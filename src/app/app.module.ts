@@ -31,6 +31,7 @@ import { ServicesComponent } from './services/services.component';
 import { CreateServiceComponent } from './create-service/create-service.component';
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { HeaderComponent } from './header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -62,6 +63,7 @@ import { HeaderComponent } from './header/header.component';
     CreateServiceComponent,
     EditServiceComponent,
     HeaderComponent,
+    DashboardComponent,
     
   ],
   imports: [

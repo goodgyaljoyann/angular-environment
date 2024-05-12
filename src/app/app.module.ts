@@ -30,8 +30,10 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { ServicesComponent } from './services/services.component';
 import { CreateServiceComponent } from './create-service/create-service.component';
 import { EditServiceComponent } from './edit-service/edit-service.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './header-admins/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RevenueReportsComponent } from './revenue-reports/revenue-reports.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -64,6 +66,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EditServiceComponent,
     HeaderComponent,
     DashboardComponent,
+    RevenueReportsComponent,
     
   ],
   imports: [
@@ -72,6 +75,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgxPaginationModule
 
   ],
   providers: [],

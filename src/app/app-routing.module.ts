@@ -25,6 +25,8 @@ import { CreateServiceComponent } from './create-service/create-service.componen
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RevenueReportsComponent } from './revenue-reports/revenue-reports.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -51,7 +53,8 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'create-service', component: CreateServiceComponent },
   { path: 'edit-service/:id', component: EditServiceComponent },
-  { path: 'dashboard', component: DashboardComponent}
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'revenue-reports', component: RevenueReportsComponent}
 ];
 
 @NgModule({

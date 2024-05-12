@@ -1,0 +1,50 @@
+.graph{
+    width:40%;
+    margin-left: 250px;
+}
+
+.revenue-stats{
+    margin-top: -500px;
+    margin-left: 300px;
+}
+
+h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.revenue-table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 150px;
+  }
+  
+  .revenue-table th, .revenue-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .revenue-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    margin-left: 395px;
+  }
+  
+  .pagination li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination li.active {
+    font-weight: bold;
+  }
+  

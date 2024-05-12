@@ -31,4 +31,11 @@ export class StatisticsService {
     const url = `${this.API_URL}/customers`; // Append /products route
     return this._http.get<any>(url);
   }
+
+  // Fetch statistics for products
+  getDailyRevenue(): Observable<any> {
+    const url = `${this.API_URL}/payments`; // Append /products route
+    return this._http.get<any>(url);
+  }
+ 
 }

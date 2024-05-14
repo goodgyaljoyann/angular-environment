@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,9 @@ import { HeaderComponent } from './header-admins/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RevenueReportsComponent } from './revenue-reports/revenue-reports.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ServicesControlsComponent } from './services-controls/services-controls.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 
@@ -67,6 +70,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HeaderComponent,
     DashboardComponent,
     RevenueReportsComponent,
+    ServicesControlsComponent,
+    DeleteDialogComponent,
     
   ],
   imports: [
@@ -75,8 +80,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
-
+    NgxPaginationModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

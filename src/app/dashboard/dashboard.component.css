@@ -18,9 +18,9 @@
   .dashboard-content {
     flex-grow: 1;
     padding: 20px;
-    margin-top: -520px;
+    margin-top: -500px;
     margin-left: 50px;
-    
+    z-index: -2;
   }
   
   .statistics-container {

@@ -75,7 +75,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       next: (res) => {
         console.log(res); // Log the response to see if it contains the appointments data
         if (res['status'] == 'success') {
-          this.appointments = this.formatAppointments(res['info']);
+          const formattedAppointments = this.formatAppointments(res['info']);
+          // Fetch only the first three appointments
+          this.appointments = formattedAppointments.slice(0, 3);
         } else {
           this.isError = true; // Set isError to true if the response status is not 'success'
         }
@@ -85,7 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
   
 
   // Method to format appointments
@@ -100,6 +102,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
   
-  
-
 }

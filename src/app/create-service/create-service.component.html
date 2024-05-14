@@ -1,1 +1,46 @@
-<p>create-service works!</p>
+<app-header></app-header>
+<section class="contacts">
+  <div class="contacts-container">
+    <img src="/assets/mechanic-image.jpg" alt="A bird"  style="background-color: #f2a900;">
+
+    <div class="contacts-form">
+      <h2>Create A New Service</h2>
+      <form class="service-form" (ngSubmit)="saveService(newServiceForm)" #newServiceForm="ngForm">
+        <!-- Page 1: First 3 inputs -->
+        <div *ngIf="currentPage === 1">
+          <div class="form-group">
+            <label for="service_name" class="form-label">Service Name</label>
+            <input type="text" id="service_name" name="service_name" class="form-control" placeholder="Enter service name" [(ngModel)]="formData.service_name" required>
+          </div>
+          <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" name="description" class="form-control" placeholder="Enter description" rows="4" [(ngModel)]="formData.description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" name="price" class="form-control" placeholder="Enter price" [(ngModel)]="formData.price" required>
+          </div>
+          <button type="button" (click)="nextPage()" class="btn btn-primary">Next</button>
+        </div>
+        
+        <!-- Page 2: Other inputs -->
+        <div *ngIf="currentPage === 2">
+          <div class="form-group">
+              <label for="location_id" class="form-label">Location</label>
+              <select id="location_id" name="location_id" class="form-control" [(ngModel)]="formData.location_id" required>
+                <option value="" disabled selected>Please select a location</option>
+                <option *ngFor="let location of locations" [value]="location.location_id">{{ location.location_name }}</option>
+              </select>
+            </div>          
+          <div class="form-group">
+            <label for="img" class="form-label">Upload Image</label>
+            <input type="file" id="img" name="img" class="form-control" accept="image/*" (change)="onFileSelected($event)" required>
+          </div>
+
+          <button type="button" (click)="previousPage()" class="btn btn-secondary"> Previous</button>
+          <button type="submit" [disabled]="!newServiceForm.form.valid" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

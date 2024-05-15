@@ -5,7 +5,7 @@
 
     <div class="contacts-form">
       <h2>Create A New Service</h2>
-      <form class="service-form" (ngSubmit)="saveService(newServiceForm)" #newServiceForm="ngForm">
+      <form class="service-form" (ngSubmit)="saveService(newServiceForm)" #newServiceForm="ngForm"  enctype="multipart/form-data">
         <!-- Page 1: First 3 inputs -->
         <div *ngIf="currentPage === 1">
           <div class="form-group">
@@ -34,7 +34,7 @@
             </div>          
           <div class="form-group">
             <label for="img" class="form-label">Upload Image</label>
-            <input type="file" id="img" name="img" class="form-control" accept="image/*" (change)="onFileSelected($event)" required>
+            <input type="file" id="img" name="img" class="form-control" accept="image/*" (change)="onFileSelected($event)" [(ngModel)]="formData.img" required>
           </div>
 
           <button type="button" (click)="previousPage()" class="btn btn-secondary"> Previous</button>

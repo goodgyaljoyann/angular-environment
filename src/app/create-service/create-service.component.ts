@@ -39,28 +39,35 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
     this.currentPage--;
   }
 
-  saveService(oForm: NgForm): void {
+  saveService(newServiceForm: NgForm): void {
     // Merge form data into formData object
-    Object.assign(this.formData, oForm.value);
-
-    // Check if all required fields are filled
-    if (this.currentPage === 2 && oForm.valid) {
-      // Store form data in local storage or array
+    Object.assign(this.formData, newServiceForm.value);
+  
+    // Check if all required fields are filled and currentPage is 2
+    if (this.currentPage === 2 && newServiceForm.valid) {
+      // Store form data
       this.storeFormData();
 
+      // Create FormData object
+      const formData = new FormData();
+      for (const key of Object.keys(this.formData)) {
+        formData.append(key, this.formData[key]);
+      }
+      if (this.selectedFile) {
+        formData.append('img', this.selectedFile, this.selectedFile.name);
+      }
+
       // Submit the form
-      this.submitForm();
+      this.submitForm(formData);
     }
   }
 
-  submitForm(): void {
+  submitForm(formData: FormData): void {
     // Submit form logic here
-    // You can access all form data from this.formData
-    // Example: 
-    this.carServicesService.createService(this.formData).subscribe({
+    this.carServicesService.createService(formData).subscribe({
       next: (res) => {
         console.log('Form Data:', this.formData);
-         // Log form data
+        // Log form data
         if (res['status'] === 'success') {
           // Show success message
           this.snackBar.open('Service created successfully', 'Close', {

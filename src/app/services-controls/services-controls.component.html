@@ -8,12 +8,12 @@
         <div class="card-header">
             <h3>ID: {{ service.service_id }}</h3>
             <div class="actions">
-                <a><i class="bi bi-pencil-square"></i></a>
+                <a routerLink="/edit-service/{{service['service_id']}}"><i class="bi bi-pencil-square"></i></a>
                 <a (click)="openDeleteConfirmationDialog(service.service_id, service.service_name, service.price)"><i class="bi bi-trash-fill"></i></a>
             </div>
         </div>
         <div class="card-body">
-            {{ service.img | json }}
+            <!-- {{ service.img | json }} -->
              <!-- Display the image -->
              <img [src]="'http://localhost:2400/uploads/services/' + service.img" alt="Service Image" class="service-image">
             <p><strong>Service Name:</strong> {{ service.service_name }}</p>

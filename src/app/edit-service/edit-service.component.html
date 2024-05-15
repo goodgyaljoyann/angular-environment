@@ -1,1 +1,44 @@
-<p>edit-service works!</p>
+<app-header></app-header>
+    <div id="tsparticles"></div>
+    <main class="box">
+        <h2>Edit Information</h2>
+        <form (ngSubmit)="updateService(editServiceForm)" #editServiceForm="ngForm">
+            <div class="inputBox">
+                <label for="service_name">Service Name</label>
+                <input type="text" id="service_name" name="service_name" [(ngModel)]="formData.service_name" required />
+            </div>
+            <div class="inputBox">
+                <label for="description">Description</label>
+                <textarea type="text" id="description" name="description" [(ngModel)]="formData.description" required ></textarea>
+            </div>
+            <div class="input-box">
+                <label for="location_id" class="form-label">Location</label>
+                <select id="location_id" name="location_id" class="form-control" [(ngModel)]="formData.location_id" required>
+                  <option value="" disabled selected>Please select a location</option>
+                  <option *ngFor="let location of locations" [value]="location.location_id">{{ location.location_name }}</option>
+                </select>
+              </div>
+              <div class="inputBox">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" [(ngModel)]="formData.price" required />
+            </div>
+            <div class="inputBox">
+                <label for="img" class="form-label">Upload Image</label>
+                <input type="file" id="img" name="img" class="form-control" accept="image/*" (change)="onFileSelected($event)" [(ngModel)]="formData.img" required>
+            </div>
+            <button type="submit">Update Service</button>
+        </form>
+        
+        <div *ngIf="!hasData">
+            <h2>Nothing to Update</h2>
+        </div>
+        <div *ngIf="hasError" class="error-message">
+            <p>Error updating. Try again!</p>
+        </div>
+    </main>
+    <footer>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.34.1/tsparticles.min.js"
+        integrity="sha256-D6LXCdCl4meErhc25yXnxIFUtwR96gPo+GtLYv89VZo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/particles.js"></script>

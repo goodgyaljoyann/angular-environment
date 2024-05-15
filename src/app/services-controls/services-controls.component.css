@@ -15,7 +15,7 @@
 }
 
 .card-header {
-    background-color: #f2f2f2;
+    background-color: #a5d8dd;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -75,13 +75,18 @@
   }
   
   .button-position{
-    margin-top: -450px;
+    margin-top: -480px;
     margin-left: 680px;
   }
   
   img{
     width: 50%;
+    height: 75px;
     margin-left: 60px;
     border-radius: 10px;
     margin-bottom: 10px;
+  }
+
+  .actions a{
+    color: black;
   }

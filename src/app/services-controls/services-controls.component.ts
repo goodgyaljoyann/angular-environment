@@ -66,6 +66,11 @@ export class ServicesControlsComponent implements OnInit, OnDestroy {
         // If deletion successful, remove the student from the table
         this.services = this.services.filter((service: any) => service.id !== id);
         this.setPage(this.currentPage);
+        
+        // Reload the current route
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/services-controls']);
+        });
       } else {
         // Handle error if deletion failed
         console.error('Failed to delete student');

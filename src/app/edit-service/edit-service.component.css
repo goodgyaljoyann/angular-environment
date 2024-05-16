@@ -15,16 +15,18 @@ header {
 }
 
 .box {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba( 35,40,45, 0.8);
     border-radius: 10px;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
     margin: auto auto;
     padding: 40px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 56%;
     transform: translate(-50%, -50%);
     margin-top: 60px;
+    width: 700px;
+    height: 470px;
 }
 
 .box h2 {
@@ -43,12 +45,40 @@ header {
     border: none;
     border-bottom: 1px solid #fff;
     color: #fff;
-    font-size: 18px;
+    font-size: 12px;
     letter-spacing: 2px;
     margin-bottom: 30px;
     outline: none;
     padding: 10px 0;
-    width: 100%;
+    width: 80%;
+    
+}
+
+textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+    width: 570px;
+    height: 80px;
+}
+
+select{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color:#746bf5;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+    width: 80%;
 }
 
 .box input[type="submit"], .box button[type="submit"], a.button {
@@ -65,13 +95,24 @@ header {
     outline: none;
     text-transform: uppercase;
     text-decoration: none;
-    margin: 2px 10px 2px 0;
+    margin: 2px 10px 2px 180px;
     display: inline-block;
-    width: 100%;
+    width: 40%;
     background-color: #ebf3fa;
+    
 }
 
 .box input[type="submit"]:hover, .box button[type="submit"]:hover, a.button:hover {
     opacity: 0.8;
 }
 
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inputBox {
+    width: 48%; /* Adjust as needed */
+}

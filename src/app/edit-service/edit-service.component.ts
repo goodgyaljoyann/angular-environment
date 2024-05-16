@@ -28,6 +28,7 @@ export class EditServiceComponent implements OnInit{
   isError: boolean = false;
   selectedFile: File | null = null;
   formData: any = {}; // Object to store form data
+  
 
   @ViewChild('editServiceForm') editServiceForm?: NgForm;
   

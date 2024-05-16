@@ -53,6 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Lilita One', sans-serif;
 }
 
 /* ----- form ----- */
@@ -68,7 +69,7 @@
     padding: 2rem;
     font-size: 1.8rem;
     color: #333;
-    height: 350px;
+    height: fit-content;
     border-radius: 10px;
   }
   
@@ -107,9 +108,52 @@
   input[type="submit"]:hover {
     color: #fceecc;
   }
+
+ .contacts-form .form-group input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+    width: 80%;
+    
+}
+
+.form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+    width: 200px;
+    height: 50px;
+}
+
+.form-group select{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color:#746bf5;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+    width: 80%;
+}
+
   
   .form-group label{
     font-size: 15px;
+    font-family: 'Lato', sans-serif;
   }
 
   button{

@@ -37,6 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ServicesControlsComponent } from './services-controls/services-controls.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { HeaderMainComponent } from './header-main/header-main.component';
 
 
 
@@ -72,6 +73,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     RevenueReportsComponent,
     ServicesControlsComponent,
     DeleteDialogComponent,
+    HeaderMainComponent,
     
   ],
   imports: [

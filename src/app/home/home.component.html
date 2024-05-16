@@ -1,5 +1,9 @@
 <app-header-main></app-header-main>
-<div>
+<div class="banner-section">
+    <h1>Fast and Easy Way to </h1>
+    <h1 class="second-element"> Service Your Car!</h1>
+    <button class="service-btn">Book Service!</button>
+    <h2>Pricing & Plans</h2>
 <img src="assets/banner.jpg" alt="mechanic checking engine" class="banner"  id="banner">
 <div class="banner-overlay"></div>
 </div>
@@ -19,6 +23,44 @@
         <p>Convenient service locations near you for easy access.</p>
     </div>
 </div>
-<div class="search-section"></div>
+<div class="search-section">
+    <!-- Left side: Search bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." class="search-input">
+      <button class="search-button">Search</button>
+    </div>
+    <div class="divider"></div>
+    <!-- Right side: Dropdowns -->
+    <div class="dropdowns">
+      <div class="dropdown-list">
+        <label for="products-dropdown">Products:</label>
+        <select id="products-dropdown">
+          <option value="" disabled selected>Please Select</option>
+          <option value="option1">Car Detergents</option>
+          <option value="option2">Car Mats and Seat Covers</option>
+          <option value="option3">Dash Covers</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <label for="services-dropdown">Services:</label>
+        <select id="services-dropdown">
+          <option value="" disabled selected>Please Select</option>
+          <option value="option1">Cleaning</option>
+          <option value="option2">Packages </option>
+          <option value="option3">Denting & Painting</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <label for="pricing-dropdown">Locations:</label>
+        <select id="pricing-dropdown">
+          <option value="" disabled selected>Please Select</option>
+          <option value="option1">Montego Bay</option>
+          <option value="option2">Ocho Rios</option>
+          <option value="option3">New Kingston</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
 
 

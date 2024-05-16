@@ -33,3 +33,41 @@ header{
 .nav-pills a{
     color: #FECA39;
 }
+
+.user-icon img{
+    width: 30px;
+    height:30px;
+    transform: translate(200px, 48px);
+}
+
+.user-dropdown {
+    position: relative;
+
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333; /* Dark Grey */
+    min-width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin-top: 35px;
+    margin-left: 60px;
+    z-index: 1000;
+  }
+  
+  .dropdown-content a {
+    color: #fff; /* White */
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #555; /* Dark Grey (Hover) */
+  }
+  
+  .user-dropdown:hover .dropdown-content {
+    display: block;
+    
+  }

@@ -76,7 +76,7 @@ import { FooterComponent } from './footer/footer.component';
     DeleteDialogComponent,
     HeaderMainComponent,
     FooterComponent,
-    
+
   ],
   imports: [
     BrowserModule,

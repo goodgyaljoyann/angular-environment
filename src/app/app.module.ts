@@ -39,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { HeaderMainComponent } from './header-main/header-main.component';
 import { FooterComponent } from './footer/footer.component';
+import { ViewServiceComponent } from './view-service/view-service.component';
 
 
 
@@ -76,6 +77,7 @@ import { FooterComponent } from './footer/footer.component';
     DeleteDialogComponent,
     HeaderMainComponent,
     FooterComponent,
+    ViewServiceComponent,
 
   ],
   imports: [

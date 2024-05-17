@@ -1,0 +1,100 @@
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .content {
+    flex: 3;
+  }
+  
+  .sidebar {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .container {
+    background-color: #feca39;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    color: black;
+  }
+  
+  .service-info {
+    margin-bottom: 15px;
+  }
+  
+  .service-info label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .service-info span {
+    display: block;
+  }
+  
+  .service-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(85px);
+  }
+  
+  .recommended-service {
+    margin-bottom: 15px;
+  }
+  
+  .recommended-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .recommended-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .recommended-card span {
+    font-weight: bold;
+  }
+  
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    color: black;
+  }
+  
+  .no-data h2 {
+    background-color: #feca39;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .recommended-name{
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+  }
+
+  .serviceName{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-left: 130px;
+    font-size: 25px;
+  }
+  

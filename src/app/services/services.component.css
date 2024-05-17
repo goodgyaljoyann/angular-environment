@@ -63,22 +63,24 @@
   }
   
   .price {
-    transform: translate(0, 35px);
+    transform: translate(-95px, 35px);
     font-weight: bold;
   }
   
   .book-button {
     margin-top: 10px;
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: #feca39;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 220px;
+    transform: translateX(95px);
   }
   
   .book-button:hover {
-    background-color: #0056b3;
+    background-color: #f3b91a;
+    cursor: pointer;
+    
   }
   

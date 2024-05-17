@@ -1,0 +1,35 @@
+<app-header-main></app-header-main>
+<div class="main-container" *ngIf="hasData">
+  <div class="content">
+    <div class="container">
+      <div class="service-info">
+        <span id="service_name" class="serviceName">{{service.service_name}}</span>
+      </div>
+      <div class="service-info">
+        <img [src]="'http://localhost:2400/uploads/services/' + service.img" alt="{{ service.service_name }}">
+      </div>
+      <div class="service-info">
+        <span id="description">{{service.description}}</span>
+      </div>
+      <div class="service-info">
+        <span id="price"> ${{service.price | number:'1.0-0'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <h3>Recommended Services</h3>
+    <div class="recommended-service" *ngFor="let recommended of recommendedServices">
+      <a [routerLink]="['/view-service', recommended.service_id]">
+        <div class="recommended-card">
+          <img [src]="'http://localhost:2400/uploads/services/' + recommended.img" alt="{{ recommended.service_name }}">
+          <h1 class="recommended-name">{{ recommended.service_name }}</h1>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!hasData" class="no-data">
+  <h2>No record to display</h2>
+</div>

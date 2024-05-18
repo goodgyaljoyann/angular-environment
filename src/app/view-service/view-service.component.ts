@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarServicesService } from '../car-services/car-services.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { LocationServicesService } from '../location-services/locations-services.service';
 
 @Component({
   selector: 'app-view-service',
@@ -11,14 +12,17 @@ import { filter } from 'rxjs/operators';
 export class ViewServiceComponent implements OnInit {
   constructor(
     private CarServicesService: CarServicesService, 
+    private LocationServicesService: LocationServicesService,
     private route: ActivatedRoute, 
     private router: Router
   ) {}
 
-  id: number = 0; 
-  service: any; 
-  hasData: boolean = false; 
+  id: number = 0;
+  service: any;
+  hasData: boolean = false;
   recommendedServices: any[] = [];
+  location: any;
+  isError: boolean = false;
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -38,6 +42,7 @@ export class ViewServiceComponent implements OnInit {
           this.service = res['data']['service'];
           this.hasData = true;
           this.loadRecommendedServices();
+          this.populateLocationById(this.service.location_id); // Load location based on location_id
         } else {
           this.hasData = false;
         }
@@ -45,6 +50,24 @@ export class ViewServiceComponent implements OnInit {
       (error) => {
         console.error('Error fetching service:', error);
         this.hasData = false;
+      }
+    );
+  }
+
+  populateLocationById(locationId: number): void {
+    this.LocationServicesService.fetchLocationById(locationId).subscribe(
+      (res) => {
+        if (res['status'] === 'success') {
+          this.location = res['data'];
+          console.log('Location:', this.location); // Log location data
+        } else {
+          this.isError = true;
+          console.log('Error fetching location:', res['message']); // Log error message
+        }
+      },
+      (error) => {
+        this.isError = true;
+        console.error('Error fetching location:', error);
       }
     );
   }

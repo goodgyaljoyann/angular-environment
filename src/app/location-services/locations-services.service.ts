@@ -23,4 +23,16 @@ export class LocationServicesService {
                                     )
                                   );
     }
+
+      // fetches a student
+  fetchLocationById(id:number): Observable<any>{
+    return this._http.get<any>(this.API_URL+ `/${id}`)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
+  
 }

@@ -5,7 +5,7 @@
       <div class="service-info">
         <span id="service_name" class="serviceName">{{service.service_name}}</span>
       </div>
-      <div class="service-info">
+      <div class="service-info image-container">
         <img [src]="'http://localhost:2400/uploads/services/' + service.img" alt="{{ service.service_name }}">
       </div>
       <div class="service-info">
@@ -14,6 +14,8 @@
       <div class="service-info">
         <span id="price"> ${{service.price | number:'1.0-0'}}</span>
       </div>
+      <button class="addtocart">Add to Cart</button>
+      <span class="location">Base: {{location?.location_name}}</span>
     </div>
   </div>
 
@@ -33,3 +35,4 @@
 <div *ngIf="!hasData" class="no-data">
   <h2>No record to display</h2>
 </div>
+<app-footer></app-footer>

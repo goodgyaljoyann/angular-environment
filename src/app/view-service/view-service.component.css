@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    margin-top: -10px;
   }
   
   .content {
@@ -14,10 +15,10 @@
   }
   
   .container {
-    background-color: #feca39;
+    background-color: #fdfbfb;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(254,202,57, 0.9);
     max-width: 500px;
     color: black;
   }
@@ -36,12 +37,18 @@
     display: block;
   }
   
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .service-info img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 250px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateX(85px);
+    
   }
   
   .recommended-service {
@@ -90,11 +97,33 @@
     font-size: 15px;
   }
 
+  .service-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .serviceName{
     margin-top: 20px;
     margin-bottom: 30px;
     font-family: 'Bebas Neue', sans-serif;
-    margin-left: 130px;
     font-size: 25px;
   }
-  
+
+  .location{
+    margin-left: 250px;
+  }
+
+  .addtocart{
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid black;
+    background-color: #feca39;
+  }
+  #price{
+    font-weight: bold;
+  }
+
+  .service-info #description{
+    font-family: 'Lato', sans-serif;
+  }

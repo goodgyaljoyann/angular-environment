@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CarServicesService } from '../car-services/car-services.service';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./services.component.css']
 })
 export class ServicesComponent implements OnInit, OnDestroy {
-
   selectedHeading: string = 'All'; // Default to 'All'
   services: any = [];
   isError: boolean = false;
   headings = ['All', 'Packages', 'Denting&Painting', 'Detailing', 'Repairs', 'Tires'];
+  cart: any[] = []; // Cart items
+  showCart: boolean = false; // Show/hide cart pop-up
 
   constructor(
     private CarServicesService: CarServicesService, 
@@ -22,6 +23,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.populateServices();
+    this.loadCartFromLocalStorage();
   }
 
   ngOnDestroy(): void {
@@ -58,5 +60,46 @@ export class ServicesComponent implements OnInit, OnDestroy {
       default:
         return true;
     }
+  }
+
+  addToCart(service: any): void {
+    if (this.cart.length >= 3) {
+      alert('You cannot book more than 3 services at a time.');
+      return;
+    }
+
+    const existingItem = this.cart.find(item => item.service.service_id === service.service_id);
+    if (!existingItem) {
+      this.cart.push({ service, quantity: 1 });
+      this.saveCartToLocalStorage();
+    }
+    this.showCart = true;
+  }
+
+  saveCartToLocalStorage(): void {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  loadCartFromLocalStorage(): void {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+      if (this.cart.length > 0) {
+        this.showCart = true;
+      }
+    }
+  }
+
+  removeFromCart(item: any): void {
+    this.cart = this.cart.filter(cartItem => cartItem !== item);
+    this.saveCartToLocalStorage();
+    if (this.cart.length === 0) {
+      this.showCart = false;
+    }
+    this.cdr.detectChanges(); // Trigger change detection to update the view
+  }
+
+  calculateCartTotal(): number {
+    return this.cart.reduce((total, item) => total + Number(item.service.price), 0);
   }
 }

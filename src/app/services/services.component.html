@@ -6,12 +6,30 @@
   </div>
   <div class="card-container">
     <div class="card" *ngFor="let service of services" [routerLink]="['/view-service', service.service_id]" [hidden]="!serviceMatchesHeading(service, selectedHeading)">
-      <div class="card-content" >
+      <div class="card-content">
         <h3>{{ service.service_name }}</h3>
         <img [src]="'http://localhost:2400/uploads/services/' + service.img" alt="{{ service.service_name }}">
         <div class="price">${{ service.price | number:'1.0-0' }}</div>
-        <a routerLink="/appointments"> <button class="book-button">Book</button></a>
+        <button class="book-button" (click)="addToCart(service); $event.stopPropagation();">Book</button>
       </div>
     </div>
   </div>
+</div>
+
+<div class="cart-icon" *ngIf="cart.length > 0" (click)="showCart = !showCart">
+  🛒
+</div>
+
+<div class="cart-popup" *ngIf="showCart">
+  <h3>Your Cart</h3>
+  <div class="cart-item" *ngFor="let item of cart">
+    <img [src]="'http://localhost:2400/uploads/services/' + item.service.img" alt="{{ item.service.service_name }}">
+    <div class="cart-item-details">
+      <span>{{ item.service.service_name }}</span>
+      <span>${{ item.service.price | number:'1.2-2' }}</span>
+      <button (click)="removeFromCart(item)" class="remove"><i class="bi bi-trash-fill"></i></button>
+    </div>
+  </div>
+  <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
+  <button routerLink="/appointments">Checkout</button>
 </div>

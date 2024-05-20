@@ -1,1 +1,40 @@
-<p>appointments works!</p>
+<app-header-main></app-header-main>
+<div class="cart-container">
+  <div class="ad-vid">
+    <iframe id="adVideoIframe" class="ad-video" src="about:blank" frameborder="0"></iframe>
+</div>
+  <div class="cart-content">
+    <h3>Your Cart</h3>
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cart">
+        <div class="cart-item-row">
+          <div class="cart-item-image">
+            <img *ngIf="item.itemType === 'service'" [src]="'http://localhost:2400/uploads/services/' + item.item.img" alt="{{ item.item.service_name }}">
+            <img *ngIf="item.itemType === 'product'" [src]="'http://localhost:2400/uploads/products/' + item.item.img" alt="{{ item.item.product_name }}">
+          </div>
+          <div class="cart-item-details">
+            <span *ngIf="item.itemType === 'service'">{{ item.item.service_name }}</span>
+            <span *ngIf="item.itemType === 'product'">{{ item.item.product_name }}</span>
+          </div>
+          <div class="cart-item-price">
+            <span>${{ item.item.price * item.quantity | number:'1.2-2' }}</span>
+          </div>
+          <div class="cart-item-quantity" *ngIf="item.itemType === 'product'">
+            <button (click)="decreaseQuantity(item)">-</button>
+            <input type="text" [(ngModel)]="item.quantity" min="1" (change)="saveCartToLocalStorage()">
+            <button (click)="increaseQuantity(item)">+</button>
+          </div>
+          <div class="cart-item-remove">
+            <button (click)="removeFromCart(item.item[item.itemType + '_id'], item.itemType)" class="remove"><i class="bi bi-trash-fill"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total">
+      <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
+    </div>
+    <div class="checkout-btn-container">
+      <button (click)="checkout()" class="checkout-btn">Checkout</button>
+    </div>
+  </div>
+</div>

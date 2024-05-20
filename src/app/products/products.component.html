@@ -25,12 +25,16 @@
   <div class="cart-item" *ngFor="let item of cart">
     <img *ngIf="item.itemType === 'service'" [src]="'http://localhost:2400/uploads/services/' + item.item.img" alt="{{ item.item.service_name }}">
     <img *ngIf="item.itemType === 'product'" [src]="'http://localhost:2400/uploads/products/' + item.item.img" alt="{{ item.item.product_name }}">
-    
     <div class="cart-item-details">
       <span *ngIf="item.itemType === 'service'">{{ item.item.service_name }}</span>
       <span *ngIf="item.itemType === 'product'">{{ item.item.product_name }}</span>
       
       <span>${{ item.item.price | number:'1.2-2' }}</span>
+      <div class="cart-item-quantity" *ngIf="item.itemType === 'product'">
+        <button (click)="decreaseQuantity(item)">-</button>
+        <input type="text" [(ngModel)]="item.quantity" min="1" (change)="saveCartToLocalStorage()">
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
       <button (click)="removeFromCart(item.item[item.itemType + '_id'], item.itemType)" class="remove"><i class="bi bi-trash-fill"></i></button>
     </div>
   </div>
@@ -38,6 +42,6 @@
     <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
   </div>
   <div class="checkout-btn-container">
-    <button routerLink="/payments" class="checkout-btn">Checkout</button>
+    <button (click)="checkout()" class="checkout-btn">Checkout</button>
   </div>
 </div>

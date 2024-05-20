@@ -83,4 +83,25 @@ export class ProductsComponent {
     return this.CartService.getCart();
   }
 
+  increaseQuantity(item: any): void {
+    item.quantity++;
+    this.saveCartToLocalStorage();
+  }
+
+  decreaseQuantity(item: any): void {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.saveCartToLocalStorage();
+    }
+  }
+
+  saveCartToLocalStorage(): void {
+    this.CartService.saveCartToLocalStorage();
+  }
+  
+  checkout(): void {
+    const hasService = this.cart.some(item => item.itemType === 'service');
+    const route = hasService ? '/appointments' : '/payments';
+    this.router.navigate([route]);
+  }
 }

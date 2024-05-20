@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ChangeDetectorRef } from '@angular/core';
 import { CarServicesService } from '../car-services/car-services.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LocationServicesService } from '../location-services/locations-services.service';
+import { CartService } from '../shared/cart.service';
 
 @Component({
   selector: 'app-view-service',
@@ -13,7 +14,9 @@ export class ViewServiceComponent implements OnInit {
   constructor(
     private CarServicesService: CarServicesService, 
     private LocationServicesService: LocationServicesService,
+    private CartService: CartService,
     private route: ActivatedRoute, 
+    private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
 
@@ -23,6 +26,7 @@ export class ViewServiceComponent implements OnInit {
   recommendedServices: any[] = [];
   location: any;
   isError: boolean = false;
+  showCart: boolean = false; // Show/hide cart pop-up
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -98,5 +102,48 @@ export class ViewServiceComponent implements OnInit {
 
   onRecommendedServiceClick(serviceId: number) {
     this.router.navigate(['/view-service', serviceId]);
+  }
+
+  addToCart(service: any): void {
+    this.CartService.addToCart(service, 'service');
+    this.showCart = true;
+  }
+
+  removeFromCart(itemId: number, itemType: 'service' | 'product'): void {
+    this.CartService.removeFromCart(itemId, itemType);
+    if (this.CartService.getCart().length === 0) {
+      this.showCart = false;
+    }
+    this.cdr.detectChanges();
+  }
+
+  calculateCartTotal(): number {
+    return this.CartService.calculateCartTotal();
+  }
+
+  increaseQuantity(item: any): void {
+    item.quantity++;
+    this.saveCartToLocalStorage();
+  }
+
+  decreaseQuantity(item: any): void {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.saveCartToLocalStorage();
+    }
+  }
+
+  saveCartToLocalStorage(): void {
+    this.CartService.saveCartToLocalStorage();
+  }
+
+  get cart(): any[] {
+    return this.CartService.getCart();
+  }
+
+  checkout(): void {
+    const hasService = this.cart.some(item => item.itemType === 'service');
+    const route = hasService ? '/appointments' : '/payments';
+    this.router.navigate([route]);
   }
 }

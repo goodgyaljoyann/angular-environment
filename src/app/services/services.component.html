@@ -31,6 +31,11 @@
       <span *ngIf="item.itemType === 'product'">{{ item.item.product_name }}</span>
       
       <span>${{ item.item.price | number:'1.2-2' }}</span>
+      <div class="cart-item-quantity" *ngIf="item.itemType === 'product'">
+        <button (click)="decreaseQuantity(item)">-</button>
+        <input type="text" [(ngModel)]="item.quantity" min="1" (change)="saveCartToLocalStorage()">
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
       <button (click)="removeFromCart(item.item[item.itemType + '_id'], item.itemType)" class="remove"><i class="bi bi-trash-fill"></i></button>
     </div>
   </div>
@@ -38,6 +43,6 @@
     <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
   </div>
   <div class="checkout-btn-container">
-    <button routerLink="/payments" class="checkout-btn">Checkout</button>
+    <button (click)="checkout()" class="checkout-btn">Checkout</button>
   </div>
 </div>

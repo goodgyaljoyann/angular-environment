@@ -44,7 +44,7 @@ export class CartService {
   }
 
   calculateCartTotal(): number {
-    return this.cart.reduce((total, cartItem) => total + Number(cartItem.item.price), 0);
+    return this.cart.reduce((total, cartItem) => total + (cartItem.item.price * cartItem.quantity), 0);
   }
 
   private countServicesInCart(): number {

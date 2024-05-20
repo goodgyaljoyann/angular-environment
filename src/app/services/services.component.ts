@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CarServicesService } from '../car-services/car-services.service';
 import { Router } from '@angular/router';
+import { CartService } from '../shared/cart.service';
 
 @Component({
   selector: 'app-services',
@@ -12,18 +13,18 @@ export class ServicesComponent implements OnInit, OnDestroy {
   services: any = [];
   isError: boolean = false;
   headings = ['All', 'Packages', 'Denting&Painting', 'Detailing', 'Repairs', 'Tires'];
-  cart: any[] = []; // Cart items
   showCart: boolean = false; // Show/hide cart pop-up
 
   constructor(
     private CarServicesService: CarServicesService, 
+    private CartService: CartService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.populateServices();
-    this.loadCartFromLocalStorage();
+
   }
 
   ngOnDestroy(): void {
@@ -63,43 +64,23 @@ export class ServicesComponent implements OnInit, OnDestroy {
   }
 
   addToCart(service: any): void {
-    if (this.cart.length >= 3) {
-      alert('You cannot book more than 3 services at a time.');
-      return;
-    }
-
-    const existingItem = this.cart.find(item => item.service.service_id === service.service_id);
-    if (!existingItem) {
-      this.cart.push({ service, quantity: 1 });
-      this.saveCartToLocalStorage();
-    }
+    this.CartService.addToCart(service, 'service');
     this.showCart = true;
   }
 
-  saveCartToLocalStorage(): void {
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-  }
-
-  loadCartFromLocalStorage(): void {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      this.cart = JSON.parse(savedCart);
-      if (this.cart.length > 0) {
-        this.showCart = true;
-      }
-    }
-  }
-
-  removeFromCart(item: any): void {
-    this.cart = this.cart.filter(cartItem => cartItem !== item);
-    this.saveCartToLocalStorage();
-    if (this.cart.length === 0) {
+  removeFromCart(itemId: number, itemType: 'service' | 'product'): void {
+    this.CartService.removeFromCart(itemId, itemType);
+    if (this.CartService.getCart().length === 0) {
       this.showCart = false;
     }
-    this.cdr.detectChanges(); // Trigger change detection to update the view
+    this.cdr.detectChanges();
   }
 
   calculateCartTotal(): number {
-    return this.cart.reduce((total, item) => total + Number(item.service.price), 0);
+    return this.CartService.calculateCartTotal();
+  }
+
+  get cart(): any[] {
+    return this.CartService.getCart();
   }
 }

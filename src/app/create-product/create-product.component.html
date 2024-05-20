@@ -1,1 +1,29 @@
-<p>create-product works!</p>
+<app-header></app-header>
+<section class="contacts">
+  <div class="contacts-container">
+    <img src="/assets/BUNDLE_2.png" alt="A bird" style="background-color: #f2a900;">
+
+    <div class="contacts-form">
+      <h2>Create A New Product</h2>
+      <form class="service-form" (ngSubmit)="saveService(newProductForm)" #newProductForm="ngForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="product_name" class="form-label">Product Name</label>
+          <input type="text" id="product_name" name="product_name" class="form-control" placeholder="Enter product name" [(ngModel)]="formData.product_name" required>
+        </div>
+        <div class="form-group">
+          <label for="price" class="form-label">Price $</label>
+          <input type="number" id="price" name="price" class="form-control" placeholder="Enter price" [(ngModel)]="formData.price" required>
+        </div>
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" name="description" class="form-control" placeholder="Enter description" rows="4" [(ngModel)]="formData.description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="img" class="form-label">Upload Image</label>
+          <input type="file" id="img" name="img" class="form-control" accept="image/*" (change)="onFileSelected($event)" [(ngModel)]="formData.img" required>
+        </div>
+            <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</section>

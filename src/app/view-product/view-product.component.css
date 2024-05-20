@@ -1,0 +1,130 @@
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: -10px;
+  }
+  
+  .content {
+    flex: 3;
+  }
+  
+  .sidebar {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .container {
+    background-color: #fdfbfb;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(254,202,57, 0.9);
+    max-width: 500px;
+    color: black;
+  }
+  
+  .product-info {
+    margin-bottom: 15px;
+  }
+  
+  .product-info label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .product-info span {
+    display: block;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-info img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .recommended-product {
+    margin-bottom: 15px;
+  }
+  
+  .recommended-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .recommended-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .recommended-card span {
+    font-weight: bold;
+  }
+  
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    color: black;
+  }
+  
+  .no-data h2 {
+    background-color: #feca39;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .recommended-name{
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+  }
+
+  .product-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .productName{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 25px;
+  }
+
+  .location{
+    margin-left: 250px;
+  }
+
+  .addtocart{
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid black;
+    background-color: #feca39;
+  }
+  #price{
+    font-weight: bold;
+  }
+
+  .product-info #description{
+    font-family: 'Lato', sans-serif;
+  }

@@ -28,6 +28,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RevenueReportsComponent } from './revenue-reports/revenue-reports.component';
 import { ServicesControlsComponent } from './services-controls/services-controls.component';
 import { ViewServiceComponent } from './view-service/view-service.component';
+import { ProductsControlsComponent } from './products-controls/products-controls.component';
+import { ViewProductComponent } from './view-product/view-product.component';
+
 
 
 const routes: Routes = [
@@ -58,7 +61,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'revenue-reports', component: RevenueReportsComponent},
   { path:  'services-controls', component: ServicesControlsComponent},
-  { path:  'view-service/:id', component: ViewServiceComponent}
+  { path:  'products-controls', component: ProductsControlsComponent},
+  { path:  'view-service/:id', component: ViewServiceComponent},
+  { path:  'view-product/:id', component: ViewProductComponent}
 ];
 
 @NgModule({

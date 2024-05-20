@@ -1,0 +1,118 @@
+.contacts {
+    display: flex;
+    align-items: center;
+    margin-top: -480px;
+  }
+  
+  .contacts-container {
+    display: flex;
+    position: relative;
+    margin-left: 320px;
+  }
+  
+  .contacts-container img {
+    position: relative;
+    height: 25rem;
+    width: auto;
+    background-size: cover;
+    filter: blur(2px); /* Adjust the blur amount as needed */
+  }
+  
+  .contacts-form {
+    position: absolute;
+    width: 550px;
+    background-color: #a3cef1;
+    margin-top: 10px;
+    left: 20rem;
+    box-shadow: 4px 6px 5px rgba(115, 115, 115, 0.102);
+    padding: 2rem;
+    font-size: 1.8rem;
+    color: #333;
+    height: fit-content;
+    border-radius: 10px;
+  }
+  
+  .contacts-form h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lilita One', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .service-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .form-control {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #description {
+    grid-column: 1 / span 2;
+  }
+  
+  #img {
+    grid-column: 1 / span 2;
+  }
+  
+  input[type="submit"] {
+    background-color: #f2a900;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 1.8rem;
+    cursor: pointer;
+    grid-column: 1 / span 2;
+    text-align: center;
+    width: 15%;
+    margin-top: -10px;
+    margin: 0 auto;
+  }
+  
+  input[type="submit"]:hover {
+    color: #fceecc;
+  }
+  
+  .form-group input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 10px 0;
+  }
+  
+  .form-group textarea{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    outline: none;
+    padding: 10px 0;
+    height: 40px;
+  }
+

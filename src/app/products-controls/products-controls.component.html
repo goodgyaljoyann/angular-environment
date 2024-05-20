@@ -1,0 +1,35 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<div class="button-position">
+    <a routerLink="/create-product"><button class="create-button">Create a new Product</button></a>
+</div>
+<div class="card-container">
+    <div class="card" *ngFor="let product of pagedProducts">
+        <div class="card-header">
+            <h3>ID: {{ product.product_id }}</h3>
+            <div class="actions">
+                <a routerLink="/edit-product/{{product['product_id']}}"><i class="bi bi-pencil-square"></i></a>
+                <a (click)="openDeleteConfirmationDialog(product.product_id, product.product_name, product.price)"><i class="bi bi-trash-fill"></i></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- {{ product.img | json }} -->
+             <!-- Display the image -->
+             <div class="image">
+                <img [src]="'http://localhost:2400/uploads/products/' + product.img" alt="Product Image" class="product-image">
+            </div>
+            <p><strong>Product Name:</strong> {{ product.product_name }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Price:</strong> {{ product.price }}</p>
+        </div>
+    </div>
+</div>
+<div class="pagination-controls">
+    <button *ngFor="let pageNumber of getPageNumbers()" (click)="pageChanged(pageNumber)"
+      [class.active]="pageNumber === currentPage">
+      {{ pageNumber }}
+    </button>
+  </div>
+
+
+

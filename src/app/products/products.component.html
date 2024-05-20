@@ -1,1 +1,43 @@
-<p>products works!</p>
+<app-header-main></app-header-main>
+
+<div class="products-container">
+  <div class="filter-container">
+    <button *ngFor="let heading of headings" (click)="onHeadingClick(heading)" [class.active]="selectedHeading === heading">{{ heading }}</button>
+  </div>
+  <div class="card-container">
+    <div class="card" *ngFor="let product of products" [routerLink]="['/view-product', product.product_id]" [hidden]="!productMatchesHeading(product, selectedHeading)">
+      <div class="card-content">
+        <h3>{{ product.product_name }}</h3>
+        <img [src]="'http://localhost:2400/uploads/products/' + product.img" alt="{{ product.product_name }}">
+        <div class="price">${{ product.price | number:'1.0-0' }}</div>
+        <button class="book-button"  (click)="addToCart(product); $event.stopPropagation();">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="cart-icon" *ngIf="cart.length > 0" (click)="showCart = !showCart">
+  🛒
+</div>
+
+<div class="cart-popup" *ngIf="showCart">
+  <h3>Your Cart</h3>
+  <div class="cart-item" *ngFor="let item of cart">
+    <img *ngIf="item.itemType === 'service'" [src]="'http://localhost:2400/uploads/services/' + item.item.img" alt="{{ item.item.service_name }}">
+    <img *ngIf="item.itemType === 'product'" [src]="'http://localhost:2400/uploads/products/' + item.item.img" alt="{{ item.item.product_name }}">
+    
+    <div class="cart-item-details">
+      <span *ngIf="item.itemType === 'service'">{{ item.item.service_name }}</span>
+      <span *ngIf="item.itemType === 'product'">{{ item.item.product_name }}</span>
+      
+      <span>${{ item.item.price | number:'1.2-2' }}</span>
+      <button (click)="removeFromCart(item.item[item.itemType + '_id'], item.itemType)" class="remove"><i class="bi bi-trash-fill"></i></button>
+    </div>
+  </div>
+  <div class="total">
+    <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
+  </div>
+  <div class="checkout-btn-container">
+    <button routerLink="/payments" class="checkout-btn">Checkout</button>
+  </div>
+</div>

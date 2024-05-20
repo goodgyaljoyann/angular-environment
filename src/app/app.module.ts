@@ -40,6 +40,9 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { HeaderMainComponent } from './header-main/header-main.component';
 import { FooterComponent } from './footer/footer.component';
 import { ViewServiceComponent } from './view-service/view-service.component';
+import { ProductsControlsComponent } from './products-controls/products-controls.component';
+import { DeleteProductDialogComponent } from './delete-product-dialog/delete-product-dialog.component';
+import { ViewProductComponent } from './view-product/view-product.component';
 
 
 
@@ -78,6 +81,9 @@ import { ViewServiceComponent } from './view-service/view-service.component';
     HeaderMainComponent,
     FooterComponent,
     ViewServiceComponent,
+    ProductsControlsComponent,
+    DeleteProductDialogComponent,
+    ViewProductComponent,
 
   ],
   imports: [

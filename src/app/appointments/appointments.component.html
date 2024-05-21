@@ -38,3 +38,31 @@
     </div>
   </div>
 </div>
+<div class="appointment-container">
+  <h3>Set Up Your Appointment</h3>
+  <form #appointmentForm="ngForm" (ngSubmit)="saveService(appointmentForm)">
+    <div class="form-row">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" ngModel required>
+    </div>
+    <div class="form-row">
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time" ngModel required>
+    </div>
+    <div class="form-row">
+      <label for="make">Make:</label>
+      <input type="text" id="make" name="make" ngModel required>
+    </div>
+    <div class="form-row">
+      <label for="model">Model:</label>
+      <input type="text" id="model" name="model" ngModel required>
+    </div>
+    <div class="form-row">
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year" ngModel required>
+    </div>
+    <div class="form-row">
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+</div>

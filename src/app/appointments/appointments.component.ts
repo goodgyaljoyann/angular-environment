@@ -1,6 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../shared/cart.service';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocationServicesService } from '../location-services/locations-services.service';
+import { AppointmentServicesService } from '../appointment-services/appointment-services.service';
 
 @Component({
   selector: 'app-appointments',
@@ -9,43 +13,42 @@ import { CartService } from '../shared/cart.service';
 })
 export class AppointmentsComponent implements OnInit, AfterViewInit {
   showCart: boolean = true;
+  formData: any = {}; // Object to store form data
+  isError: boolean = false;
+  locations: any[] = [];
 
   constructor(
     private cartService: CartService,
     private router: Router,
-    private cdr: ChangeDetectorRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private locationServicesService: LocationServicesService,
+    private appointmentServicesService: AppointmentServicesService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    // Additional initialization if needed
+    this.populateLocations();
   }
 
   ngAfterViewInit(): void {
     const iframe = this.renderer.selectRootElement('#adVideoIframe') as HTMLIFrameElement;
 
-    // Ensure the iframe content is ready
     iframe.onload = () => {
       const doc = iframe.contentDocument || iframe.contentWindow?.document;
       if (doc) {
-        // Create a video element
         const videoElement = doc.createElement('video');
         videoElement.src = 'assets/Ad.mp4';
         videoElement.autoplay = true;
         videoElement.loop = true;
-        videoElement.muted = true; // Optional: mute the video
+        videoElement.muted = true;
         videoElement.style.width = '100%';
         videoElement.style.height = '100%';
-
-        // Remove controls from the video
         videoElement.controls = false;
 
-        // Append the video element to the iframe's body
         doc.body.appendChild(videoElement);
       }
     };
 
-    // Set the iframe to a blank page initially
     iframe.src = 'about:blank';
   }
 
@@ -78,10 +81,72 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     if (this.cartService.getCart().length === 0) {
       this.showCart = false;
     }
-    this.cdr.detectChanges();
   }
 
   checkout(): void {
     this.router.navigate(['/payments']);
+  }
+
+  saveService(newServiceForm: NgForm): void {
+    Object.assign(this.formData, newServiceForm.value);
+    const services = this.cart.filter(item => item.itemType === 'service');
+
+    services.forEach(service => {
+      const appointmentData = {
+        ...this.formData,
+        service_id: service.item.service_id,
+        customer_id: this.getCustomerId(), // Get customer_id from cookie or session (to be implemented)
+        payment_status: 'pending',
+        appt_status: 'scheduled',
+        mechanic_note: ''
+      };
+
+      this.submitForm(appointmentData);
+    });
+  }
+
+  submitForm(formData: any): void {
+    this.appointmentServicesService.createAppointment(formData).subscribe({
+      next: (res) => {
+        if (res['status'] === 'success') {
+          this.snackBar.open('Appointment created successfully', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+
+          this.router.navigateByUrl('/');
+        } else {
+          this.snackBar.open('Failed to create appointment. Please try again.', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Error creating appointment:', error);
+        this.snackBar.open('An error occurred. Please try again later.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      }
+    });
+  }
+
+  getCustomerId(): string {
+    // Logic to get the customer_id from browser/cookie/session (to be implemented)
+    return '1';
+  }
+
+  populateLocations(): void {
+    this.locationServicesService.fetchAllLocations().subscribe(res => {
+      if (res['status'] === 'success') {
+        this.locations = res['data'];
+      } else {
+        this.isError = true;
+      }
+    });
   }
 }

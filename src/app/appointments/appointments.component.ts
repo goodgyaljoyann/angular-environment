@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppointmentServicesService } from '../appointment-services/appointment-services.service';
 import { CartService } from '../shared/cart.service';
+import { CheckAvailabilityService } from '../Bookings/check-availability.service';
 
 @Component({
   selector: 'app-appointments',
@@ -14,28 +15,90 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
   
   formData: any = {}; // Object to store form data
   isError: boolean = false;
-  
+  minDate!: string;
+  maxDate!: string;
+  timeOptions: string[] = [];
+
   constructor(
     private cartService: CartService,
     private router: Router,
     private renderer: Renderer2,
     private appointmentServicesService: AppointmentServicesService,
+    private checkAvailabilityService:CheckAvailabilityService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    // Any other initialization code
+    this.setDateLimits();
+    this.generateTimeOptions();
   }
 
   ngAfterViewInit(): void {
-    // Any post view initialization code
+    const iframe = this.renderer.selectRootElement('#adVideoIframe') as HTMLIFrameElement;
+
+    iframe.onload = () => {
+      const doc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (doc) {
+        const videoElement = doc.createElement('video');
+        videoElement.src = 'assets/Ad.mp4';
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+        videoElement.muted = true;
+        videoElement.style.width = '100%';
+        videoElement.style.height = '100%';
+        videoElement.controls = false;
+
+        doc.body.appendChild(videoElement);
+      }
+    };
+
+    iframe.src = 'about:blank';
   }
 
   saveAppointmentDetails(newServiceForm: NgForm): void {
-    Object.assign(this.formData, newServiceForm.value);
-    localStorage.setItem('appointmentDetails', JSON.stringify(this.formData));
-    this.router.navigate(['/payments']);
+    const { date, time } = newServiceForm.value;
+  
+    this.checkAvailabilityService.checkAvailability(date, time).subscribe(
+      (response: { data: { isAvailable: boolean } }) => {
+        const isAvailable = response.data.isAvailable;
+  
+        if (isAvailable) {
+          Object.assign(this.formData, newServiceForm.value);
+          localStorage.setItem('appointmentDetails', JSON.stringify(this.formData));
+          this.router.navigate(['/payments']);
+        } else {
+          this.snackBar.open('The selected time slot is fully booked. Please choose another time.', 'Close', {
+            duration: 3000,
+          });
+        }
+      },
+      (error: any) => {
+        console.error('Error checking availability', error);
+        this.snackBar.open('There was an error checking the availability. Please try again later.', 'Close', {
+          duration: 3000,
+        });
+      }
+    );
+  }  
+
+  setDateLimits(): void {
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 7);
+
+    this.minDate = today.toISOString().split('T')[0];
+    this.maxDate = maxDate.toISOString().split('T')[0];
   }
 
-  // Other methods...
+  generateTimeOptions(): void {
+    const startTime = 9;
+    const endTime = 15;
+    const interval = 30; // 30 minutes interval
+    for (let hour = startTime; hour < endTime; hour++) {
+      for (let minutes = 0; minutes < 60; minutes += interval) {
+        const time = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        this.timeOptions.push(time);
+      }
+    }
+  }
 }

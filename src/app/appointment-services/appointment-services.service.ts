@@ -14,6 +14,18 @@ export class AppointmentServicesService {
  
   constructor(private  _http:HttpClient){ }
 
+
+  // fetches appointment slots
+  getBookings(): Observable<any>{
+    return this._http.get<any>(this.API_URL+ `/bookings`)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
+
    // fetches all Appointments
   fetchAllAppointments(): Observable<any>{
     return this._http.get<any>(this.API_URL)

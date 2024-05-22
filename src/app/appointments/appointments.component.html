@@ -1,39 +1,42 @@
 <app-header-main></app-header-main>
 
-<div class="appointment-container">
-  <h3>Set Up Your Appointment</h3>
-  <form #newServiceForm="ngForm" (ngSubmit)="saveAppointmentDetails(newServiceForm)">
-    <div class="form-row">
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" ngModel required>
-    </div>
-    <div class="form-row">
-      <label for="time">Time:</label>
-      <input type="time" id="time" name="time" ngModel required>
-    </div>
-    <div class="form-row">
-      <label for="make">Make:</label>
-      <input type="text" id="make" name="make" ngModel required>
-    </div>
-    <div class="form-row">
-      <label for="model">Model:</label>
-      <input type="text" id="model" name="model" ngModel required>
-    </div>
-    <div class="form-row">
-      <label for="year">Year:</label>
-      <input type="number" id="year" name="year" ngModel required>
-    </div>
-    <div class="form-row">
-      <label for="mechanic_note">Mechanic Note:</label>
-      <textarea type="number" id="mechanic_note" name="mechanic_note" ngModel></textarea>
-    </div>
-    <div class="form-row">
-      <button type="submit" class="submit-btn">Submit</button>
-    </div>
-  </form>
-</div>
-<div class="cart-container">
+<div class="main-container">
+  <div class="appointment-container">
+    <h3>Set Up Your Appointment</h3>
+    <form #newServiceForm="ngForm" (ngSubmit)="saveAppointmentDetails(newServiceForm)">
+      <div class="form-row">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" ngModel required [min]="minDate" [max]="maxDate">
+      </div>
+      <div class="form-row">
+        <label for="time">Time:</label>
+        <select id="time" name="time" ngModel required>
+          <option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" ngModel required>
+      </div>
+      <div class="form-row">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" ngModel required>
+      </div>
+      <div class="form-row">
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" ngModel required>
+      </div>
+      <div class="form-row">
+        <label for="mechanic_note">Mechanic Note:</label>
+        <textarea id="mechanic_note" name="mechanic_note" ngModel></textarea>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+  </div>
+
   <div class="ad-vid">
     <iframe id="adVideoIframe" class="ad-video" src="about:blank" frameborder="0"></iframe>
+  </div>
 </div>
-  

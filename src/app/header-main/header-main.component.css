@@ -1,7 +1,7 @@
 img{
     width: 45%;
-    margin-top: -35px;
-    margin-left: -100px;
+    margin-top: -40px;
+    margin-left: -50px;
 }
 header{
     background-color: #23282d; 
@@ -13,7 +13,7 @@ header{
     color: #ffffff;
     font-size: 10px;
     margin-top: -10px;
-    margin-left: -180px;
+    margin-left: 0px;
     margin-right: 90px;
 }
 .opening-hrs h2{
@@ -34,10 +34,14 @@ header{
     color: #FECA39;
 }
 
-.user-icon img{
-    width: 30px;
-    height:30px;
-    transform: translate(200px, 48px);
+.navigations{
+  margin-left: -100px;
+}
+
+.user-name h3{
+    font-size: 15px;
+    color: #ffffff;
+    transform: translate(60px, 26px);
 }
 
 .user-dropdown {
@@ -51,7 +55,7 @@ header{
     background-color: #333; /* Dark Grey */
     min-width: 120px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    margin-top: 35px;
+    margin-top: 25px;
     margin-left: 60px;
     z-index: 1000;
   }

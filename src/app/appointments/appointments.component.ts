@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppointmentServicesService } from '../appointment-services/appointment-services.service';
 import { CartService } from '../shared/cart.service';
 import { CheckAvailabilityService } from '../Bookings/check-availability.service';
+import { AuthService } from '../Auth/auth.service';
 
 @Component({
   selector: 'app-appointments',
@@ -25,6 +26,7 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     private renderer: Renderer2,
     private appointmentServicesService: AppointmentServicesService,
     private checkAvailabilityService:CheckAvailabilityService,
+    private authService:AuthService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -55,12 +57,10 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     iframe.src = 'about:blank';
   }
 
-getCustomerId(): string {
-    return '1'; // Replace with logic to get the customer_id
-  } 
+
   saveAppointmentDetails(newServiceForm: NgForm): void {
     const { date, time } = newServiceForm.value;
-    const customer_id = this.getCustomerId(); // Get customer_id
+    const customer_id = this.authService.getCustomerId(); // Get customer_id
   
     this.checkAvailabilityService.checkAvailability(date, time).subscribe(
       (response: { data: { isAvailable: boolean } }) => {

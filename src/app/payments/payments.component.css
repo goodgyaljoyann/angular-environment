@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-   
   }
   
   .cart-content {
@@ -15,6 +14,8 @@
     max-width: 500px;
     height: 450px;
     overflow-y: auto;
+    margin: 0 auto;
+    transform: translateY(40px);
   }
   
   h3 {
@@ -121,7 +122,7 @@
   }
   
   .checkout-btn {
-    background-color: #007bff;
+    background-color: #00b352;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -130,9 +131,35 @@
   }
   
   .checkout-btn:hover {
-    background-color: #0056b3;
+    background-color: #034b00;
   }
   
+  .later-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .later-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .back-btn {
+    background-color: #ced2cc;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 310px;
+  }
+  
+  .back-btn:hover {
+    background-color: #7e909a;
+  }
   /* Custom Scrollbar */
   .cart-items::-webkit-scrollbar {
     width: 12px;

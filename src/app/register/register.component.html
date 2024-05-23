@@ -1,1 +1,24 @@
-<p>register works!</p>
+<div class="auth-container">
+  <form (ngSubmit)="onSignup(signupForm)" #signupForm="ngForm">
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <input type="text" ngModel name="first_name" placeholder="First Name" required>
+    </div>
+    <div class="form-group">
+      <input type="text" ngModel name="last_name" placeholder="Last Name" required>
+    </div>
+    <div class="form-group">
+      <input type="text" ngModel name="phone" placeholder="Phone" required>
+    </div>
+    <div class="form-group">
+      <input type="email" ngModel name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+      <input type="password" ngModel name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+      <input type="text" ngModel name="location_id" placeholder="Location ID" required>
+    </div>
+    <button type="submit" class="btn">Sign Up</button>
+  </form>
+</div>

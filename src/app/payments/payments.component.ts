@@ -7,6 +7,7 @@ import { AppointmentServicesService } from '../appointment-services/appointment-
 import { MatDialog } from '@angular/material/dialog';
 import { DebitCardPaymentComponent } from '../debit-card-payment/debit-card-payment.component';
 import { PaymentsServicesService } from '../payments-services/payments-services.service';
+import { AuthService } from '../Auth/auth.service';
 
 @Component({
   selector: 'app-payments',
@@ -26,6 +27,7 @@ export class PaymentsComponent implements OnInit {
     private locationServicesService: LocationServicesService,
     private appointmentServicesService: AppointmentServicesService,
     private paymentsService: PaymentsServicesService,
+    private authService:AuthService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
@@ -74,7 +76,7 @@ export class PaymentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async (result: any) => {
       if (result && result.success) {
-        const customerId = this.getCustomerId();
+        const customerId = this.authService.getCustomerId();
 
         try {
           const appointmentId = await this.getLastAppointmentIdByCustomer(customerId);
@@ -106,6 +108,7 @@ export class PaymentsComponent implements OnInit {
               verticalPosition: 'top'
             });
             this.router.navigate(['/']);
+            this.cartService.clearCart();
           } else {
             this.snackBar.open('Failed to create payment. Please try again.', 'Close', {
               duration: 3000,
@@ -168,7 +171,7 @@ payLater(): void {
     };
 
     // Get the customer ID
-    const customerId = this.getCustomerId();
+    const customerId = this.authService.getCustomerId();
 
     // Fetch the last appointment ID by the customer
     this.getLastAppointmentIdByCustomer(customerId).then(appointmentId => {
@@ -192,6 +195,7 @@ payLater(): void {
     horizontalPosition: 'center',
     verticalPosition: 'top'
   });
+  this.cartService.clearCart();
 }
 
 submitForm(appointmentId: number, formData: any): void { // Pass appointmentId and formData as arguments
@@ -204,7 +208,6 @@ submitForm(appointmentId: number, formData: any): void { // Pass appointmentId a
           horizontalPosition: 'center',
           verticalPosition: 'top'
         });
-
         this.router.navigateByUrl('/');
       } else {
         this.snackBar.open('Failed to create appointment. Please try again.', 'Close', {
@@ -225,9 +228,6 @@ submitForm(appointmentId: number, formData: any): void { // Pass appointmentId a
   });
 }
 
-  getCustomerId(): string {
-    return '1'; // Replace with logic to get the customer_id
-  }
 
   async getLastAppointmentIdByCustomer(customerId: string): Promise<string | null> {
     try {

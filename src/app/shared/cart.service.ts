@@ -52,5 +52,9 @@ export class CartService {
     return this.cart.filter(cartItem => cartItem.itemType === 'service').length;
   }
 
-  
+   // Add the clearCart method
+   clearCart(): void {
+    this.cart = [];
+    this.saveCartToLocalStorage();
+  }
 }

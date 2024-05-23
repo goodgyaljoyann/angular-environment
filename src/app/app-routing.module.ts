@@ -30,6 +30,7 @@ import { ServicesControlsComponent } from './services-controls/services-controls
 import { ViewServiceComponent } from './view-service/view-service.component';
 import { ProductsControlsComponent } from './products-controls/products-controls.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { AuthGuardService } from './Auth-Guard/auth-guard.service';
 
 
 
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'admins', component: AdminsComponent },
   { path: 'create-admin', component: CreateAdminComponent },
   { path: 'edit-admin/:id', component: EditAdminComponent },
-  { path: 'appointments', component: AppointmentsComponent },
+  { path: 'appointments', component: AppointmentsComponent, canActivate: [AuthGuardService]  },
   { path: 'create-appointment', component: CreateAppointmentComponent },
   { path: 'edit-appointment/:id', component: EditAppointmentComponent },
   { path: 'customers', component: CustomersComponent },
@@ -49,7 +50,7 @@ const routes: Routes = [
   { path: 'locations', component: LocationsComponent },
   { path: 'create-location', component: CreateLocationComponent },
   { path: 'edit-location/:id', component: EditLocationComponent },
-  { path: 'payments', component: PaymentsComponent },
+  { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuardService]  },
   { path: 'create-payment', component: CreatePaymentComponent },
   { path: 'edit-payment/:id', component: EditPaymentComponent },
   { path: 'products', component: ProductsComponent },
@@ -63,7 +64,9 @@ const routes: Routes = [
   { path:  'services-controls', component: ServicesControlsComponent},
   { path:  'products-controls', component: ProductsControlsComponent},
   { path:  'view-service/:id', component: ViewServiceComponent},
-  { path:  'view-product/:id', component: ViewProductComponent}
+  { path:  'view-product/:id', component: ViewProductComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

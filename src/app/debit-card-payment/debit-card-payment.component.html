@@ -1,0 +1,29 @@
+<div mat-dialog-content>
+    <h2>Enter Credit Card Information</h2>
+    <form #creditCardForm="ngForm" (ngSubmit)="submitCreditCard(creditCardForm)">
+      <mat-form-field appearance="fill">
+        <mat-label>Credit Card Number</mat-label>
+        <input matInput type="text" name="creditCardNumber" ngModel #creditCardNumber="ngModel" minlength="15" maxlength="15" pattern="[0-9]*" required>
+        <mat-error *ngIf="creditCardNumber.errors?.['required']">Credit card number is required</mat-error>
+        <mat-error *ngIf="creditCardNumber.errors?.['pattern']">Credit card number must contain only numbers</mat-error>
+        <mat-error *ngIf="creditCardNumber.errors?.['minlength'] || creditCardNumber.errors?.['maxlength']">Credit card number must be 15 digits long</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>CVV</mat-label>
+        <input matInput type="text" name="cvv" ngModel #cvv="ngModel" minlength="3" maxlength="3" pattern="[0-9]*" required>
+        <mat-error *ngIf="cvv.errors?.['required']">CVV is required</mat-error>
+        <mat-error *ngIf="cvv.errors?.['pattern']">CVV must contain only numbers</mat-error>
+        <mat-error *ngIf="cvv.errors?.['minlength'] || cvv.errors?.['maxlength']">CVV must be 3 digits long</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Expiration (MM/YYYY)</mat-label>
+        <input matInput type="month" name="expiration" ngModel #expiration="ngModel" required>
+        <mat-error *ngIf="expiration.errors?.['required']">Expiration date is required</mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" [disabled]="creditCardForm.invalid">Submit</button>
+    </form>
+  </div>
+  

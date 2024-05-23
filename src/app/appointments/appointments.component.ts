@@ -55,17 +55,39 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     iframe.src = 'about:blank';
   }
 
+getCustomerId(): string {
+    return '1'; // Replace with logic to get the customer_id
+  } 
   saveAppointmentDetails(newServiceForm: NgForm): void {
     const { date, time } = newServiceForm.value;
+    const customer_id = this.getCustomerId(); // Get customer_id
   
     this.checkAvailabilityService.checkAvailability(date, time).subscribe(
       (response: { data: { isAvailable: boolean } }) => {
         const isAvailable = response.data.isAvailable;
   
         if (isAvailable) {
-          Object.assign(this.formData, newServiceForm.value);
-          localStorage.setItem('appointmentDetails', JSON.stringify(this.formData));
-          this.router.navigate(['/payments']);
+          // Add customer_id to the form data
+          const formDataWithCustomerId = { ...newServiceForm.value, customer_id };
+  
+          this.appointmentServicesService.createAppointment(formDataWithCustomerId).subscribe(
+            (res: any) => {
+              if (res.status === 'success') {
+                localStorage.setItem('appointmentDetails', JSON.stringify(res.data));
+                this.router.navigate(['/payments']);
+              } else {
+                this.snackBar.open('Failed to create appointment. Please try again.', 'Close', {
+                  duration: 3000,
+                });
+              }
+            },
+            (error: any) => {
+              console.error('Error creating appointment:', error);
+              this.snackBar.open('An error occurred while creating the appointment. Please try again later.', 'Close', {
+                duration: 3000,
+              });
+            }
+          );
         } else {
           this.snackBar.open('The selected time slot is fully booked. Please choose another time.', 'Close', {
             duration: 3000,

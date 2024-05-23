@@ -8,26 +8,14 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentServicesService {
+export class PaymentsServicesService {
 
-  private API_URL= environment.api_url+'/api/v1/appointments';
+  private API_URL= environment.api_url+'/api/v1/payments';
  
   constructor(private  _http:HttpClient){ }
 
-
-  // fetches appointment slots
-  getBookings(): Observable<any>{
-    return this._http.get<any>(this.API_URL+ `/bookings`)
-                                .pipe(
-                                  map((res)=>{
-                                    return res;
-                                  }
-                                  )
-                                );
-  }
-
-   // fetches all Appointments
-  fetchAllAppointments(): Observable<any>{
+   // fetches all services
+  fetchAllPayments(): Observable<any>{
     return this._http.get<any>(this.API_URL)
                                 .pipe(
                                   map((res)=>{
@@ -38,7 +26,7 @@ export class AppointmentServicesService {
   }
 
   // fetches a student
-  fetchAppointmentById(id:number): Observable<any>{
+  fetchPaymentById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
                                   map((res)=>{
@@ -49,7 +37,7 @@ export class AppointmentServicesService {
   }
   
   // creates a student
-  createAppointment(data:any): Observable<any>{
+  createPayment(data:any): Observable<any>{
     return this._http.post<any>(this.API_URL, data)
                                 .pipe(
                                   map((res)=>{
@@ -60,7 +48,7 @@ export class AppointmentServicesService {
   }
 
   // updates a student
-  updateAppointment(id:number, data:any): Observable<any>{
+  updatePayment(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
                                   map((res)=>{
@@ -71,7 +59,7 @@ export class AppointmentServicesService {
   }
 
   // updates a student
-  deleteAppointment(id:number): Observable<any>{
+  deletePayment(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(
                                   map((res)=>{
@@ -81,12 +69,4 @@ export class AppointmentServicesService {
                                 );
   }
 
-  getLastAppointmentIdByCustomer(customerId: number): Observable<any> {
-    return this._http.get<any>(`${this.API_URL}/last/${customerId}`);
-  }
-  
-  addServiceToAppointment(appointmentData: any): Observable<any> {
-    return this._http.post<any>(`${this.API_URL}/addService`, appointmentData);
-  }
-  
 }

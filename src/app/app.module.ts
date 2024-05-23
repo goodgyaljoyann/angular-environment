@@ -44,6 +44,12 @@ import { ViewServiceComponent } from './view-service/view-service.component';
 import { ProductsControlsComponent } from './products-controls/products-controls.component';
 import { DeleteProductDialogComponent } from './delete-product-dialog/delete-product-dialog.component';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { DebitCardPaymentComponent } from './debit-card-payment/debit-card-payment.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+
 
 
 
@@ -85,6 +91,7 @@ import { ViewProductComponent } from './view-product/view-product.component';
     ProductsControlsComponent,
     DeleteProductDialogComponent,
     ViewProductComponent,
+    DebitCardPaymentComponent,
 
   ],
   imports: [
@@ -96,7 +103,13 @@ import { ViewProductComponent } from './view-product/view-product.component';
     NgxPaginationModule,
     MatDialogModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDialogModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

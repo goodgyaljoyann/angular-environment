@@ -49,6 +49,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { HistoryComponent } from './history/history.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -92,6 +94,8 @@ import { CommonModule } from '@angular/common';
     DeleteProductDialogComponent,
     ViewProductComponent,
     DebitCardPaymentComponent,
+    HistoryComponent,
+    ConfirmationDialogComponent,
 
   ],
   imports: [

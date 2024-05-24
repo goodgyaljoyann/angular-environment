@@ -31,6 +31,7 @@ import { ViewServiceComponent } from './view-service/view-service.component';
 import { ProductsControlsComponent } from './products-controls/products-controls.component';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { AuthGuardService } from './Auth-Guard/auth-guard.service';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'revenue-reports', component: RevenueReportsComponent},
   { path:  'services-controls', component: ServicesControlsComponent},
   { path:  'products-controls', component: ProductsControlsComponent},
+  { path: 'history', component: HistoryComponent, canActivate: [AuthGuardService]  },
   { path:  'view-service/:id', component: ViewServiceComponent},
   { path:  'view-product/:id', component: ViewProductComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },

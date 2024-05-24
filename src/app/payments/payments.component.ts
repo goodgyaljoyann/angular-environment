@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DebitCardPaymentComponent } from '../debit-card-payment/debit-card-payment.component';
 import { PaymentsServicesService } from '../payments-services/payments-services.service';
 import { AuthService } from '../Auth/auth.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+
 
 @Component({
   selector: 'app-payments',
@@ -162,41 +164,68 @@ async updateAppointmentStatus(appointmentId: string, paymentStatus: string, appt
 }
 
 payLater(): void {
-  const services = this.cart.filter(item => item.itemType === 'service');
-  services.forEach(service => {
-    const appointmentData = {
-      service_id: service.item.service_id,
-      payment_status: 'pending', // Define payment_status
-      appt_status: 'scheduled'   // Define appt_status
-    };
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    width: '250px',
+    data: {
+      message: 'Choosing to pay later forfeits the products in your cart. Do you want to continue?',
+      confirmAction: 'Continue',
+      cancelAction: 'Cancel'
+    }
+  });
 
-    // Get the customer ID
-    const customerId = this.authService.getCustomerId();
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      const services = this.cart.filter(item => item.itemType === 'service');
+      const appointmentDataList: any[] = [];
 
-    // Fetch the last appointment ID by the customer
-    this.getLastAppointmentIdByCustomer(customerId).then(appointmentId => {
-      if (!appointmentId) {
-        // Handle case when no appointment is found for the customer
-        this.snackBar.open('No appointment found for the customer.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
+      services.forEach(service => {
+        const appointmentData = {
+          service_id: service.item.service_id,
+          payment_status: 'pending', // Define payment_status
+          appt_status: 'scheduled'   // Define appt_status
+        };
+
+        appointmentDataList.push(appointmentData);
+
+        // Store the price of the service into the local storage
+        localStorage.setItem(`service_price_${service.item.service_id}`, service.item.price);
+      });
+
+      // Store the appointment data in local storage
+      localStorage.setItem('pendingAppointments', JSON.stringify(appointmentDataList));
+
+      // Get the customer ID
+      const customerId = this.authService.getCustomerId();
+
+      appointmentDataList.forEach(appointmentData => {
+        this.getLastAppointmentIdByCustomer(customerId).then(appointmentId => {
+          if (!appointmentId) {
+            // Handle case when no appointment is found for the customer
+            this.snackBar.open('No appointment found for the customer.', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+          } else {
+            // Parse appointmentId to number and pass both appointmentId and appointmentData to submitForm
+            this.submitForm(parseInt(appointmentId), appointmentData);
+          }
         });
-      } else {
-        // Parse appointmentId to number and pass both appointmentId and appointmentData to submitForm
-        this.submitForm(parseInt(appointmentId), appointmentData);
-      }
-    });
-  });
+      });      
 
-  // Display a message for 20 seconds
-  this.snackBar.open('Your appointment is scheduled. If payment is not received within 24 hours before the appointment, it will be cancelled.', 'Close', {
-    duration: 20000, // 20 seconds
-    horizontalPosition: 'center',
-    verticalPosition: 'top'
+      // Display a message about forfeiting products in the cart if paid later
+      this.snackBar.open('Your appointment is scheduled. If payment is not received within 24 hours before the appointment, it will be cancelled.', 'Close', {
+        duration: 20000, // 20 seconds
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
+
+      // Clear the cart
+      this.cartService.clearCart();
+    }
   });
-  this.cartService.clearCart();
 }
+
 
 submitForm(appointmentId: number, formData: any): void { // Pass appointmentId and formData as arguments
   // Pass appointmentId as an argument to update the appointment

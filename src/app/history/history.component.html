@@ -1,0 +1,29 @@
+<div *ngIf="hasData; else noDataTemplate" class="history-container">
+    <h2>Appointment History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Service</th>
+          <th>Appointment Status</th>
+          <th>Payment Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointment">
+          <td>{{ appointment.date | date:'mediumDate' }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.service_id }}</td>
+          <td>{{ appointment.appt_status }}</td>
+          <td>{{ appointment.payment_status }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="payments-button" (click)="payForLastAppointment()">Pay for Last Appointment</button>
+  </div>
+  
+  <ng-template #noDataTemplate>
+    <p>No appointment history found. Please book an appointment!</p>
+  </ng-template>
+  

@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'edit-appointment/:id', component: EditAppointmentComponent },
   { path: 'customers', component: CustomersComponent },
   { path: 'create-customer', component: CreateCustomerComponent },
-  { path: 'edit-customer/:id', component: EditCustomerComponent },
+  { path: 'edit-info/:id', component: EditCustomerComponent, canActivate: [AuthGuardService] },
   { path: 'locations', component: LocationsComponent },
   { path: 'create-location', component: CreateLocationComponent },
   { path: 'edit-location/:id', component: EditLocationComponent },

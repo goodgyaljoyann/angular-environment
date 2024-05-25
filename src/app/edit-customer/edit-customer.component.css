@@ -1,0 +1,56 @@
+.edit-customer-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    height: max-content;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .inputBox {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-control:focus {
+    border-color: #feca39;
+    box-shadow: 0 0 5px rgba(254, 202, 57, 0.5);
+  }
+  
+  .btn-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #feca39;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .btn-submit:hover {
+    background-color: #e6b635;
+  }
+  

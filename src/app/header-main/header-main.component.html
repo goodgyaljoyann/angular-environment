@@ -25,15 +25,16 @@
           <div *ngIf="hasData">
             <h3>{{ customer.first_name }} {{ customer.last_name }}</h3>
           </div>
-          <div *ngIf="!hasData">
-            <p>Hey! Signup or Log In!</p>
-          </div>
       </span>
       <div class="dropdown-content" >
-        <a href="#">Edit Account Preferences</a>
+        <a routerLink="/edit-info/{{customer['customer_id']}}">Edit Profile</a>
         <a routerLink="/history">View History</a>
-        <a href="#">Logout</a>
+        <a >Logout</a>
       </div>
+    </div>
+    <div *ngIf="!hasData" class="user-prompt">
+      <a routerLink="/register"><button>Sign Up!</button></a>
+      <a routerLink="/login"><button>Login</button></a>
     </div>
     
   </header>

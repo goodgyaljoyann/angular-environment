@@ -1,1 +1,36 @@
-<p>edit-customer works!</p>
+<app-header-main></app-header-main>
+<div class="edit-customer-container">
+  <h2>Edit Customer Profile</h2>
+  <form (ngSubmit)="updateCustomer()" #editCustomerForm="ngForm">
+    <div class="inputBox">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" id="first_name" name="first_name" class="form-control" [(ngModel)]="formData.first_name" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="last_name" class="form-label">Last Name</label>
+      <input type="text" id="last_name" name="last_name" class="form-control" [(ngModel)]="formData.last_name" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="formData.phone" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="formData.email" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="location_id" class="form-label">Location</label> <br>
+      <select id="location_id" name="location_id" class="form-control" [(ngModel)]="formData.location_id" required>
+        <option value="" disabled selected>Please select a location</option>
+        <option *ngFor="let location of locations" [value]="location.location_id">{{ location.location_name }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-submit">Update Profile</button>
+  </form>
+</div>
+<app-footer></app-footer>

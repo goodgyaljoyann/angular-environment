@@ -14,9 +14,20 @@ export class CustomerService {
 
   constructor(private  _http:HttpClient){ }
 
-  // fetches a student
+  // fetches a customer
   fetchCustomerById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
+
+  // updates a student
+  updateCustomer(id:number, data:any): Observable<any>{
+    return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
                                   map((res)=>{
                                     return res;

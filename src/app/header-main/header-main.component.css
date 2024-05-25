@@ -44,6 +44,17 @@ header{
     transform: translate(60px, 26px);
 }
 
+.user-prompt button{
+  font-size: 15px;
+  color: #ffffff;
+  border-radius: 20px;
+  margin-right: 5px;
+  border: none;
+  padding: 5px 8px;
+  background-color: #FECA39;
+  transform: translate(40px, 25px);
+}
+
 .user-dropdown {
     position: relative;
 

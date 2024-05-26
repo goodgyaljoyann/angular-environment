@@ -23,6 +23,13 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
+  isAdmin(): boolean {
+    // Implement your logic to check if the user is an admin
+    const adminId = this.getAdminId();
+    return !!adminId;
+  }
+  
+
   registerUser(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user).pipe(
       // Handling the successful response
@@ -68,10 +75,64 @@ export class AuthService {
   }
 
   logout() {
+    // Clear token from local storage
+    localStorage.removeItem('token');
+
+    // Clear customer ID from local storage
+    localStorage.removeItem('customer_id');
+
+    // Clear any other necessary state
     this.token = null;
     this.authStatusListener.next(false);
+    
+    // Redirect to the login page
     this.router.navigate(['/login']);
-  }
+}
+
+ // Admin Authentication Methods
+ registerAdmin(admin: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}/register-admin`, admin).pipe(
+    map((response: any) => {
+      this.router.navigate(['/login-admin']);
+      return response;
+    })
+  );
+}
+
+loginAdmin(admin: any): Observable<{ token: string, admin_id: string }> {
+  return this.http.post<{ token: string, admin_id: string }>(`${this.apiUrl}/login-admin`, admin)
+    .pipe(
+      map(response => {
+        if (response && response.token && response.admin_id) {
+          this.token = response.token;
+          this.saveAdminId(response.admin_id);
+          this.authStatusListener.next(true);
+          return response;
+        } else {
+          throw new Error('Invalid response from server: token or admin_id is missing');
+        }
+      }),
+      catchError(error => {
+        throw new Error('Error occurred while logging in: ' + error.message);
+      })
+    );
+}
+
+saveAdminId(adminId: string): void {
+  this.cookieService.set('admin_id', adminId);
+}
+
+getAdminId(): string {
+  return this.cookieService.get('admin_id');
+}
+
+logoutAdmin() {
+  localStorage.removeItem('token');
+  this.cookieService.delete('admin_id');
+  this.token = null;
+  this.authStatusListener.next(false);
+  this.router.navigate(['/login-admin']);
+}
 
   isAuthenticated(): boolean {
     return this.token !== null;

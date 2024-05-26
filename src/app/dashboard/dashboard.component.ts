@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { StatisticsService } from '../statistics/statistics.service';
 import { ViewAllAppointmentsService } from '../view-allAppointments/view-all-appointments.service';
-import Chart from 'chart.js/auto';
+import { AdminService } from '../admin-services/admin.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../Auth/auth.service';
+
 
 interface Payment {
   date: string;
@@ -19,10 +22,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   appointments: any = [];
   payments: any = [];
   isError: boolean = true;
+  admin: any;
+  hasData: boolean = false;
 
   constructor(
     private statisticsService: StatisticsService,
-    private viewAllAppointmentsService: ViewAllAppointmentsService
+    private viewAllAppointmentsService: ViewAllAppointmentsService,
+    private router:Router,
+    private authService:AuthService,
+    private adminService:AdminService
   ) {}
   
 
@@ -30,6 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.fetchStatistics();
     this.fetchAllAppointments();
     this.fetchScheduledAppointments();
+    this.loadAdminInfo();
   }
 
   ngOnDestroy(): void {
@@ -102,4 +111,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
   
+  loadAdminInfo() {
+    const adminId = localStorage.getItem('admin_id');
+    if (adminId !== null) {
+      const adminIdNumber = parseInt(adminId, 10);
+      if (!isNaN(adminIdNumber)) {
+        this.adminService.fetchAdminById(adminIdNumber).subscribe(
+          (res) => {
+            if (res.status !== 'error') {
+              this.admin = res.data.admin;
+              this.hasData = true;
+            } else {
+              this.hasData = false;
+            }
+          },
+          (error) => {
+            console.error('Error fetching info:', error);
+            this.hasData = false;
+          }
+        );
+      } else {
+        console.error('Admin ID is not a valid number');
+
+      }
+    } else {
+      console.error('Admin ID not found in local storage');
+      this.hasData = false;
+    }
+  }
+
+  logout(): void {
+    this.authService.logoutAdmin();
+    this.router.navigate(['/login']);
+  }
 }

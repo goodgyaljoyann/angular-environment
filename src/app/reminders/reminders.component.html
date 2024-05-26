@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="reminders-container">
+    <h2>Scheduled Appointments</h2>
+    <table class="appointments-table">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Customer Phone</th>
+          <th>Service</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Payment Status</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments">
+          <td>{{ appointment.customer.first_name }} {{ appointment.customer.last_name }}</td>
+          <td>{{ appointment.customer.phone }}</td>
+          <td>{{ appointment.service.service_name }}</td>
+          <td>{{ appointment.make }}</td>
+          <td>{{ appointment.model }}</td>
+          <td>{{ appointment.payment_status }}</td>
+          <td>{{ appointment.appt_status }}</td>
+          <td>
+            <button (click)="updateStatus(appointment.appointment_id, 'completed')" class="btn btn-success">Complete</button>
+            <button (click)="updateStatus(appointment.appointment_id, 'active')" class="btn btn-primary">Activate</button>
+            <button (click)="updateStatus(appointment.appointment_id, 'cancelled')" class="btn btn-danger">Cancel</button>
+          </td>
+        </tr>
+        <tr *ngIf="appointments.length === 0">
+          <td colspan="6">No scheduled appointments found.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="isError" class="error-message">
+      An error occurred while fetching appointments. Please try again later.
+    </div>
+  </div>
+  

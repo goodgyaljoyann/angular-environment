@@ -17,14 +17,11 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
 import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
 import { CustomersComponent } from './customers/customers.component';
-import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { LocationsComponent } from './locations/locations.component';
 import { CreateLocationComponent } from './create-location/create-location.component';
 import { EditLocationComponent } from './edit-location/edit-location.component';
 import { PaymentsComponent } from './payments/payments.component';
-import { CreatePaymentComponent } from './create-payment/create-payment.component';
-import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
@@ -51,6 +48,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { HistoryComponent } from './history/history.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { RegisterAdminComponent } from './register-admin/register-admin.component';
+import { RemindersComponent } from './reminders/reminders.component';
 
 
 
@@ -68,14 +68,11 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     CreateAppointmentComponent,
     EditAppointmentComponent,
     CustomersComponent,
-    CreateCustomerComponent,
     EditCustomerComponent,
     LocationsComponent,
     CreateLocationComponent,
     EditLocationComponent,
     PaymentsComponent,
-    CreatePaymentComponent,
-    EditPaymentComponent,
     ProductsComponent,
     CreateProductComponent,
     EditProductComponent,
@@ -96,6 +93,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     DebitCardPaymentComponent,
     HistoryComponent,
     ConfirmationDialogComponent,
+    LoginAdminComponent,
+    RegisterAdminComponent,
+    RemindersComponent,
 
   ],
   imports: [

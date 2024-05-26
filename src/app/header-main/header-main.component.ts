@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer-service/customer.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../Auth/auth.service';
 
 @Component({
   selector: 'app-header-main',
@@ -10,7 +12,7 @@ export class HeaderMainComponent implements OnInit {
 
   customerInfo: any; // Variable to store customer information
 
-  constructor(private customerService: CustomerService) {} // Inject the customer service
+  constructor(private customerService: CustomerService, private router:Router, private authService:AuthService) {} // Inject the customer service
 
   customer: any;
   hasData: boolean = false;
@@ -41,12 +43,17 @@ export class HeaderMainComponent implements OnInit {
         );
       } else {
         console.error('Customer ID is not a valid number');
-        this.hasData = false;
+
       }
     } else {
       console.error('Customer ID not found in local storage');
       this.hasData = false;
     }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
   
   }

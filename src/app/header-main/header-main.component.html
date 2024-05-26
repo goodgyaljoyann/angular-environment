@@ -20,6 +20,10 @@
     </ul>
   </div>
 
+  <div *ngIf="!hasData" class="user-prompt">
+    <a routerLink="/register"><button>Sign Up!</button></a>
+    <a routerLink="/login"><button>Login</button></a>
+  </div>
     <div class="user-dropdown">
       <span class="user-name">
           <div *ngIf="hasData">
@@ -29,12 +33,9 @@
       <div class="dropdown-content" >
         <a routerLink="/edit-info/{{customer['customer_id']}}">Edit Profile</a>
         <a routerLink="/history">View History</a>
-        <a >Logout</a>
+        <a (click)="logout()">Logout</a>
       </div>
     </div>
-    <div *ngIf="!hasData" class="user-prompt">
-      <a routerLink="/register"><button>Sign Up!</button></a>
-      <a routerLink="/login"><button>Login</button></a>
-    </div>
+    
     
   </header>

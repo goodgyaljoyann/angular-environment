@@ -70,6 +70,13 @@ export class AppointmentServicesService {
                                 );
   }
 
+  updateAppointmentStatus(appointmentId: number, appt_status: string): Observable<any> {
+    return this._http.patch<any>(`${this.API_URL}/status/${appointmentId}`, { appt_status })
+      .pipe(
+        map(res => res)
+      );
+  }
+
   // updates a student
   deleteAppointment(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
@@ -80,6 +87,18 @@ export class AppointmentServicesService {
                                   )
                                 );
   }
+
+    // Fetch statistics for products
+    getScheduledAppointments(): Observable<any> {
+      const url = `${this.API_URL}/scheduled`; // Append /products route
+      return this._http.get<any>(url);
+    }
+
+    // Fetch statistics for products
+    getActiveAppointments(): Observable<any> {
+      const url = `${this.API_URL}/active`; // Append /products route
+      return this._http.get<any>(url);
+    }
 
   getLastAppointmentIdByCustomer(customerId: number): Observable<any> {
     return this._http.get<any>(`${this.API_URL}/last/${customerId}`);

@@ -25,23 +25,17 @@ export class RemindersComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAppointments();
+    this.fetchActiveAppointments();
   }
 
   fetchAppointments(): void {
     const scheduledAppointments$ = this.fetchScheduledAppointments();
     const activeAppointments$ = this.fetchActiveAppointments();
-  
+
     forkJoin([scheduledAppointments$, activeAppointments$]).subscribe({
       next: ([scheduledAppointments, activeAppointments]) => {
         // Combine scheduled and active appointments
-        const appointments = [...scheduledAppointments, ...activeAppointments].slice(0, 5);
-        
-        // Check if both arrays are empty
-        if (scheduledAppointments.length === 0 && activeAppointments.length === 0) {
-          console.log("No appointments found.");
-        } else {
-          this.appointments = appointments;
-        }
+        this.appointments = [...scheduledAppointments, ...activeAppointments].slice(0, 5);
       },
       error: (error) => {
         console.error('Error fetching appointments:', error);
@@ -49,7 +43,6 @@ export class RemindersComponent implements OnInit {
       }
     });
   }
-  
 
   fetchScheduledAppointments(): Observable<any[]> {
     return this.appointmentServicesService.getScheduledAppointments().pipe(

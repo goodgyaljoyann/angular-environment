@@ -51,6 +51,10 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import { RemindersComponent } from './reminders/reminders.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ReplysComponent } from './replys/replys.component';
+import { MessageUsComponent } from './message-us/message-us.component';
+import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 
 
 
@@ -96,6 +100,10 @@ import { RemindersComponent } from './reminders/reminders.component';
     LoginAdminComponent,
     RegisterAdminComponent,
     RemindersComponent,
+    MessagesComponent,
+    ReplysComponent,
+    MessageUsComponent,
+    ReplyDialogComponent,
 
   ],
   imports: [

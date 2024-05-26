@@ -1,8 +1,9 @@
 .reminders-container {
   padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  transform: translate(120px, -500px);
+  transform: translate(120px, -620px);
+  height: fit-content;
 }
 
 h2 {
@@ -13,7 +14,7 @@ h2 {
 .appointments-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  
 }
 
 .appointments-table th, .appointments-table td {
@@ -34,26 +35,33 @@ h2 {
 .btn {
   padding: 5px 10px;
   margin-right: 5px;
+  display: flex;
 }
 
 .btn-success {
+  width: 70px;
   background-color: #28a745;
   color: white;
   border: none;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .btn-primary {
+  width: 70px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 .btn-danger {
+  width: 70px;
   background-color: red;
   color: white;
   border: none;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .btn-success:hover, .btn-primary:hover {

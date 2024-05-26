@@ -1,43 +1,46 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 /* Dashboard Header */
- .dashboard-header {
+.dashboard-header {
     background-color: #1f3f49; /* Dark Grey */
     color: #fff; /* White */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    
-  }
-  
-  /* Logo */
-  .logo img {
+}
+
+/* Logo */
+.logo img {
     height: 100px;
     border-radius: 50px;
     cursor: pointer;
-  }
-  
-  /* Search Bar */
-  .search-bar input {
+}
+
+/* Search Bar */
+.search-bar input {
     padding: 10px 50px;
     border-radius: 5px;
     border: none;
-  }
-  
-  /* User Dropdown */
-  .user-dropdown {
-    position: relative;
+}
 
-  }
-  
-  .user-icon img {
+.search-bar i {
+    margin-left: 20px;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+}
+
+.user-icon img {
     width: 30px;
     height: 30px;
     cursor: pointer;
     margin-right: 50px;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #333; /* Dark Grey */
@@ -45,61 +48,56 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     right: 0;
     z-index: 1000;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: #fff; /* White */
     padding: 10px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {
+}
+
+.dropdown-content a:hover {
     background-color: #555; /* Dark Grey (Hover) */
-  }
-  
-  .user-dropdown:hover .dropdown-content {
+}
+
+.user-dropdown:hover .dropdown-content {
     display: block;
-    
-  }
-  
- /* Sidebar Navigation */
+}
+
+/* Sidebar Navigation */
 .sidebar {
     background-color: #1f3f49;
     color: #fff; /* White */
     padding-top: 20px;
     width: 15%;
-    height: 100vh; /* Set height to 100% of viewport height */
+    min-height: 100vh; /* Minimum height to fill the viewport */
     display: flex;
     flex-direction: column;
-    height: 500px;
-  }
-  
-  .sidebar ul {
+    height: auto; /* Let height be determined by content */
+}
+
+.sidebar ul {
     list-style-type: none;
     padding: 0;
     margin-top: 10px; /* Add spacing at the top */
-  }
-  
-  .sidebar ul li {
-    padding: 20px;
-  }
+}
 
-  .sidebar i {
+.sidebar ul li {
+    padding: 20px;
+}
+
+.sidebar i {
     margin-right: 5px;
-  }
-  
-  .sidebar ul li a {
+}
+
+.sidebar ul li a {
     color: #fff; /* White */
     text-decoration: none;
-  }
-  
-  .sidebar a:hover {
-    background-color: #d32d41; /* dark red (Hover) */
+}
+
+.sidebar a:hover {
+    background-color: #d32d41; /* Dark Red (Hover) */
     border-radius: 5px; /* Add some rounded corners on hover */
-    width: 15%;
     padding: 5px;
-  }
-  .search-bar i{
-    margin-left: 20px;
-  }
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -122,9 +122,10 @@ saveAdminId(adminId: string): void {
   this.cookieService.set('admin_id', adminId);
 }
 
-getAdminId(): string {
-  return this.cookieService.get('admin_id');
+getAdminId(): Observable<string> {
+  return of(this.cookieService.get('admin_id'));
 }
+
 
 logoutAdmin() {
   localStorage.removeItem('token');

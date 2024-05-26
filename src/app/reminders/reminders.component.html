@@ -1,12 +1,15 @@
 <app-header></app-header>
-<div class="reminders-container">
+<div class="reminders-container" >
     <h2>Scheduled Appointments</h2>
     <table class="appointments-table">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Customer Name</th>
           <th>Customer Phone</th>
           <th>Service</th>
+          <th>Date</th>
+          <th>Time</th>
           <th>Make</th>
           <th>Model</th>
           <th>Payment Status</th>
@@ -16,9 +19,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let appointment of appointments">
+          <td>{{appointment.appointment_id}}</td>
           <td>{{ appointment.customer.first_name }} {{ appointment.customer.last_name }}</td>
           <td>{{ appointment.customer.phone }}</td>
           <td>{{ appointment.service.service_name }}</td>
+          <td>{{ appointment.date | date:'mediumDate'}}</td>
+          <td>{{ appointment.time }}</td>
           <td>{{ appointment.make }}</td>
           <td>{{ appointment.model }}</td>
           <td>{{ appointment.payment_status }}</td>

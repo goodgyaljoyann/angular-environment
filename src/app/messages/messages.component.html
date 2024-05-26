@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div *ngIf="isError">
+    <p>Error loading messages. Please try again later.</p>
+  </div>
+  
+  <div *ngIf="!isError && messages.length > 0" class="message-container">
+    <div *ngFor="let message of messages" class="message-bubble">
+      <p><strong>{{ message.customer.first_name }} {{ message.customer.last_name }}</strong></p>
+      <p>Appointment ID: {{ message.appointment_id }}</p>
+      <p>{{ message.message_content }}</p>
+      <!-- Display reply if it exists -->
+      <div *ngIf="message.reply">
+        <p><strong>Reply:</strong> {{ message.reply }}</p>
+      </div>
+      <!-- Display reply button if there is no reply -->
+      <button *ngIf="!message.reply" (click)="replyToMessage(message.message_id)">Reply</button>
+    </div>
+  </div>
+  
+  <div *ngIf="!isError && messages.length === 0">
+    <p>No messages found.</p>
+  </div>
+  

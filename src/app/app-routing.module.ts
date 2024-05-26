@@ -33,6 +33,7 @@ import { RoleGuardService } from './role-guard/role-guard.service';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import { RemindersComponent } from './reminders/reminders.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path:  'services-controls', component: ServicesControlsComponent, canActivate: [RoleGuardService]},
   { path:  'reminders', component: RemindersComponent, canActivate: [RoleGuardService]},
   { path:  'products-controls', component: ProductsControlsComponent, canActivate: [RoleGuardService]},
+  { path:  'messages', component: MessagesComponent, canActivate: [RoleGuardService]},
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuardService]  },
   { path:  'view-service/:id', component: ViewServiceComponent},
   { path:  'view-product/:id', component: ViewProductComponent},

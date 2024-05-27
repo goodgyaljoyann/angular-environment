@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Bree+Serif&family=Dancing+Script:wght@400..700&family=Fjalla+One&family=Francois+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lilita+One&family=Oswald:wght@200..700&family=Passion+One:wght@400;700;900&family=Permanent+Marker&family=Teko:wght@300..700&display=swap');
 
 .auth-container {
     max-width: 400px;
@@ -8,9 +9,11 @@
     background-color: #fff;
   }
   
-  .auth-container h2 {
+  .auth-container h4 {
     text-align: center;
     margin-bottom: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
   }
   
   .form-group {
@@ -26,18 +29,22 @@
   
   .btn {
     display: block;
-    width: 100%;
+    width: 20%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #e11c26;
     border: none;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Fjalla One', sans-serif;
+    margin: 0 auto;
   }
   
   .btn:hover {
     background-color: #0056b3;
   }
 .logo{
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

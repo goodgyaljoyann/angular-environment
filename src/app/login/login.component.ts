@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, Renderer2 } from '@angular/core';
 import { AuthService } from '../Auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  constructor(private authService: AuthService, private router:Router) {}
+export class LoginComponent implements AfterViewInit {
+  constructor(private authService: AuthService, private router:Router, private renderer: Renderer2) {}
 
   onLogin(form: any) {
     if (form.valid) {
@@ -31,6 +31,29 @@ export class LoginComponent {
         }
       );
     }
+  }
+
+  ngAfterViewInit(): void {
+    const iframe = this.renderer.selectRootElement('#adVideoIframe') as HTMLIFrameElement;
+
+    iframe.onload = () => {
+      const doc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (doc) {
+        const videoElement = doc.createElement('video');
+        videoElement.src = 'assets/login-bkg.mp4';
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+        videoElement.muted = true;
+        videoElement.style.width = '100%';
+        videoElement.style.height = '100%';
+        videoElement.style.objectFit = 'cover';
+        videoElement.controls = false;
+
+        doc.body.appendChild(videoElement);
+      }
+    };
+
+    iframe.src = 'about:blank';
   }
   
 }

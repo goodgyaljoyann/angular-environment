@@ -1,6 +1,7 @@
+<div class="bg-image">
 <div class="auth-container">
+  <div class="business-logo"> <img src="assets/new-logo.png" alt="business logo"></div>
   <form (ngSubmit)="onSignup(signupForm)" #signupForm="ngForm">
-    <h2>Sign Up</h2>
     <div class="form-group">
       <input type="text" ngModel name="first_name" placeholder="First Name" required>
     </div>
@@ -17,8 +18,12 @@
       <input type="password" ngModel name="password" placeholder="Password" required>
     </div>
     <div class="form-group">
-      <input type="text" ngModel name="location_id" placeholder="Location ID" required>
+        <select id="location_id" name="location_id" ngModel class="form-control" required>
+          <option value="" disabled selected>Please select a location</option>
+          <option *ngFor="let location of locations" [value]="location.location_id">{{ location.location_name }}</option>
+        </select>
     </div>
     <button type="submit" class="btn">Sign Up</button>
   </form>
+</div>
 </div>

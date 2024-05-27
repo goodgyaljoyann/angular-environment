@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.error('Error fetching all appointments:', error);
       }
     });
-  }  
+  }
 
   fetchScheduledAppointments(): void {
     this.viewAllAppointmentsService.getScheduledAppointments().subscribe({

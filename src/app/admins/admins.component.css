@@ -1,0 +1,39 @@
+.container {
+    padding: 20px;
+    margin-top: -620px;
+    margin-left: 520px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .table {
+    width: 60%;
+    border-collapse: collapse;
+    
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+  }
+  

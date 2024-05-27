@@ -1,1 +1,33 @@
-<p>admins works!</p>
+<app-header></app-header>
+
+<div class="container">
+  <div class="row mt-4 mb-2">
+    <div class="col-md-6">
+      <h2>Admins</h2>
+    </div>
+    <div class="col-md-6 text-md-right">
+      <a routerLink="/register-admin" class="btn btn-primary">Add New Admin</a>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Admin ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let admin of admins">
+          <td>{{ admin.admin_id }}</td>
+          <td>{{ admin.f_name }}</td>
+          <td>{{ admin.l_name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

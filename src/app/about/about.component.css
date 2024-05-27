@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Passion+One&family=Lato:wght@400;700&display=swap');
+
+/* Apply font families to specific elements */
+
+h1, h2, h3 {
+  font-family: 'Anton', sans-serif;
+}
+
+.about-us-text p,
+.mission-statement p,
+.vision-statement p,
+.feature h3,
+.feature p {
+  font-family: 'Lato', sans-serif;
+}
+
+/* Alternate between Bebas Neue and Passion One for specific elements */
+
+.image-overlay h1 {
+  font-family: 'Bebas Neue', sans-serif; /* First title */
+}
+
+.feature h3 {
+  font-family: 'Passion One', sans-serif; /* Second title */
+}
+
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .left-section {
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    position: relative;
+  }
+  
+  .left-section img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .image-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .right-section {
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    padding: 20px;
+  }
+  
+  .about-us-text h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .mission-statement,
+  .vision-statement {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .mission-statement h3,
+  .vision-statement h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .why-use-us {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .feature {
+    flex: 1 1 250px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .feature img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    display: block;
+    margin: 0 auto; /* Center the image */
+  }
+  
+  .feature h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .feature p {
+    font-size: 16px;
+    text-align: center;
+  }
+  

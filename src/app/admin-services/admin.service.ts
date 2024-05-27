@@ -13,6 +13,17 @@ export class AdminService {
 
   constructor(private  _http:HttpClient){ }
 
+     // fetches all Appointments
+     fetchAllAdmins(): Observable<any>{
+      return this._http.get<any>(this.API_URL)
+                                  .pipe(
+                                    map((res)=>{
+                                      return res;
+                                    }
+                                    )
+                                  );
+    }
+
   // fetches a customer
   fetchAdminById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
@@ -22,5 +33,5 @@ export class AdminService {
                                   }
                                   )
                                 );
-  }
+                              }
 }

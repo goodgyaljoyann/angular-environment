@@ -1,1 +1,53 @@
-<p>message-us works!</p>
+<app-header-main></app-header-main>
+<div class="container">
+<div class="message-container">
+    <!-- Business contact info as chat bubble -->
+    <div class="message-bubble business-info">
+      <p><strong>Business Contact Info:</strong></p>
+      <p>Phone: 888-536-5263</p>
+      <p>Email: info@noblejamaica.com</p>
+      <p>Address: 123 Union Street, Montego Bay City, Jamaica</p>
+    </div>
+  
+    <!-- Customer's previous message -->
+    <div *ngIf="messages && messages.length > 0; else noMessages">
+      <div class="message-bubble customer-message" *ngFor="let message of messages">
+        <p><strong>Your message:</strong> {{ message.message_content }}</p>
+      </div>
+      
+      <!-- Reply message bubble -->
+  <ng-container *ngIf="messages[0].reply">
+    <div class="message-bubble reply-message" *ngFor="let message of messages">
+      <p> <strong>Reply:</strong> {{ message.reply }}</p>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!messages[0].reply" class="message-bubble no-reply">
+    <p>No replies yet</p>
+  </div>
+
+    
+    </div>
+  
+    <!-- No messages fallback -->
+    <ng-template #noMessages>
+      <div class="message-bubble no-message">
+        <p>Send Your Message Now!</p>
+      </div>
+    </ng-template>
+  
+    <!-- Input for new message -->
+    <form class="message-form" (ngSubmit)="saveMessage(newMessageForm)" #newMessageForm="ngForm">
+      <textarea class="message-input" id="message_content" name="message_content" placeholder="Enter your message..." rows="4" [(ngModel)]="formData.message_content" required></textarea>
+      <button class="send-button" type="submit" [disabled]="!newMessageForm.form.valid">Send</button>
+    </form>
+  </div>
+  
+  <!-- Ad container -->
+  <div class="ad-container">
+    <!-- Add your ad content here -->
+    <img src="assets/thumbnail.png" alt="Ad">
+  </div>
+  </div>
+
+  <app-footer></app-footer>

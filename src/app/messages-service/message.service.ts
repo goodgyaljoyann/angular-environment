@@ -24,8 +24,8 @@ export class MessageService {
   }
 
   // fetches a student
-  fetchMessageById(id:number): Observable<any>{
-    return this._http.get<any>(this.API_URL+ `/${id}`)
+  fetchLastMessageByCustomerId(customer_id:number): Observable<any>{
+    return this._http.get<any>(this.API_URL+ `/last-message/${customer_id}`)
                                 .pipe(
                                   map((res)=>{
                                     return res;

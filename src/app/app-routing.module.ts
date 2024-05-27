@@ -34,6 +34,9 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import { RemindersComponent } from './reminders/reminders.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MessageUsComponent } from './message-us/message-us.component';
+import { AboutComponent } from './about/about.component';
+
 
 
 
@@ -43,7 +46,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login-admin', component: LoginAdminComponent },
   { path: 'register-admin', component: RegisterAdminComponent },
-  { path: 'admins', component: AdminsComponent },
+  { path: 'admins', component: AdminsComponent, canActivate: [RoleGuardService] },
   { path: 'create-admin', component: CreateAdminComponent, canActivate: [RoleGuardService] },
   { path: 'edit-admin/:id', component: EditAdminComponent },
   { path: 'appointments', component: AppointmentsComponent, canActivate: [AuthGuardService]  },
@@ -68,6 +71,8 @@ const routes: Routes = [
   { path:  'products-controls', component: ProductsControlsComponent, canActivate: [RoleGuardService]},
   { path:  'messages', component: MessagesComponent, canActivate: [RoleGuardService]},
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuardService]  },
+  { path: 'message-us', component: MessageUsComponent, canActivate: [AuthGuardService]  },
+  { path: 'about', component: AboutComponent },
   { path:  'view-service/:id', component: ViewServiceComponent},
   { path:  'view-product/:id', component: ViewProductComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },

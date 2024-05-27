@@ -74,6 +74,10 @@ export class AuthService {
     // You can also use return localStorage.getItem('customer_id');
   }
 
+  getUserId(): Observable<string> {
+    return of(this.cookieService.get('customer_id'));
+  }
+
   logout() {
     // Clear token from local storage
     localStorage.removeItem('token');

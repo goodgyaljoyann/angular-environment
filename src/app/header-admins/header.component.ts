@@ -10,9 +10,17 @@ import { AuthService } from '../Auth/auth.service';
 export class HeaderComponent {
   constructor(private router:Router,
     private authService:AuthService,){}
- 
+    
+    searchQuery: string = '';
+    
     logout(): void {
     this.authService.logoutAdmin();
     this.router.navigate(['/login-admin']);
+  }
+
+  onSearch(): void {
+    if (this.searchQuery.trim() !== '') {
+      this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
+    }
   }
 }

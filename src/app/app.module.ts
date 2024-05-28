@@ -61,6 +61,7 @@ import { SearchComponent } from './search/search.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +109,7 @@ import { SearchComponent } from './search/search.component';
     ReplyDialogComponent,
     AboutComponent,
     SearchComponent,
+
 
   ],
   imports: [

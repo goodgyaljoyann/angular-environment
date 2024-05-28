@@ -5,8 +5,9 @@
     </div>
     <div class="search-bar">
       <!-- Search bar implementation -->
-      <input type="text" placeholder="Search...">
-      <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search..." class="search-input" [(ngModel)]="searchQuery">
+      <button class="search-button" (click)="onSearch()"><i class="bi bi-search"></i></button>
+      
     </div>
     <div class="user-dropdown">
       <!-- User dropdown -->

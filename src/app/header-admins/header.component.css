@@ -101,3 +101,10 @@
     border-radius: 5px; /* Add some rounded corners on hover */
     padding: 5px;
 }
+
+button{
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 15px;
+}

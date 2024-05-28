@@ -1,23 +1,31 @@
 <div class="search-results" *ngIf="searchQuery">
-    <h2>Search Results for "{{ searchQuery }}"</h2>
-    <ul>
-      <li *ngFor="let result of searchResults">
-        <div (click)="viewDetails(result.type, result.id)">
-          <ng-container *ngIf="result.type === 'product'">
-            <img [src]="'http://localhost:2400/uploads/products/' + result.img" alt="{{ result.name }}">
-          </ng-container>
-          <ng-container *ngIf="result.type === 'service'">
-            <img [src]="'http://localhost:2400/uploads/services/' + result.img" alt="{{ result.name }}">
-          </ng-container>
-          <span>{{ result.name }}</span>
+  <button class="back-button" (click)="goBack()">Back</button>
+  <h2>Search Results for "{{ searchQuery }}"</h2>
+  <div class="result-grid">
+    <div *ngFor="let result of searchResults" class="result-card" (click)="viewDetails(result.type, result.id)">
+      <ng-container *ngIf="result.type === 'service' || result.type === 'product'">
+        <img *ngIf="result.type === 'product'" [src]="'http://localhost:2400/uploads/products/' + result.img" alt="{{ result.name }}">
+        <img *ngIf="result.type === 'service'" [src]="'http://localhost:2400/uploads/services/' + result.img" alt="{{ result.name }}">
+        <div class="result-info">
+          <h3>{{ result.name }}</h3>
         </div>
-      </li>
-    </ul>
+      </ng-container>
+      <ng-container *ngIf="result.type === 'appointment'">
+        <div class="appointment-info">
+          <div><strong>ID:</strong> {{ result.id }}</div>
+          <div><strong>Date:</strong> {{ result.date | date:'mediumDate' }}</div>
+          <div><strong>Time:</strong> {{ result.time }}</div>
+          <div><strong>Make:</strong> {{ result.make }}</div>
+          <div><strong>Model:</strong> {{ result.model }}</div>
+          <div><strong>Year:</strong> {{ result.year }}</div>
+          <div><strong>Mechanic Note:</strong> {{ result.mechanic_note }}</div>
+          <div><strong>Payment Status:</strong> {{ result.payment_status }}</div>
+          <div><strong>Appointment Status:</strong> {{ result.appt_status }}</div>
+        </div>
+      </ng-container>
+    </div>
   </div>
-  <div *ngIf="!searchQuery">
-    <p>No search query provided.</p>
-  </div>
-  <div class="back-button">
-    <button routerLink="/">Back</button>
-  </div>
-  
+</div>
+<div *ngIf="!searchQuery">
+  <p>No search query provided.</p>
+</div>

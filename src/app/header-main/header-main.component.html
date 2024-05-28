@@ -27,7 +27,7 @@
     <div class="user-dropdown">
       <span class="user-name">
           <div *ngIf="hasData">
-            <h3>{{ customer.first_name }} {{ customer.last_name }}</h3>
+            <h3>{{ customer.first_name }} <strong>{{ customer.last_name }}</strong></h3>
           </div>
       </span>
       <div class="dropdown-content" >

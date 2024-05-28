@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer-service/customer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,12 @@ import { CustomerService } from '../customer-service/customer.service';
 export class HomeComponent implements OnInit {
   customerInfo: any; // Variable to store customer information
 
-  constructor(private customerService: CustomerService) {} // Inject the customer service
+  constructor(private customerService: CustomerService, private router:Router
+  ) {} // Inject the customer service
 
   customer: any;
   hasData: boolean = false;
+  searchQuery: string = '';
 
   ngOnInit() {
     this.loadCustomerInfo(); // Load customer information when component initializes
@@ -45,6 +48,12 @@ export class HomeComponent implements OnInit {
     } else {
       console.error('Customer ID not found in local storage');
       this.hasData = false;
+    }
+  }
+
+  onSearch(): void {
+    if (this.searchQuery.trim() !== '') {
+      this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
     }
   }
   

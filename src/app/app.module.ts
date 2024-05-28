@@ -56,6 +56,7 @@ import { ReplysComponent } from './replys/replys.component';
 import { MessageUsComponent } from './message-us/message-us.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 import { AboutComponent } from './about/about.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -106,6 +107,7 @@ import { AboutComponent } from './about/about.component';
     MessageUsComponent,
     ReplyDialogComponent,
     AboutComponent,
+    SearchComponent,
 
   ],
   imports: [

@@ -36,6 +36,7 @@ import { RemindersComponent } from './reminders/reminders.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageUsComponent } from './message-us/message-us.component';
 import { AboutComponent } from './about/about.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -75,6 +76,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path:  'view-service/:id', component: ViewServiceComponent},
   { path:  'view-product/:id', component: ViewProductComponent},
+  { path: 'search', component: SearchComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
   { path: '**', redirectTo: '/login-admin', pathMatch: 'full' }

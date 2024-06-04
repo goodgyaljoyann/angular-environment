@@ -16,6 +16,7 @@
           <th>Admin ID</th>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,11 @@
           <td>{{ admin.admin_id }}</td>
           <td>{{ admin.f_name }}</td>
           <td>{{ admin.l_name }}</td>
+          <td> 
+            <a routerLink="/view-admin/{{admin['admin_id']}}"><button><i class="bi bi-binoculars-fill"></i></button></a>
+            <button (click)="openDeleteConfirmationDialog(admin.admin_id, admin.f_name,admin.l_name)"><i class="bi bi-trash-fill"></i></button>
+          </td>
+
         </tr>
       </tbody>
     </table>

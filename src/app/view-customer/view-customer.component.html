@@ -1,0 +1,30 @@
+<app-header-main></app-header-main>
+<div class="main-container" *ngIf="hasData">
+  <div class="content">
+    <div class="container card">
+      <div class="card-left">
+        <img src="assets/new-logo.png" alt="Customer Image" class="customer-image">
+      </div>
+      <div class="card-right">
+        <h1>Your Account Details</h1>
+        <div class="customer-info">
+          <span id="first_name" class="first_name">{{ customer.first_name }}</span>
+        </div>
+        <div class="customer-info">
+          <span id="last_name" class="last_name">{{ customer.last_name }}</span>
+        </div>
+        <div class="customer-info">
+          <span id="email" class="email">{{ customer.email }}</span>
+        </div>
+        <div class="customer-info">
+          <span id="phone" class="phone">{{ customer.phone }}</span>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-delete" (click)="openDeleteConfirmationDialog(customer.customer_id, customer.first_name,customer.last_name)" >Delete Customer Account</button>
+          <button class="btn btn-update">Update Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

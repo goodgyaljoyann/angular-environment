@@ -17,8 +17,8 @@
       </span>
       <div class="dropdown-content">
         <!-- Dropdown Content -->
-        <a href="#">Edit Account</a>
-        <a href="#">View Info</a>
+        <a routerLink="/edit-admin/{{admin['admin_id']}}">Edit Account</a>
+        <a routerLink="/view-admin/{{admin['admin_id']}}">View Info</a>
         <a (click)="logout()">Logout</a>
       </div>
     </div>

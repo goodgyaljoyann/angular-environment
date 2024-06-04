@@ -37,6 +37,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessageUsComponent } from './message-us/message-us.component';
 import { AboutComponent } from './about/about.component';
 import { SearchComponent } from './search/search.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import { ViewAdminComponent } from './view-admin/view-admin.component';
+
 
 
 
@@ -73,6 +76,9 @@ const routes: Routes = [
   { path:  'messages', component: MessagesComponent, canActivate: [RoleGuardService]},
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuardService]  },
   { path: 'message-us', component: MessageUsComponent, canActivate: [AuthGuardService]  },
+  { path: 'view-customer', component: ViewCustomerComponent, canActivate: [AuthGuardService]  },
+  { path: 'view-admin/:id', component: ViewAdminComponent, canActivate: [RoleGuardService]  },
+  { path: 'edit-admin/:id', component: EditAdminComponent, canActivate: [RoleGuardService] },
   { path: 'about', component: AboutComponent },
   { path:  'view-service/:id', component: ViewServiceComponent},
   { path:  'view-product/:id', component: ViewProductComponent},

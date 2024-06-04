@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminService } from '../admin-services/admin.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 
 @Component({
   selector: 'app-admins',
@@ -17,6 +19,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   constructor(
     private adminService: AdminService,
     private router:Router,
+    private dialog:MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -44,4 +47,34 @@ export class AdminsComponent implements OnInit, OnDestroy {
         }
       });
     }  
+
+    openDeleteConfirmationDialog(id: number, f_name: string, l_name: string): void {
+      const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
+        width: '300px',
+        data: { id, f_name, l_name } // Pass ID and name as data
+      });
+  
+      dialogRef.afterClosed().subscribe(res => {
+        if (res) {
+          // Call your deleteStudent method here
+          
+          this.deleteAdmin(id);
+        }
+      });
+    }
+  
+    deleteAdmin(id: number): void {
+      // Call your service method to delete the student by ID
+      const deleteSub = this.adminService.deleteAdminById(id).subscribe(res => {
+        if (res['status'] == 'success') {
+          // Reload the current route
+          this.router.navigateByUrl('/view-admin', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/dashboard']);
+          });
+        } else {
+          // Handle error if deletion failed
+          console.error('Failed to delete user');
+        }
+      });
+    }
 }

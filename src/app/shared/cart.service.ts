@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +8,18 @@ import { Injectable } from '@angular/core';
 export class CartService {
   private cart: any[] = [];
 
-  constructor() {
+  constructor(private snackBar: MatSnackBar) {
     this.loadCartFromLocalStorage();
   }
 
+  
   addToCart(item: any, itemType: 'service' | 'product'): void {
-    if (itemType === 'service' && this.countServicesInCart() >= 3) {
-      alert('You cannot book more than 3 services at a time.');
+    if (itemType === 'service' && this.countServicesInCart() >= 1) {
+      this.snackBar.open('You cannot book more than 1 service at a time.', 'Close', {
+        duration: 3000, // Duration in milliseconds
+        verticalPosition: 'top', // 'top' or 'bottom'
+        horizontalPosition: 'center', // 'start', 'center', 'end', 'left', 'right'
+      });
       return;
     }
 

@@ -7,6 +7,34 @@ import { DebitCardPaymentComponent } from '../debit-card-payment/debit-card-paym
 import { PaymentsServicesService } from '../payments-services/payments-services.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppointmentServicesService } from '../appointment-services/appointment-services.service';
+import { Observable, map } from 'rxjs';
+import { CarServicesService } from '../car-services/car-services.service';
+
+interface Appointment {
+  appointment_id: number;
+  date: string;
+  time: string;
+  service_id: number;
+  service_name?: string;
+  appt_status: string;
+  payment_status: string;
+}
+
+interface AppointmentResponse {
+  status: string;
+  data: Appointment[];
+}
+
+interface ServiceInfo {
+  service_name: string;
+}
+
+interface ServiceResponse {
+  status: string;
+  data: {
+    service: ServiceInfo;
+  };
+}
 
 
 @Component({
@@ -15,7 +43,8 @@ import { AppointmentServicesService } from '../appointment-services/appointment-
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  appointment: any[] = [];
+  appointment: Appointment[] = [];
+  serviceNames: { [key: number]: string } = {};
   hasData: boolean = false;
 
   constructor(
@@ -26,6 +55,7 @@ export class HistoryComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private paymentsService: PaymentsServicesService,
+    private carServicesService:CarServicesService
   ) {}
 
   ngOnInit(): void {
@@ -35,10 +65,11 @@ export class HistoryComponent implements OnInit {
   loadData() {
     const customerId = this.authService.getCustomerId();
     this.historyService.fetchCustomerAppointments(parseInt(customerId)).subscribe(
-      (res) => {
+      (res: AppointmentResponse) => {
         if (res.status !== 'error') {
           this.appointment = res.data;
           this.hasData = true;
+          this.fetchServiceNames(); // Moved inside the if block
         } else {
           this.hasData = false;
         }
@@ -49,6 +80,26 @@ export class HistoryComponent implements OnInit {
       }
     );
   }
+
+  fetchServiceNames() {
+    this.appointment.forEach((appointment: Appointment) => {
+      this.fetchServiceInfo(appointment.service_id).subscribe(
+        (serviceName: string) => {
+          this.serviceNames[appointment.service_id] = serviceName;
+        },
+        (error) => {
+          console.error('Error fetching service info:', error);
+        }
+      );
+    });
+  }
+
+  fetchServiceInfo(service_id: number): Observable<string> {
+    return this.carServicesService.fetchServiceById(service_id).pipe(
+      map((res: ServiceResponse) => res.data.service.service_name)
+    );
+  }
+
 
   async payForLastAppointment(): Promise<void> {
     const customerId = this.authService.getCustomerId();

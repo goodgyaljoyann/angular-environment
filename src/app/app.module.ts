@@ -57,6 +57,9 @@ import { MessageUsComponent } from './message-us/message-us.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 import { AboutComponent } from './about/about.component';
 import { SearchComponent } from './search/search.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
+import { ViewAdminComponent } from './view-admin/view-admin.component';
 
 
 
@@ -109,6 +112,9 @@ import { SearchComponent } from './search/search.component';
     ReplyDialogComponent,
     AboutComponent,
     SearchComponent,
+    ViewCustomerComponent,
+    DeleteAccountDialogComponent,
+    ViewAdminComponent,
 
 
   ],

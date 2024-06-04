@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CarServicesService } from '../car-services/car-services.service'; 
 import { ProductsServicesService } from '../product-services/products-services.service';
 import { AppointmentServicesService } from '../appointment-services/appointment-services.service';
+import { Location } from '@angular/common';
+
 
 interface Service {
   service_name: string;
@@ -43,7 +45,8 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private carServicesService: CarServicesService,
     private productsServicesService: ProductsServicesService,
-    private appointmentServicesService: AppointmentServicesService
+    private appointmentServicesService: AppointmentServicesService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -152,6 +155,7 @@ export class SearchComponent implements OnInit {
   }
 
   goBack(): void {
-    window.location.href = '/';
+    this.location.back();
   }
+  
 }

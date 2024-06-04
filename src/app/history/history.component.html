@@ -15,7 +15,7 @@
         <tr *ngFor="let appointment of appointment">
           <td>{{ appointment.date | date:'mediumDate' }}</td>
           <td>{{ appointment.time }}</td>
-          <td>{{ appointment.service_id }}</td>
+          <td>{{ serviceNames[appointment.service_id] || 'Loading...' }}</td>
           <td>{{ appointment.appt_status }}</td>
           <td>{{ appointment.payment_status }}</td>
         </tr>

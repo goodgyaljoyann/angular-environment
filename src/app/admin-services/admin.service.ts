@@ -34,4 +34,24 @@ export class AdminService {
                                   )
                                 );
                               }
+   // updates a student
+   updateAdmin(id:number, data:any): Observable<any>{
+    return this._http.patch<any>(this.API_URL + `/${id}`, data)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
+
+  deleteAdminById(id:number): Observable<any>{
+    return this._http.delete<any>(this.API_URL + `/${id}`)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
 }

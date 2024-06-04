@@ -35,4 +35,14 @@ export class CustomerService {
                                   )
                                 );
   }
+
+  deleteCustomerById(id:number): Observable<any>{
+    return this._http.delete<any>(this.API_URL + `/${id}`)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
 }

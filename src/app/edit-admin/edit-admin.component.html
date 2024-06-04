@@ -1,1 +1,22 @@
-<p>edit-admin works!</p>
+<app-header></app-header>
+<div class="edit-admin-container">
+  <h2>Edit Admin Profile</h2>
+  <form (ngSubmit)="updateAdmin()" #editAdminForm="ngForm">
+    <div class="inputBox">
+      <label for="f_name" class="form-label">First Name</label>
+      <input type="text" id="f_name" name="f_name" class="form-control" [(ngModel)]="formData.f_name" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="l_name" class="form-label">Last Name</label>
+      <input type="text" id="l_name" name="l_name" class="form-control" [(ngModel)]="formData.l_name" required>
+    </div>
+
+    <div class="inputBox">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="formData.email" required>
+    </div>
+
+    <button type="submit" class="btn-submit">Update Profile</button>
+  </form>
+</div>

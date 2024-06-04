@@ -1,17 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { AuthService } from '../Auth/auth.service';
+import { AdminService } from '../admin-services/admin.service';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   constructor(private router:Router,
-    private authService:AuthService,){}
+    private authService:AuthService,
+  private adminService:AdminService){}
     
     searchQuery: string = '';
+    hasData: boolean = false; // Defines whether there is data to display
+    hasError: boolean = false;
+    admin: any;
     
     logout(): void {
     this.authService.logoutAdmin();
@@ -22,5 +29,27 @@ export class HeaderComponent {
     if (this.searchQuery.trim() !== '') {
       this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
     }
+  }
+  
+  ngOnInit(): void {
+    this.loadData()
+  }
+  loadData() {
+    this.authService.getAdminId().pipe(
+      switchMap((adminId) => this.adminService.fetchAdminById(parseInt(adminId)))
+    ).subscribe(
+      (res) => {
+        if (res['status'] !== 'error') {
+          this.admin = res['data']['admin'];
+          this.hasData = true;
+        } else {
+          this.hasData = false;
+        }
+      },
+      (error) => {
+        console.error('Error fetching admin:', error);
+        this.hasData = false;
+      }
+    );
   }
 }

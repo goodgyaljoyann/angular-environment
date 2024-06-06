@@ -9,12 +9,12 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PaymentsServicesService {
-
+  //fetches backend Api
   private API_URL= environment.api_url+'/api/v1/payments';
  
   constructor(private  _http:HttpClient){ }
 
-   // fetches all services
+   // fetches all payments
   fetchAllPayments(): Observable<any>{
     return this._http.get<any>(this.API_URL)
                                 .pipe(
@@ -25,7 +25,7 @@ export class PaymentsServicesService {
                                 );
   }
 
-  // fetches a student
+  // fetches a payment by id
   fetchPaymentById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
@@ -36,7 +36,7 @@ export class PaymentsServicesService {
                                 );
   }
   
-  // creates a student
+  // creates a new payment
   createPayment(data:any): Observable<any>{
     return this._http.post<any>(this.API_URL, data)
                                 .pipe(
@@ -47,7 +47,7 @@ export class PaymentsServicesService {
                                 );
   }
 
-  // updates a student
+  // updates payment data
   updatePayment(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
@@ -58,7 +58,7 @@ export class PaymentsServicesService {
                                 );
   }
 
-  // updates a student
+  // removes payment from system
   deletePayment(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(

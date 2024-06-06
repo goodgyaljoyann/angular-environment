@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CarServicesService {
+  //Initiates Api endpoint
   private API_URL= environment.api_url+'/api/v1/services';
  
   constructor(private  _http:HttpClient){ }
@@ -23,7 +24,7 @@ export class CarServicesService {
                                 );
   }
 
-  // fetches a student
+  // fetches service by Id
   fetchServiceById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
@@ -34,7 +35,7 @@ export class CarServicesService {
                                 );
   }
   
-  // creates a student
+  // creates a new service in the database
   createService(data:any): Observable<any>{
     return this._http.post<any>(this.API_URL, data)
                                 .pipe(
@@ -45,7 +46,7 @@ export class CarServicesService {
                                 );
   }
 
-  // updates a student
+  // updates service information
   updateService(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
@@ -56,7 +57,7 @@ export class CarServicesService {
                                 );
   }
 
-  // updates a student
+  // deletes service information from database
   deleteService(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginAdminComponent {
   constructor(private authService: AuthService, private router:Router) {}
   
+  //Function that accepts admin login information
   onLogin(form: any) {
     if (form.valid) {
       this.authService.loginAdmin(form.value).subscribe(

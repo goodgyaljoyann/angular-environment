@@ -13,27 +13,31 @@ import { switchMap } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   constructor(private router:Router,
     private authService:AuthService,
-  private adminService:AdminService){}
+    private adminService:AdminService){}
     
+    //Declare variables
     searchQuery: string = '';
     hasData: boolean = false; // Defines whether there is data to display
     hasError: boolean = false;
     admin: any;
     
+    //log admin out of system
     logout(): void {
     this.authService.logoutAdmin();
     this.router.navigate(['/login-admin']);
   }
-
+  //function that facilitates search
   onSearch(): void {
     if (this.searchQuery.trim() !== '') {
       this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
     }
   }
-  
+  //Initiates function
   ngOnInit(): void {
     this.loadData()
   }
+
+  //Function that loads admin information by fetching from cookie
   loadData() {
     this.authService.getAdminId().pipe(
       switchMap((adminId) => this.adminService.fetchAdminById(parseInt(adminId)))

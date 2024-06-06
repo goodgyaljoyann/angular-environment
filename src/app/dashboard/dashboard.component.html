@@ -3,26 +3,30 @@
         <!-- Main Content -->
         <main>
         <div class="dashboard-content">
-            <!-- Content Goes Here -->
+            <!-- Admin can see their name when they log in -->
             <span class="user-name">
               <div>
                 <h3> Welcome {{ admin.f_name }} {{ admin.l_name }}!</h3>
               </div>
           </span>
+          <!--Admins can view count of services available for booking-->
             <div class="statistics-container">
               <div class="statistic-card-1">
                 <h3>{{ statistics.services.serviceCount }}</h3>
                 <p>Services Available for Booking</p>
               </div>
+              <!--Admins can view count of appointments that are active-->
               <div class="statistic-card-2">
                 <h3>{{ statistics.appointments.activeAppointmentCount }}</h3>
                 <p> Active Appointments</p>
               </div>
+              <!--Admins can view count of customers that are members-->
               <div class="statistic-card-3">
                 <h3>{{ statistics.products.customerCount }}</h3>
                 <p> Customers </p>
               </div>
             </div>
+            <!--Admins can view a list of appointments that are "scheduled" therefore upcoming-->
             <div class="appt-list" >
                 <h2 style="font-family: 'Anton', sans-serif; font-size: 20px;">Upcoming Appointments</h2>
                 <table>

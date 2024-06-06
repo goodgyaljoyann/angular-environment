@@ -1,16 +1,17 @@
 <app-header></app-header>
 
-<div class="container">
+<div class="admin-container">
   <div class="row mt-4 mb-2">
     <div class="col-md-6">
-      <h2>Admins</h2>
+      <h2 class="admin-title">Admins</h2>
     </div>
     <div class="col-md-6 text-md-right">
-      <a routerLink="/register-admin" class="btn btn-primary">Add New Admin</a>
+      <a routerLink="/register-admin" class="add-new-admin-btn">Add New Admin</a>
     </div>
   </div>
   <div class="table-responsive">
-    <table class="table table-striped">
+    <!--Table displaying admins details-->
+    <table class="admin-table">
       <thead>
         <tr>
           <th>Admin ID</th>
@@ -25,15 +26,11 @@
           <td>{{ admin.f_name }}</td>
           <td>{{ admin.l_name }}</td>
           <td> 
-            <a routerLink="/view-admin/{{admin['admin_id']}}"><button><i class="bi bi-binoculars-fill"></i></button></a>
-            <button (click)="openDeleteConfirmationDialog(admin.admin_id, admin.f_name,admin.l_name)"><i class="bi bi-trash-fill"></i></button>
+            <a routerLink="/view-admin/{{admin['admin_id']}}"><button class="view-btn"><i class="bi bi-binoculars-fill"></i></button></a>
+            <button (click)="openDeleteConfirmationDialog(admin.admin_id, admin.f_name,admin.l_name)" class="delete-btn"><i class="bi bi-trash-fill"></i></button>
           </td>
-
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
-
-

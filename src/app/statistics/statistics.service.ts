@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators'; // Import map operator
   providedIn: 'root'
 })
 export class StatisticsService {
-  
+  //Initiate backend api endpoint
   private API_URL = environment.api_url + '/api/v1/statistics'; // Base URL
 
   constructor(private _http: HttpClient) {}
@@ -32,7 +32,7 @@ export class StatisticsService {
     return this._http.get<any>(url);
   }
 
-  // Fetch statistics for products
+  // Fetch statistics for payments in order to calculate revenue
   getDailyRevenue(): Observable<any> {
     const url = `${this.API_URL}/payments`; // Append /products route
     return this._http.get<any>(url);

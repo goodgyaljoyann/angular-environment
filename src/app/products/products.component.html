@@ -1,5 +1,6 @@
 <app-header-main></app-header-main>
 
+<!--Displays all products available and give customers the option to add to cart-->
 <div class="products-container">
   <div class="filter-container">
     <button *ngFor="let heading of headings" (click)="onHeadingClick(heading)" [class.active]="selectedHeading === heading">{{ heading }}</button>
@@ -13,13 +14,13 @@
         <button class="book-button"  (click)="addToCart(product); $event.stopPropagation();">Add to Cart</button>
       </div>
     </div>
-
   </div>
 </div>
+<!--Displays cart only if there is an item in it-->
 <div class="cart-icon" *ngIf="cart.length > 0" (click)="showCart = !showCart">
   🛒
 </div>
-
+<!--Displays cart and cart controls-->
 <div class="cart-popup" *ngIf="showCart">
   <h3>Your Cart</h3>
   <div class="cart-item" *ngFor="let item of cart">

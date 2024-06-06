@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class ViewAllAppointmentsService {
 
+  //Initiate Backend Api
   private API_URL = environment.api_url + '/api/v1/appointments'; // Base URL
 
   constructor(private _http: HttpClient) {}
@@ -24,7 +25,7 @@ export class ViewAllAppointmentsService {
                                 );
   }
 
-  // Fetch statistics for products
+  // Fetches scheduled appointments
   getScheduledAppointments(): Observable<any> {
     const url = `${this.API_URL}/scheduled`; // Append /products route
     return this._http.get<any>(url);

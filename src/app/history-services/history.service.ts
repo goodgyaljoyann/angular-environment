@@ -9,12 +9,12 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HistoryService {
-
+ //Initiate backend Api
   private API_URL= environment.api_url+'/api/v1/history';
  
   constructor(private  _http:HttpClient){ }
 
-    // fetches a student
+    // fetches all appoints booked by customer
     fetchCustomerAppointments(id:number): Observable<any>{
       return this._http.get<any>(this.API_URL+ `/${id}`)
                                   .pipe(

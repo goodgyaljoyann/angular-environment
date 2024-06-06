@@ -13,6 +13,8 @@ interface Payment {
   styleUrls: ['./revenue-reports.component.css']
 })
 export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  //Declare variables
   payments: Payment[] = []; // Initialize payments array
   isError: boolean = false; // Initialize isError to false
   pageSize: number = 3;
@@ -24,7 +26,8 @@ export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit
 
 
   constructor(private statisticsService: StatisticsService) {}
-
+  
+  //Initiates functions
   ngOnInit(): void {
     this.fetchPaymentsRevenue();
     this.calculateTotalPages();
@@ -33,7 +36,8 @@ export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit
   ngOnDestroy(): void {
     // Clean up resources (unsubscribe from observables, etc.) here
   }
-
+  
+  //Function that is used to fetch revenue data
   fetchPaymentsRevenue(): void {
     this.statisticsService.getDailyRevenue().subscribe({
       next: (res) => {
@@ -50,7 +54,8 @@ export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit
       }
     });
   }
-
+  
+  //checks date and aggregate revenue
   processData(data: any[]): Payment[] {
     return data.map(item => {
       const date = new Date(item.date);
@@ -70,11 +75,13 @@ export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit
       }
     });
   }
-
+  
+  //Initiates Revenue chart display
   ngAfterViewInit(): void {
     this.renderLineChart
   }
 
+  //function that formats revenue chart
   private renderLineChart(): void {
     const maxPoints = 5;
     const paymentsCount = this.payments.length;
@@ -102,22 +109,22 @@ export class RevenueReportsComponent implements OnInit, OnDestroy, AfterViewInit
       data: chartData
     });
   }  
-
+    //gets the number of pages
   calculateTotalPages(): void {
     this.totalPages = Math.ceil(this.totalItems / this.pageSize);
   }
-
+  //Displays page numbers
   getPageNumbers(): number[] {
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }
-
+  //controls the switch between pages and displays that page
   pageChanged(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       // Update displayed page content or fetch data for the new page
     }
   }
-
+  //update page numbers
   setPage(page: number): void {
     const startIndex = (page - 1) * this.pageSize;
     const endIndex = Math.min(startIndex + this.pageSize, this.payments.length);

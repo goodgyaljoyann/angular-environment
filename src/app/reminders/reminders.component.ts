@@ -12,6 +12,8 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./reminders.component.css']
 })
 export class RemindersComponent implements OnInit {
+
+  //Declare Variables
   appointments: any[] = [];
   isError: boolean = false;
   activeAppointments: any[] = [];
@@ -22,12 +24,14 @@ export class RemindersComponent implements OnInit {
     private carServicesService: CarServicesService,
     private snackBar: MatSnackBar
   ) {}
-
+  
+  //Initiate functions
   ngOnInit(): void {
     this.fetchAppointments();
     this.fetchActiveAppointments();
   }
 
+  //fetches appointments and joins that are active or scheduled
   fetchAppointments(): void {
     const scheduledAppointments$ = this.fetchScheduledAppointments();
     const activeAppointments$ = this.fetchActiveAppointments();
@@ -43,7 +47,7 @@ export class RemindersComponent implements OnInit {
       }
     });
   }
-
+  //Fetches scheduled appointments
   fetchScheduledAppointments(): Observable<any[]> {
     return this.appointmentServicesService.getScheduledAppointments().pipe(
       switchMap((res: any) => {
@@ -58,7 +62,8 @@ export class RemindersComponent implements OnInit {
       })
     );
   }
-
+  
+  //fetches active appointments
   fetchActiveAppointments(): Observable<any[]> {
     return this.appointmentServicesService.getActiveAppointments().pipe(
       switchMap((res: any) => {
@@ -73,7 +78,7 @@ export class RemindersComponent implements OnInit {
       })
     );
   }
-
+  //Utilizes the customer id and service id to get details for customers and service
   fetchAppointmentDetails(appointment: any): Observable<any> {
     return forkJoin({
       customer: this.fetchCustomerInfo(appointment.customer_id),
@@ -87,19 +92,20 @@ export class RemindersComponent implements OnInit {
     );
   }
 
-
+  //Function that fetches customer info
   fetchCustomerInfo(customer_id: number): Observable<any> {
     return this.customerService.fetchCustomerById(customer_id).pipe(
       map(res => res.data.customer)
     );
   }
-
+  //Function that fetches service info
   fetchServiceInfo(service_id: number): Observable<any> {
     return this.carServicesService.fetchServiceById(service_id).pipe(
       map(res => res.data.service) // Assuming the service object has a 'name' property
     );
   }
-
+  
+  //Updates the status of appointments
   updateStatus(appointment_id: number, status: string): void {
     this.appointmentServicesService.updateAppointmentStatus(appointment_id, status).subscribe({
       next: (res) => {

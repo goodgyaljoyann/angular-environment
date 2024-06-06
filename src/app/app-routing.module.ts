@@ -3,16 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminsComponent } from './admins/admins.component';
-import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
-import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
-import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
-import { CustomersComponent } from './customers/customers.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { LocationsComponent } from './locations/locations.component';
-import { CreateLocationComponent } from './create-location/create-location.component';
-import { EditLocationComponent } from './edit-location/edit-location.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
@@ -49,18 +42,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login-admin', component: LoginAdminComponent },
-  { path: 'register-admin', component: RegisterAdminComponent },
+  { path: 'register-admin', component: RegisterAdminComponent, canActivate: [RoleGuardService] },
   { path: 'admins', component: AdminsComponent, canActivate: [RoleGuardService] },
-  { path: 'create-admin', component: CreateAdminComponent, canActivate: [RoleGuardService] },
   { path: 'edit-admin/:id', component: EditAdminComponent },
   { path: 'appointments', component: AppointmentsComponent, canActivate: [AuthGuardService]  },
-  { path: 'create-appointment', component: CreateAppointmentComponent },
-  { path: 'edit-appointment/:id', component: EditAppointmentComponent },
-  { path: 'customers', component: CustomersComponent },
   { path: 'edit-info/:id', component: EditCustomerComponent, canActivate: [AuthGuardService] },
-  { path: 'locations', component: LocationsComponent },
-  { path: 'create-location', component: CreateLocationComponent },
-  { path: 'edit-location/:id', component: EditLocationComponent },
   { path: 'payments', component: PaymentsComponent, canActivate: [AuthGuardService]  },
   { path: 'products', component: ProductsComponent },
   { path: 'create-product', component: CreateProductComponent, canActivate: [RoleGuardService] },

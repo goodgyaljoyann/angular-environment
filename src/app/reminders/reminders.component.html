@@ -1,4 +1,5 @@
 <app-header></app-header>
+<!--Displays all active/scheduled appointments in the system-->
 <div class="reminders-container" >
     <h2>Scheduled Appointments</h2>
     <table class="appointments-table">
@@ -29,6 +30,7 @@
           <td>{{ appointment.model }}</td>
           <td>{{ appointment.payment_status }}</td>
           <td>{{ appointment.appt_status }}</td>
+          <!--Functions that give the admin the option to update appointment status-->
           <td>
             <button (click)="updateStatus(appointment.appointment_id, 'completed')" class="btn btn-success">Complete</button>
             <button (click)="updateStatus(appointment.appointment_id, 'active')" class="btn btn-primary">Activate</button>

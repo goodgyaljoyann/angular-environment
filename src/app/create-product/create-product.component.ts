@@ -12,11 +12,15 @@ import { ProductsServicesService } from '../product-services/products-services.s
 })
 export class CreateProductComponent implements OnInit, OnDestroy{
 
-  constructor(private ProductsServicesService: ProductsServicesService, public dialog: MatDialog, private router: Router,  private snackBar: MatSnackBar){}
-  isError: boolean = false;
-   
-   selectedFile: File | null = null;
-   formData: any = {}; // Object to store form data
+  constructor(private ProductsServicesService: ProductsServicesService,
+     public dialog: MatDialog, 
+     private router: Router,  
+     private snackBar: MatSnackBar){}
+    
+     //Declare variables
+    isError: boolean = false;
+    selectedFile: File | null = null;
+    formData: any = {}; // Object to store form data
  
    ngOnInit(): void {
      // Initialize component logic here
@@ -26,8 +30,9 @@ export class CreateProductComponent implements OnInit, OnDestroy{
    ngOnDestroy(): void {
      // Clean up resources (unsubscribe from observables, etc.) here
    }
-
-   saveService(newProductForm: NgForm): void {
+    
+    //Function to facilitate saving product info and transforming form data
+   saveProduct(newProductForm: NgForm): void {
     // Merge form data into formData object
     Object.assign(this.formData, newProductForm.value);
       // Store form data
@@ -46,7 +51,7 @@ export class CreateProductComponent implements OnInit, OnDestroy{
       this.submitForm(formData);
     
   }
-
+  //Function that saves form data in the database
   submitForm(formData: FormData): void {
     // Submit form logic here
     this.ProductsServicesService.createProduct(formData).subscribe({
@@ -83,13 +88,14 @@ export class CreateProductComponent implements OnInit, OnDestroy{
       }
     });
   }
-
+  
+  //stores form data into local storage until user decides to submit
   storeFormData(): void {
     // Store form data in local storage or array
-    // Example using local storage:
     localStorage.setItem('formData', JSON.stringify(this.formData));
   }
-
+  
+  //function that facilitates file uploads
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     console.log('Selected File:', this.selectedFile);

@@ -1,39 +1,93 @@
-.container {
-    padding: 20px;
-    margin-top: -620px;
-    margin-left: 520px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  }
-  
-  .table {
-    width: 60%;
-    border-collapse: collapse;
-    
-  }
-  
-  .table th,
-  .table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
-  }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f2f2f2;
-  }
-  
+.admin-container {
+  padding: 20px;
+  margin-top: -610px;
+  margin-left: 490px;
+}
+
+.admin-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-new-admin-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.add-new-admin-btn:hover {
+  background-color: #3e8e41;
+}
+
+.admin-table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.view-btn {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.view-btn:hover {
+  background-color: #23527c;
+}
+
+.bi-trash-fill {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background: none;
+}
+
+.bi-trash-fill:hover {
+  color: #c0392b;
+}
+
+.bi-binoculars-fill {
+  font-size: 18px;
+  margin-right: 10px;
+  color: blue;
+}
+
+.bi-trash-fill {
+  font-size: 18px;
+  margin-right: 10px;
+  color: red;
+}
+
+button{
+  background: none;
+  border: none;
+}

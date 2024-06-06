@@ -1,9 +1,11 @@
 <app-header></app-header>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <div class="service-container">
+<!--Button to create a new service-->
 <div class="button-position">
     <a routerLink="/create-service"><button class="create-button">Create a new Service</button></a>
 </div>
+<!--Display services in card format with actions-->
 <div class="card-container">
     <div class="card" *ngFor="let service of pagedServices">
         <div class="card-header">
@@ -14,8 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-            <!-- {{ service.img | json }} -->
-             <!-- Display the image -->
+             <!-- Display the image of service -->
              <img [src]="'http://localhost:2400/uploads/services/' + service.img" alt="Service Image" class="service-image">
             <p><strong>Service Name:</strong> {{ service.service_name }}</p>
             <p><strong>Description:</strong> {{ service.description }}</p>
@@ -23,6 +24,7 @@
         </div>
     </div>
 </div>
+<!--Pagination Controls-->
 <div class="pagination-controls">
     <button *ngFor="let pageNumber of getPageNumbers()" (click)="pageChanged(pageNumber)"
       [class.active]="pageNumber === currentPage">

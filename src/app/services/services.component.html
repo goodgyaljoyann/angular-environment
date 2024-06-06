@@ -1,9 +1,11 @@
 <app-header-main></app-header-main>
-
+<!--Services page on main webpage-->
 <div class="services-container">
+  <!--Heading Container-->
   <div class="headings-container">
     <div class="heading" *ngFor="let heading of headings" (click)="onHeadingClick(heading)" [class.active]="selectedHeading === heading">{{ heading }}</div>
   </div>
+  <!--Card Container with links to view-->
   <div class="card-container">
     <div class="card" *ngFor="let service of services" [routerLink]="['/view-service', service.service_id]" [hidden]="!serviceMatchesHeading(service, selectedHeading)">
       <div class="card-content">
@@ -15,11 +17,11 @@
     </div>
   </div>
 </div>
-
+<!--Cart Button-->
 <div class="cart-icon" *ngIf="cart.length > 0" (click)="showCart = !showCart">
   🛒
 </div>
-
+<!--Cart-->
 <div class="cart-popup" *ngIf="showCart">
   <h3>Your Cart</h3>
   <div class="cart-item" *ngFor="let item of cart">

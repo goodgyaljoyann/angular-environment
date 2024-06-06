@@ -19,17 +19,19 @@ export class ViewAdminComponent {
     private authService:AuthService,
     private dialog:MatDialog
   ) {}
-
+  
+  //Declare variables
   id: number = 0;
   admin: any;
   hasData: boolean = false;
   isError: boolean = false;
  
-
+  //Initiate function
   ngOnInit(): void {
     this.loadData();
   }
-
+  
+  //Loads admin data based on Id
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.adminService.fetchAdminById(this.id).subscribe(
@@ -47,7 +49,7 @@ export class ViewAdminComponent {
       }
     );
   }
-
+  //If admin chooses to delete account, this opens the dialog box
   openDeleteConfirmationDialog(id: number, f_name: string, l_name: string): void {
     const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
       width: '300px',
@@ -62,7 +64,7 @@ export class ViewAdminComponent {
       }
     });
   }
-
+  //Function to remove admin details from database
   deleteAdmin(id: number): void {
     // Call your service method to delete the student by ID
     const deleteSub = this.adminService.deleteAdminById(id).subscribe(res => {

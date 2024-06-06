@@ -11,8 +11,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditProductComponent implements OnInit{
 
-  constructor(private ProductsServicesService: ProductsServicesService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private ProductsServicesService: ProductsServicesService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private snackBar: MatSnackBar) {}
 
+  //Initiates function
   ngOnInit(): void {
     this.loadData();
     
@@ -30,6 +34,7 @@ export class EditProductComponent implements OnInit{
 
   @ViewChild('editProductForm') editProductForm?: NgForm;
   
+  //Loads product information into form 
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.ProductsServicesService.fetchProductById(this.id).subscribe(
@@ -52,7 +57,8 @@ export class EditProductComponent implements OnInit{
       }
     );
   }
-
+  
+  //function update product information in database
   updateProduct(oForm: NgForm){
     const formData = new FormData();
     for (const key of Object.keys(oForm.value)) {
@@ -95,6 +101,7 @@ export class EditProductComponent implements OnInit{
     );
   }  
   
+  //facilitates image uploads
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     console.log('Selected File:', this.selectedFile);

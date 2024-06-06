@@ -10,18 +10,20 @@ import { AuthService } from '../Auth/auth.service';
 })
 export class HeaderMainComponent implements OnInit {
 
-  customerInfo: any; // Variable to store customer information
+  constructor(private customerService: CustomerService, 
+    private router:Router, private authService:AuthService) {} // Inject the customer service
 
-  constructor(private customerService: CustomerService, private router:Router, private authService:AuthService) {} // Inject the customer service
-
+  //Declare variables
   customer: any;
   hasData: boolean = false;
+  customerInfo: any; // Variable to store customer information
 
+  //Initiate function
   ngOnInit() {
     this.loadCustomerInfo(); // Load customer information when component initializes
   }
 
-
+  //loads customer information to be displayed on website
   loadCustomerInfo() {
     const customerId = localStorage.getItem('customer_id');
     if (customerId !== null) {
@@ -50,7 +52,8 @@ export class HeaderMainComponent implements OnInit {
       this.hasData = false;
     }
   }
-
+  
+  //logs user out of system
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

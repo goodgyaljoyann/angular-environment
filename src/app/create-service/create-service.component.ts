@@ -13,8 +13,15 @@ import { LocationServicesService } from '../location-services/locations-services
 })
 export class CreateServiceComponent implements OnInit, OnDestroy {
 
-  constructor(private carServicesService: CarServicesService, private locationServicesService: LocationServicesService, public dialog: MatDialog, private router: Router,  private snackBar: MatSnackBar){}
- isError: boolean = false;
+  constructor(
+    private carServicesService: CarServicesService,
+    private locationServicesService: LocationServicesService, 
+    public dialog: MatDialog, 
+    private router: Router,  
+    private snackBar: MatSnackBar){}
+
+    //Declare variables
+  isError: boolean = false;
   locations: any[] = [];
   selectedLocationId: number = 0;
   selectedFile: File | null = null;
@@ -28,17 +35,21 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Clean up resources (unsubscribe from observables, etc.) here
   }
-
+  
+  //set current page number
   currentPage = 1;
-
+  
+  //function to move to next page
   nextPage(): void {
     this.currentPage++;
   }
-
+  
+  //function to go back to previous page
   previousPage(): void {
     this.currentPage--;
   }
-
+  
+    //Function to facilitate saving service info and transforming form data
   saveService(newServiceForm: NgForm): void {
     // Merge form data into formData object
     Object.assign(this.formData, newServiceForm.value);
@@ -61,7 +72,7 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
       this.submitForm(formData);
     }
   }
-
+    //Function that saves form data in the database
   submitForm(formData: FormData): void {
     // Submit form logic here
     this.carServicesService.createService(formData).subscribe({
@@ -98,19 +109,22 @@ export class CreateServiceComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  //stores form data into local storage
   storeFormData(): void {
     // Store form data in local storage or array
     // Example using local storage:
     localStorage.setItem('formData', JSON.stringify(this.formData));
   }
-
+  
+  //facilitates image uploads
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     console.log('Selected File:', this.selectedFile);
     // You can perform additional actions with the selected file here
   }
-
+  
+  //populates list of locations that user can input into form
   populateLocations() {
     const locationsSub = this.locationServicesService.fetchAllLocations().subscribe(res => {
       if (res['status'] === 'success') {

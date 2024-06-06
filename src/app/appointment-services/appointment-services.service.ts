@@ -9,13 +9,13 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AppointmentServicesService {
-
+  //Initiate Api endpoint
   private API_URL= environment.api_url+'/api/v1/appointments';
  
   constructor(private  _http:HttpClient){ }
 
 
-  // fetches appointment slots
+  // fetches appointment slots, if they are availability
   getBookings(): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/bookings`)
                                 .pipe(
@@ -37,7 +37,7 @@ export class AppointmentServicesService {
                                 );
   }
 
-  // fetches a student
+  // fetches an appointment by Id
   fetchAppointmentById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
@@ -48,7 +48,7 @@ export class AppointmentServicesService {
                                 );
   }
   
-  // creates a student
+  // creates an appointment
   createAppointment(data:any): Observable<any>{
     return this._http.post<any>(this.API_URL, data)
                                 .pipe(
@@ -59,7 +59,7 @@ export class AppointmentServicesService {
                                 );
   }
 
-  // updates a student
+  // updates an appointment by id
   updateAppointment(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
@@ -69,7 +69,7 @@ export class AppointmentServicesService {
                                   )
                                 );
   }
-
+  //Updates an appointment status
   updateAppointmentStatus(appointmentId: number, appt_status: string): Observable<any> {
     return this._http.patch<any>(`${this.API_URL}/status/${appointmentId}`, { appt_status })
       .pipe(
@@ -77,7 +77,7 @@ export class AppointmentServicesService {
       );
   }
 
-  // updates a student
+  // deletes an appointment
   deleteAppointment(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(
@@ -88,23 +88,23 @@ export class AppointmentServicesService {
                                 );
   }
 
-    // Fetch statistics for products
+    // Fetches scheduled appointments
     getScheduledAppointments(): Observable<any> {
       const url = `${this.API_URL}/scheduled`; // Append /products route
       return this._http.get<any>(url);
     }
 
-    // Fetch statistics for products
+    // Fetches active appointments
     getActiveAppointments(): Observable<any> {
       const url = `${this.API_URL}/active`; // Append /products route
       return this._http.get<any>(url);
     }
-
-  getLastAppointmentIdByCustomer(customerId: number): Observable<any> {
+    //get the customers last appointment by their Id
+    getLastAppointmentIdByCustomer(customerId: number): Observable<any> {
     return this._http.get<any>(`${this.API_URL}/last/${customerId}`);
-  }
-  
-  addServiceToAppointment(appointmentData: any): Observable<any> {
+    }
+    //adds an additional service to an appointment slot
+    addServiceToAppointment(appointmentData: any): Observable<any> {
     return this._http.post<any>(`${this.API_URL}/addService`, appointmentData);
   }
   

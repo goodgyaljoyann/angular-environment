@@ -2,11 +2,11 @@
 <section class="contacts">
   <div class="contacts-container">
     <img src="/assets/mechanic-image.jpg" alt="A bird"  style="background-color: #f2a900;">
-
+    <!--Form to create new service -->
     <div class="contacts-form">
       <h2>Create A New Service</h2>
       <form class="service-form" (ngSubmit)="saveService(newServiceForm)" #newServiceForm="ngForm"  enctype="multipart/form-data">
-        <!-- Page 1: First 3 inputs -->
+        <!-- Pagination Page 1: First 3 inputs -->
         <div *ngIf="currentPage === 1">
           <div class="form-group">
             <label for="service_name" class="form-label">Service Name</label>
@@ -23,7 +23,7 @@
           <button type="button" (click)="nextPage()" class="btn btn-primary">Next</button>
         </div>
         
-        <!-- Page 2: Other inputs -->
+        <!-- Pagination Page 2: Other inputs -->
         <div *ngIf="currentPage === 2">
           <div class="form-group">
               <label for="location_id" class="form-label">Location</label>

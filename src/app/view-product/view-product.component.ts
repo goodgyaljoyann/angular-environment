@@ -17,7 +17,8 @@ export class ViewProductComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
-
+  
+  //Declare variables
   id: number = 0;
   product: any;
   hasData: boolean = false;
@@ -25,7 +26,8 @@ export class ViewProductComponent implements OnInit {
   location: any;
   isError: boolean = false;
   showCart: boolean = false;
-
+  
+  //Initiate Function
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -35,7 +37,7 @@ export class ViewProductComponent implements OnInit {
 
     this.loadData();
   }
-
+  //Loads data for a specific product
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.ProductsServicesService.fetchProductById(this.id).subscribe(
@@ -43,7 +45,7 @@ export class ViewProductComponent implements OnInit {
         if (res['status'] !== 'error') {
           this.product = res['data'];
           this.hasData = true;
-          this.loadRecommendedServices();
+          this.loadRecommendedProducts();
         } else {
           this.hasData = false;
         }
@@ -54,13 +56,13 @@ export class ViewProductComponent implements OnInit {
       }
     );
   }
-
-  loadRecommendedServices() {
+  //loads a list of recommended products
+  loadRecommendedProducts() {
     this.ProductsServicesService.fetchAllProducts().subscribe(
       (res) => {
         if (res['status'] === 'success') {
           const allProducts = res['data']['products'];
-          this.recommendedProducts = this.getRandomProducts(allProducts, this.id, 3);
+          this.recommendedProducts = this.getRandomProducts(allProducts, this.id, 3);//Don't suggest > 3 at a time
         }
       },
       (error) => {
@@ -68,7 +70,7 @@ export class ViewProductComponent implements OnInit {
       }
     );
   }
-
+  //Randomizes product list
   getRandomProducts(products: any[], currentProductId: number, count: number): any[] {
     const filteredProducts = products.filter(product => product.id !== currentProductId);
     const randomProducts = [];
@@ -78,48 +80,55 @@ export class ViewProductComponent implements OnInit {
     }
     return randomProducts;
   }
-
-  onRecommendedServiceClick(productId: number) {
+  
+  //Directs to the respective view page of the product
+  onRecommendedProductClick(productId: number) {
     this.router.navigate(['/view-product', productId]);
   }
-
+  
+  //Adds the product to cart from view page
   addToCart(product: any): void {
     this.CartService.addToCart(product, 'product');
     this.showCart = true;
   }
-
+  //removes item from cart from view page
   removeFromCart(itemId: number, itemType: 'service' | 'product'): void {
     this.CartService.removeFromCart(itemId, itemType);
     if (this.CartService.getCart().length === 0) {
       this.showCart = false;
     }
-    this.cdr.detectChanges();
+    this.cdr.detectChanges(); //refreshes page after change is made
   }
-
+  
+  //Calculates total of items in cart
   calculateCartTotal(): number {
     return this.CartService.calculateCartTotal();
   }
-
+  
+  //Gets cart 
   get cart(): any[] {
     return this.CartService.getCart();
   }
-
+  
+  //Increases product quantity
   increaseQuantity(item: any): void {
     item.quantity++;
     this.saveCartToLocalStorage();
   }
-
+  
+  //Decreases product quantity
   decreaseQuantity(item: any): void {
     if (item.quantity > 1) {
       item.quantity--;
       this.saveCartToLocalStorage();
     }
   }
-
+  //saves cart to local storage
   saveCartToLocalStorage(): void {
     this.CartService.saveCartToLocalStorage();
   }
   
+  //Directs to payments or appointments page based on items in the cart
   checkout(): void {
     const hasService = this.cart.some(item => item.itemType === 'service');
     const route = hasService ? '/appointments' : '/payments';

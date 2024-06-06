@@ -20,17 +20,18 @@ export class ViewCustomerComponent {
     private authService:AuthService,
     private dialog:MatDialog
   ) {}
-
+  
+  //Declare variables
   id: number = 0;
   customer: any;
   hasData: boolean = false;
   isError: boolean = false;
  
-
+//Initiate Function
   ngOnInit(): void {
     this.loadData();
   }
-
+  //Loads data for customer based on their Id
   loadData() {
     const customerId = this.authService.getCustomerId();
     this.CustomerService.fetchCustomerById(parseInt(customerId)).subscribe(
@@ -48,7 +49,7 @@ export class ViewCustomerComponent {
       }
     );
   }
-
+  //Opens delete dialog box
   openDeleteConfirmationDialog(id: number, first_name: string, last_name: string): void {
     const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
       width: '300px',
@@ -63,7 +64,7 @@ export class ViewCustomerComponent {
       }
     });
   }
-
+  //Deletes customer data from the database
   deleteCustomer(id: number): void {
     // Call your service method to delete the student by ID
     const deleteSub = this.CustomerService.deleteCustomerById(id).subscribe(res => {

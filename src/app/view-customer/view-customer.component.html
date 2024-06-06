@@ -1,4 +1,5 @@
 <app-header-main></app-header-main>
+<!--Customers can view personal details-->
 <div class="main-container" *ngIf="hasData">
   <div class="content">
     <div class="container card">
@@ -20,6 +21,7 @@
           <span id="phone" class="phone">{{ customer.phone }}</span>
         </div>
         <div class="button-group">
+          <!--Customers can update password or delete account action buttons-->
           <button class="btn btn-delete" (click)="openDeleteConfirmationDialog(customer.customer_id, customer.first_name,customer.last_name)" >Delete Customer Account</button>
           <button class="btn btn-update">Update Password</button>
         </div>

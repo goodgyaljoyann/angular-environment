@@ -19,6 +19,7 @@ export class EditCustomerComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
+  //Initiates functions
   ngOnInit(): void {
     this.loadData();
     this.populateLocations();
@@ -34,6 +35,7 @@ export class EditCustomerComponent implements OnInit {
   
   @ViewChild('editCustomerForm') editCustomerForm?: NgForm;
   
+  //Loads customer data into form
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.customerService.fetchCustomerById(this.id).subscribe(
@@ -60,8 +62,9 @@ export class EditCustomerComponent implements OnInit {
       }
     );
   }
-
+  //Updates customer information in the database
   updateCustomer() {
+    //calls the customer service function updateCustomer and updates with the user id and form data
     const updateSub = this.customerService.updateCustomer(this.id, this.formData).subscribe(
       (res) => {
         if (res['status'] !== 'error') {
@@ -95,6 +98,7 @@ export class EditCustomerComponent implements OnInit {
     );
   }  
 
+  //Populates locations that are in system where users can update their info
   populateLocations() {
     const locationsSub = this.locationServicesService.fetchAllLocations().subscribe(
       (res) => {

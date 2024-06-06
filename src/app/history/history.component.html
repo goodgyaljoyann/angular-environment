@@ -1,4 +1,5 @@
 <app-header-main></app-header-main>
+<!--Displays customer appointment history-->
 <div *ngIf="hasData; else noDataTemplate" class="history-container">
     <h2>Appointment History</h2>
     <table>
@@ -9,6 +10,7 @@
           <th>Service</th>
           <th>Appointment Status</th>
           <th>Payment Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +20,21 @@
           <td>{{ serviceNames[appointment.service_id] || 'Loading...' }}</td>
           <td>{{ appointment.appt_status }}</td>
           <td>{{ appointment.payment_status }}</td>
+          <td>
+            <!--Buttons display based on whether or no the payment status is "paid" and updates accordingly-->
+            <ng-container *ngIf="appointment.appt_status !== 'refund'; else requestSent">
+              <button *ngIf="appointment.payment_status === 'paid'" (click)="updateStatus(appointment.appointment_id, 'refund')">
+                Cancel & Refund
+              </button>
+              <button *ngIf="appointment.payment_status !== 'paid'" (click)="updateStatus(appointment.appointment_id, 'cancel')">
+                Cancel
+              </button>
+            </ng-container>
+            <ng-template #requestSent>
+              <span>Request Sent</span>
+            </ng-template>
+          </td>
+          
         </tr>
       </tbody>
     </table>

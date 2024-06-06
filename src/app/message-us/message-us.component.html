@@ -21,7 +21,7 @@
       <p> <strong>Reply:</strong> {{ message.reply }}</p>
     </div>
   </ng-container>
-
+    <!--Display this message bubble, if user doesn't have message in system -->
   <div *ngIf="!messages[0].reply" class="message-bubble no-reply">
     <p>No replies yet</p>
   </div>

@@ -8,7 +8,8 @@ import { AuthService } from '../Auth/auth.service';
 })
 export class RegisterAdminComponent {
   constructor(private authService: AuthService) {}
-
+  
+  //Function that facilitates admin registration
   onSignup(form: any) {
     if (form.valid) {
       this.authService.registerAdmin(form.value).subscribe(

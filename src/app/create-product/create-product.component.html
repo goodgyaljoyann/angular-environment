@@ -1,11 +1,12 @@
 <app-header></app-header>
 <section class="contacts">
   <div class="contacts-container">
+    <!--Image displayed beside form-->
     <img src="/assets/BUNDLE_2.png" alt="A bird" style="background-color: #f2a900;">
-
+    <!--Form to create new Product-->
     <div class="contacts-form">
       <h2>Create A New Product</h2>
-      <form class="service-form" (ngSubmit)="saveService(newProductForm)" #newProductForm="ngForm" enctype="multipart/form-data">
+      <form class="service-form" (ngSubmit)="saveProduct(newProductForm)" #newProductForm="ngForm" enctype="multipart/form-data">
         <div class="form-group">
           <label for="product_name" class="form-label">Product Name</label>
           <input type="text" id="product_name" name="product_name" class="form-control" placeholder="Enter product name" [(ngModel)]="formData.product_name" required>

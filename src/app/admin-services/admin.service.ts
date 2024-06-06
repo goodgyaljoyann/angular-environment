@@ -8,12 +8,12 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminService {
-
+  //establish Api endpoint
   private API_URL= environment.api_url+'/api/v1/admins';
 
   constructor(private  _http:HttpClient){ }
 
-     // fetches all Appointments
+     // fetches all Admins
      fetchAllAdmins(): Observable<any>{
       return this._http.get<any>(this.API_URL)
                                   .pipe(
@@ -24,7 +24,7 @@ export class AdminService {
                                   );
     }
 
-  // fetches a customer
+  // fetches an admin by Id
   fetchAdminById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
@@ -34,7 +34,7 @@ export class AdminService {
                                   )
                                 );
                               }
-   // updates a student
+   // updates admin details
    updateAdmin(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
@@ -44,7 +44,7 @@ export class AdminService {
                                   )
                                 );
   }
-
+  //delete admin information from system
   deleteAdminById(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(

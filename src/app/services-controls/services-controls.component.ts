@@ -32,7 +32,7 @@ export class ServicesControlsComponent implements OnInit, OnDestroy {
   isPreviousDisabled: boolean = true;
 
 
-  //Function in component to retrieve records through the studentService
+  //Function in component to retrieve  all service records through the car Service
   populateServices() {
     const servicesSub = this.CarServicesService.fetchAllServices().subscribe(res => {
       if (res['status'] == 'success') {
@@ -43,7 +43,8 @@ export class ServicesControlsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  //Open dialog box to delete/remove a service
   openDeleteConfirmationDialog(id: number, service_name: string, price: string): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '300px',
@@ -58,7 +59,7 @@ export class ServicesControlsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  //Function that deletes service from database
   deleteService(id: number): void {
     // Call your service method to delete the student by ID
     const deleteSub = this.CarServicesService.deleteService(id).subscribe(res => {
@@ -77,24 +78,26 @@ export class ServicesControlsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  //Detects page change
   pageChanged(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.setPage(page);
     }
   }
-
+  //Sets and displays data for current page
   setPage(page: number): void {
     this.currentPage = page;
     const startIndex = (page - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.pagedServices = this.services.slice(startIndex, endIndex);
   }
-
+  //Calculate the total pages
   get totalPages(): number {
     return Math.ceil(this.services.length / this.pageSize);
   }
-
+  
+  //Displays number of pages
   getPageNumbers(): number[] {
     return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }

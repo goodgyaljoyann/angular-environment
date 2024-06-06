@@ -13,7 +13,7 @@ import { AuthService } from '../Auth/auth.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit, AfterViewInit {
-  
+  //Declare variables
   formData: any = {}; // Object to store form data
   isError: boolean = false;
   minDate!: string;
@@ -29,12 +29,12 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     private authService:AuthService,
     private snackBar: MatSnackBar
   ) {}
-
+  //Initiate functions
   ngOnInit(): void {
     this.setDateLimits();
     this.generateTimeOptions();
   }
-
+  //Changes video settings to apply unique functionality such as autoplay, mute and remove controls etc.
   ngAfterViewInit(): void {
     const iframe = this.renderer.selectRootElement('#adVideoIframe') as HTMLIFrameElement;
 
@@ -57,12 +57,12 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     iframe.src = 'about:blank';
   }
 
-
+  //Saves appointment details entered by user by getting user ID from cookie and storing info entered
   saveAppointmentDetails(newServiceForm: NgForm): void {
-    const { date, time } = newServiceForm.value;
+    const { date, time } = newServiceForm.value; // retrieved from form
     const customer_id = this.authService.getCustomerId(); // Get customer_id
   
-    this.checkAvailabilityService.checkAvailability(date, time).subscribe(
+    this.checkAvailabilityService.checkAvailability(date, time).subscribe(//check date and time to see if slot is open
       (response: { data: { isAvailable: boolean } }) => {
         const isAvailable = response.data.isAvailable;
   
@@ -102,7 +102,7 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
       }
     );
   }  
-
+  //changes the calendar date so that user can only book 7 days in advance
   setDateLimits(): void {
     const today = new Date();
     const maxDate = new Date();
@@ -111,10 +111,10 @@ export class AppointmentsComponent implements OnInit, AfterViewInit {
     this.minDate = today.toISOString().split('T')[0];
     this.maxDate = maxDate.toISOString().split('T')[0];
   }
-
+  //generates time slots within business hours
   generateTimeOptions(): void {
-    const startTime = 9;
-    const endTime = 15;
+    const startTime = 9; //starts at 9 am
+    const endTime = 15;  //ends at 3 pm
     const interval = 30; // 30 minutes interval
     for (let hour = startTime; hour < endTime; hour++) {
       for (let minutes = 0; minutes < 60; minutes += interval) {

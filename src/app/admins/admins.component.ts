@@ -10,7 +10,7 @@ import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-ac
   styleUrls: ['./admins.component.css']
 })
 export class AdminsComponent implements OnInit, OnDestroy {
-
+  //declare variables
   isError: boolean = true;
   admin: any;
   hasData: boolean = false;
@@ -31,7 +31,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     // Clean up resources (unsubscribe from observables, etc.) here
   }
 
-    //move the below code
+    //displays admin details by fetching info from database
     displayAdmins(): void {
       this.adminService.fetchAllAdmins().subscribe({
         next: (res) => {
@@ -47,7 +47,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         }
       });
     }  
-
+    //After the user initiates the "delete", it opens up dialog box
     openDeleteConfirmationDialog(id: number, f_name: string, l_name: string): void {
       const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
         width: '300px',
@@ -62,9 +62,9 @@ export class AdminsComponent implements OnInit, OnDestroy {
         }
       });
     }
-  
+    //Function that performs the action that deletes admin information from database
     deleteAdmin(id: number): void {
-      // Call your service method to delete the student by ID
+      // Call your service method to delete the admin by ID
       const deleteSub = this.adminService.deleteAdminById(id).subscribe(res => {
         if (res['status'] == 'success') {
           // Reload the current route

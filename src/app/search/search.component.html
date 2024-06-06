@@ -1,7 +1,9 @@
+<!--Displays search results based on information entered by user-->
 <div class="search-results" *ngIf="searchQuery">
   <button class="back-button" (click)="goBack()">Back</button>
   <h2>Search Results for "{{ searchQuery }}"</h2>
   <div class="result-grid">
+    <!--Displays Display image and information for product/service-->
     <div *ngFor="let result of searchResults" class="result-card" (click)="viewDetails(result.type, result.id)">
       <ng-container *ngIf="result.type === 'service' || result.type === 'product'">
         <img *ngIf="result.type === 'product'" [src]="'http://localhost:2400/uploads/products/' + result.img" alt="{{ result.name }}">
@@ -10,6 +12,7 @@
           <h3>{{ result.name }}</h3>
         </div>
       </ng-container>
+      <!--For admin user only where admins can search for appointments based on IDs-->
       <ng-container *ngIf="result.type === 'appointment'">
         <div class="appointment-info">
           <div><strong>ID:</strong> {{ result.id }}</div>

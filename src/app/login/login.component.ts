@@ -8,31 +8,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements AfterViewInit {
-  constructor(private authService: AuthService, private router:Router, private renderer: Renderer2) {}
+  //Declare variables
+  errorMessage: string = '';
 
+  constructor(private authService: AuthService,
+              private router: Router,
+              private renderer: Renderer2) {}
+
+  // Function that accepts login information and authenticates if user is a part of the system
   onLogin(form: any) {
     if (form.valid) {
       this.authService.loginUser(form.value).subscribe(
         response => {
-          console.log('Login successful', response);
           if (response && response.customer_id) {
-            // Assuming the response contains the user's data including the customer_id
+            console.log('Login successful', response);
             const customerId = response.customer_id;
-            // Save the customer_id as a cookie or in localStorage
             localStorage.setItem('customer_id', customerId);
-            // Redirect to a secure page after successful login
             this.router.navigate(['/']);
+          } else if (response && response.error) {
+            this.errorMessage = response.error;  // sends an error message
+            console.error('Login failed:', response.error);
           } else {
-            console.error('Login failed: Response is missing customer_id');
+            this.errorMessage = 'Login failed: Unknown error';
+            console.error('Login failed: Response is missing customer_id or error');
           }
         },
         error => {
+          this.errorMessage = 'Login failed: Invalid credentials';
           console.error('Login failed', error);
         }
       );
+    } else {
+      this.errorMessage = 'Please fill out the form correctly';
     }
   }
 
+  // Formats video, removes controls, applies loop and mute
   ngAfterViewInit(): void {
     const iframe = this.renderer.selectRootElement('#adVideoIframe') as HTMLIFrameElement;
 
@@ -55,5 +66,4 @@ export class LoginComponent implements AfterViewInit {
 
     iframe.src = 'about:blank';
   }
-  
 }

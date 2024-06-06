@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductsServicesService {
-
+  //Initiates backend Api
   private API_URL= environment.api_url+'/api/v1/products';
  
   constructor(private  _http:HttpClient){ }
@@ -25,7 +25,7 @@ export class ProductsServicesService {
                                 );
   }
 
-  // fetches a student
+  // fetches a product by Id
   fetchProductById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(
@@ -36,7 +36,7 @@ export class ProductsServicesService {
                                 );
   }
   
-  // creates a student
+  // creates a new product
   createProduct(data:any): Observable<any>{
     return this._http.post<any>(this.API_URL, data)
                                 .pipe(
@@ -47,7 +47,7 @@ export class ProductsServicesService {
                                 );
   }
 
-  // updates a student
+  // updates a product in the system
   updateProduct(id:number, data:any): Observable<any>{
     return this._http.patch<any>(this.API_URL + `/${id}`, data)
                                 .pipe(
@@ -58,7 +58,7 @@ export class ProductsServicesService {
                                 );
   }
 
-  // updates a student
+  // deletes product from system
   deleteProduct(id:number): Observable<any>{
     return this._http.delete<any>(this.API_URL + `/${id}`)
                                 .pipe(

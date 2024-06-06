@@ -1,12 +1,15 @@
+<!--Cart on the payment page-->
 <div class="cart-content">
     <h3>Your Cart</h3>
     <div class="cart-items">
       <div class="cart-item" *ngFor="let item of cart">
         <div class="cart-item-row">
           <div class="cart-item-image">
+            <!--Displays images of items in cart-->
             <img *ngIf="item.itemType === 'service'" [src]="'http://localhost:2400/uploads/services/' + item.item.img" alt="{{ item.item.service_name }}">
             <img *ngIf="item.itemType === 'product'" [src]="'http://localhost:2400/uploads/products/' + item.item.img" alt="{{ item.item.product_name }}">
           </div>
+          <!--Shows the location of service -->
           <div class="cart-item-details">
               <span *ngIf="item.itemType === 'service'">
                 {{ item.item.service_name }} <br>
@@ -14,6 +17,7 @@
               </span>
             <span *ngIf="item.itemType === 'product'">{{ item.item.product_name }}</span>
           </div>
+          <!--Controls items in cart-->
           <div class="cart-item-price">
             <span>${{ item.item.price * item.quantity | number:'1.2-2' }}</span>
           </div>
@@ -28,9 +32,11 @@
         </div>
       </div>
     </div>
+    <!--Displays the total of items in cart-->
     <div class="total">
       <p>Total: ${{ calculateCartTotal() | number:'1.2-2' }}</p>
     </div>
+    <!--Action Buttons-->
     <div class="checkout-btn-container">
       <button (click)="checkout()" class="checkout-btn">Checkout</button>
     </div>

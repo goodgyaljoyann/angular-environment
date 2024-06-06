@@ -11,7 +11,7 @@ export class DeleteAccountDialogComponent {
     public dialogRef: MatDialogRef<DeleteAccountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  
+   //closes modal after user makes selection
   closeModal(): void {
     this.dialogRef.close();
     }

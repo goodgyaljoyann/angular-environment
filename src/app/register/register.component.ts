@@ -9,14 +9,17 @@ import { LocationServicesService } from '../location-services/locations-services
 })
 export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private locationServicesService: LocationServicesService) {}
-
+  
+  //Declare variables
   locations: any[] = [];
   isError: boolean = false;
-
+  
+  //Initiate function
   ngOnInit(): void {
     this.populateLocations();
   }
-
+  
+  //function that registers user on the system
   onSignup(form: any) {
     if (form.valid) {
       this.authService.registerUser(form.value).subscribe(
@@ -29,7 +32,8 @@ export class RegisterComponent implements OnInit {
       );
     }
   }
-
+  
+  //populates locations that users can choose from when registering
   populateLocations() {
     const locationsSub = this.locationServicesService.fetchAllLocations().subscribe(res => {
       if (res['status'] === 'success') {

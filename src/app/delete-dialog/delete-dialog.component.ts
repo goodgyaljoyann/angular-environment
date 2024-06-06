@@ -13,6 +13,7 @@ export class DeleteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
   
+  //closes modal after user makes a selection
   closeModal(): void {
     this.dialogRef.close();
     }

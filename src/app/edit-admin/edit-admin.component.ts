@@ -16,7 +16,8 @@ export class EditAdminComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-
+  
+  //Initiate function that loads admin data
   ngOnInit(): void {
     this.loadData();
   
@@ -31,6 +32,7 @@ export class EditAdminComponent implements OnInit {
   
   @ViewChild('editAdminForm') editAdminForm?: NgForm;
   
+  //loads admin data into the form
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.adminService.fetchAdminById(this.id).subscribe(
@@ -55,7 +57,7 @@ export class EditAdminComponent implements OnInit {
       }
     );
   }
-
+  //Function that updates admin information in the database
   updateAdmin() {
     const updateSub = this.adminService.updateAdmin(this.id, this.formData).subscribe(
       (res) => {

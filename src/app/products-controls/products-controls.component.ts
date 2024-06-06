@@ -31,7 +31,7 @@ export class ProductsControlsComponent  implements OnInit, OnDestroy {
   isPreviousDisabled: boolean = true;
 
 
-  //Function in component to retrieve records through the studentService
+  //Function in component to retrieve records through the productService
   populateProducts() {
     const productsSub = this.ProductServicesService.fetchAllProducts().subscribe(res => {
       if (res['status'] == 'success') {
@@ -43,6 +43,7 @@ export class ProductsControlsComponent  implements OnInit, OnDestroy {
     });
   }
 
+  //Opens dialog box that confirms whether or not user wants to remove product
   openDeleteConfirmationDialog(id: number, product_name: string, price: string): void {
     const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
       width: '300px',
@@ -53,12 +54,13 @@ export class ProductsControlsComponent  implements OnInit, OnDestroy {
       if (res) {
         // Call your deleteStudent method here
         
-        this.deleteService(id);
+        this.deleteProduct(id);
       }
     });
   }
-
-  deleteService(id: number): void {
+  
+  //Function that deletes product from system
+  deleteProduct(id: number): void {
     // Call your service method to delete the student by ID
     const deleteSub = this.ProductServicesService.deleteProduct(id).subscribe(res => {
       if (res['status'] == 'success') {
@@ -76,7 +78,8 @@ export class ProductsControlsComponent  implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  //Navigation where admin can navigate through products available
   pageChanged(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.setPage(page);

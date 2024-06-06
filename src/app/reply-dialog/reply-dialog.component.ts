@@ -7,13 +7,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./reply-dialog.component.css']
 })
 export class ReplyDialogComponent {
+  //Declare variable
   replyMessage: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ReplyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
-
+  //closes dialog box if user chooses to cancel
   onCancel(): void {
     this.dialogRef.close();
   }

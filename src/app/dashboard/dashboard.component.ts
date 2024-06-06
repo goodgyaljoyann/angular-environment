@@ -18,6 +18,8 @@ interface Payment {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+
+  //Declare variables
   statistics: any = {};
   appointments: any = [];
   payments: any = [];
@@ -36,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchStatistics();
-    this.fetchAllAppointments();
+    // this.fetchAllAppointments();
     this.fetchScheduledAppointments();
     this.loadAdminInfo();
   }
@@ -45,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Clean up resources (unsubscribe from observables, etc.) here
   }
 
+  //This code fetches statistics for admins to view on dashboard
   fetchStatistics(): void {
     forkJoin({
       servicesData: this.statisticsService.getServicesStatistics(),
@@ -62,31 +65,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  //move the below code
-  fetchAllAppointments(): void {
-    this.viewAllAppointmentsService.getAllAppointments().subscribe({
-      next: (res) => {
-        console.log(res); // Log the response to see if it contains the appointments data
-        if (res['status'] == 'success') {
-          this.appointments = res['data'];
-        } else {
-          this.isError = true; // Set isError to true if the response status is not 'success'
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching all appointments:', error);
-      }
-    });
-  }
+  // //move the below code, not in use
+  // fetchAllAppointments(): void {
+  //   this.viewAllAppointmentsService.getAllAppointments().subscribe({
+  //     next: (res) => {
+  //       console.log(res); // Log the response to see if it contains the appointments data
+  //       if (res['status'] == 'success') {
+  //         this.appointments = res['data'];
+  //       } else {
+  //         this.isError = true; // Set isError to true if the response status is not 'success'
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('Error fetching all appointments:', error);
+  //     }
+  //   });
+  // }
 
+  //fetches all appointments that are currently "scheduled", fetches the first 5
   fetchScheduledAppointments(): void {
     this.viewAllAppointmentsService.getScheduledAppointments().subscribe({
       next: (res) => {
         console.log(res); // Log the response to see if it contains the appointments data
         if (res['status'] == 'success') {
           const formattedAppointments = this.formatAppointments(res['info']);
-          // Fetch only the first three appointments
-          this.appointments = formattedAppointments.slice(0, 3);
+          // Fetch only the first five appointments
+          this.appointments = formattedAppointments.slice(0, 5);
         } else {
           this.isError = true; // Set isError to true if the response status is not 'success'
         }
@@ -99,7 +103,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
   
 
-  // Method to format appointments
+  // Method to format appointment date
   private formatAppointments(appointments: any[]): any[] {
     return appointments.map(appointment => {
       const date = new Date(appointment.date);
@@ -111,11 +115,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
   
+  //code that loads admin information so that their name can be displayed
   loadAdminInfo() {
     const adminId = localStorage.getItem('admin_id');
     if (adminId !== null) {
       const adminIdNumber = parseInt(adminId, 10);
       if (!isNaN(adminIdNumber)) {
+        //calls the admin service function to fetch admin ID stored in cookie
         this.adminService.fetchAdminById(adminIdNumber).subscribe(
           (res) => {
             if (res.status !== 'error') {
@@ -139,7 +145,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.hasData = false;
     }
   }
-
+  
+  //allows admins to logout from the system
   logout(): void {
     this.authService.logoutAdmin();
     this.router.navigate(['/login']);

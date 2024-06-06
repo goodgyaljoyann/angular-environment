@@ -8,20 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  customerInfo: any; // Variable to store customer information
+  
 
   constructor(private customerService: CustomerService, private router:Router
   ) {} // Inject the customer service
 
+  //Declare variables
   customer: any;
   hasData: boolean = false;
   searchQuery: string = '';
-
+  customerInfo: any; // Variable to store customer information
+  
+  //Initiate function
   ngOnInit() {
     this.loadCustomerInfo(); // Load customer information when component initializes
   }
 
-
+  //Function that loads customer information on the webpage
   loadCustomerInfo() {
     const customerId = localStorage.getItem('customer_id');
     if (customerId !== null) {
@@ -50,7 +53,8 @@ export class HomeComponent implements OnInit {
       this.hasData = false;
     }
   }
-
+  
+  //Facilitates search
   onSearch(): void {
     if (this.searchQuery.trim() !== '') {
       this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });

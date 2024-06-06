@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../Auth/auth.service';
 import { ReplyDialogComponent } from '../reply-dialog/reply-dialog.component'; // Import ReplyDialogComponent
+import { DeleteMessageDialogComponent } from '../delete-message-dialog/delete-message-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -17,18 +19,22 @@ export class MessagesComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private customerService: CustomerService,
     private dialog: MatDialog, // Inject MatDialog
-    private authService: AuthService // Inject AuthService
+    private authService: AuthService, // Inject AuthService
+    private router:Router
   ) {}
-
+  
+  //Initiates function
   ngOnInit(): void {
     this.populateMessages();
   }
 
   ngOnDestroy(): void {}
 
+  //Declare variables
   messages: any = [];
   isError: boolean = false;
 
+  //Displays or populate messages in the system from users
   populateMessages() {
     const messagesSub = this.messageService.fetchAllMessages().subscribe(res => {
       if (res['status'] == 'success') {
@@ -40,6 +46,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     });
   }
 
+  //Gets customer details and maps to each message
   fetchCustomerDetails() {
     const customerRequests = this.messages.map((message: any) => {
       return this.customerService.fetchCustomerById(message.customer_id).pipe(
@@ -60,7 +67,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  //Function that allows admins to reply to messages
   replyToMessage(message_id: number): void {
     const dialogRef = this.dialog.open(ReplyDialogComponent, {
       width: '400px',
@@ -75,6 +83,36 @@ export class MessagesComponent implements OnInit, OnDestroy {
             // Handle response if needed
           });
         });
+      }
+    });
+  }
+  //Opens delete dialog box that allows admins to delete messages
+  openDeleteConfirmationDialog(id: number, first_name: string, last_name: string): void {
+    const dialogRef = this.dialog.open(DeleteMessageDialogComponent, {
+      width: '300px',
+      data: { id, first_name, last_name } // Pass ID and name as data
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        // Call your deleteStudent method here
+        
+        this.deleteMessage(id);
+      }
+    });
+  }
+  //Function that deletes message
+  deleteMessage(id: number): void {
+    // Call your service method to delete the message by ID
+    const deleteSub = this.messageService.deleteMessage(id).subscribe(res => {
+      if (res['status'] == 'success') {
+        // Reload the current route
+        this.router.navigateByUrl('/view-admin', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      } else {
+        // Handle error if deletion failed
+        console.error('Failed to delete user');
       }
     });
   }

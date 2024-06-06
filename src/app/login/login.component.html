@@ -1,6 +1,8 @@
+<!--Video that plays in a loop in the background-->
 <div class="bg-video-wrapper">
   <iframe class="bg-video" src="assets/login-bkg.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen id="adVideoIframe"></iframe>
 </div>
+<!--Login Form-->
 <div class="auth-container">
     <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
       <h2>Login</h2>
@@ -12,4 +14,10 @@
       </div>
       <button type="submit" class="btn">Login</button>
     </form>
+    <!--If user doesn't have an account, directs them to signup-->
+    <span class="signup-text">No account? <a routerLink="/register" class="signup-link">Sign up!</a></span>
+    <!--checks user details if correct, displays error message-->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
   </div>

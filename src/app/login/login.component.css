@@ -66,6 +66,7 @@ body, html {
   border-radius: 4px;
   cursor: pointer;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .btn:hover {
@@ -76,4 +77,38 @@ body, html {
   width: 200px;
   display: block;
   margin: 0 auto; /* Center the logo */
+}
+
+.signup-text {
+  text-align: left;
+  display: block;
+  margin-bottom: 5px; /* Ensures the span takes the full width */
+}
+
+.signup-link {
+  text-decoration: none; /* Removes the underline */
+  color: inherit; /* Inherits the color from the parent element */
+}
+
+.signup-link:hover, .signup-link:focus, .signup-link:active {
+  text-decoration: none; /* Ensures underline does not appear on hover, focus, or active states */
+  outline: none; /* Removes outline for better visual consistency */
+}
+
+.signup-link:visited {
+  color: inherit; /* Ensures the visited link color remains consistent */
+}
+
+a{
+  background-color: aquamarine;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.error-message{
+  background-color: #ac3e31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }

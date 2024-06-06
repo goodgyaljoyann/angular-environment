@@ -19,7 +19,8 @@ export class ViewServiceComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
-
+  
+  //Declare variables
   id: number = 0;
   service: any;
   hasData: boolean = false;
@@ -27,7 +28,8 @@ export class ViewServiceComponent implements OnInit {
   location: any;
   isError: boolean = false;
   showCart: boolean = false; // Show/hide cart pop-up
-
+  
+  //Initialize Function
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -37,7 +39,7 @@ export class ViewServiceComponent implements OnInit {
 
     this.loadData();
   }
-
+  //Loads the service info based on id
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.CarServicesService.fetchServiceById(this.id).subscribe(
@@ -57,7 +59,7 @@ export class ViewServiceComponent implements OnInit {
       }
     );
   }
-
+  //Loads location information
   populateLocationById(locationId: number): void {
     this.LocationServicesService.fetchLocationById(locationId).subscribe(
       (res) => {
@@ -75,13 +77,13 @@ export class ViewServiceComponent implements OnInit {
       }
     );
   }
-
+  //loads recommended services
   loadRecommendedServices() {
     this.CarServicesService.fetchAllServices().subscribe(
       (res) => {
         if (res['status'] === 'success') {
           const allServices = res['data']['services'];
-          this.recommendedServices = this.getRandomServices(allServices, this.id, 3);
+          this.recommendedServices = this.getRandomServices(allServices, this.id, 3); //loads no > 3
         }
       },
       (error) => {
@@ -89,7 +91,8 @@ export class ViewServiceComponent implements OnInit {
       }
     );
   }
-
+  
+  //Randomizes service options
   getRandomServices(services: any[], currentServiceId: number, count: number): any[] {
     const filteredServices = services.filter(service => service.id !== currentServiceId);
     const randomServices = [];
@@ -99,16 +102,18 @@ export class ViewServiceComponent implements OnInit {
     }
     return randomServices;
   }
-
+  //Directs to the respective view page of the service click on
   onRecommendedServiceClick(serviceId: number) {
     this.router.navigate(['/view-service', serviceId]);
   }
-
+  
+  //add a service to cart
   addToCart(service: any): void {
     this.CartService.addToCart(service, 'service');
     this.showCart = true;
   }
-
+  
+  //remove service from cart
   removeFromCart(itemId: number, itemType: 'service' | 'product'): void {
     this.CartService.removeFromCart(itemId, itemType);
     if (this.CartService.getCart().length === 0) {
@@ -116,31 +121,31 @@ export class ViewServiceComponent implements OnInit {
     }
     this.cdr.detectChanges();
   }
-
+  //calculates cart total
   calculateCartTotal(): number {
     return this.CartService.calculateCartTotal();
   }
-
+  //increases quantity of an item
   increaseQuantity(item: any): void {
     item.quantity++;
     this.saveCartToLocalStorage();
   }
-
+  //decreases quantity of an item
   decreaseQuantity(item: any): void {
     if (item.quantity > 1) {
       item.quantity--;
       this.saveCartToLocalStorage();
     }
   }
-
+  //Saves cart to local storage
   saveCartToLocalStorage(): void {
     this.CartService.saveCartToLocalStorage();
   }
-
+  //get cart 
   get cart(): any[] {
     return this.CartService.getCart();
   }
-
+  //directs to payments or appointments page based on items in cart
   checkout(): void {
     const hasService = this.cart.some(item => item.itemType === 'service');
     const route = hasService ? '/appointments' : '/payments';

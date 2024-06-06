@@ -12,8 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditServiceComponent implements OnInit{
 
-  constructor(private CarServicesService: CarServicesService, private locationServicesService: LocationServicesService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private CarServicesService: CarServicesService,
+      private locationServicesService: LocationServicesService, 
+      private route: ActivatedRoute, 
+      private router: Router, 
+      private snackBar: MatSnackBar) {}
 
+      //Initiates function
   ngOnInit(): void {
     this.loadData();
     this.populateLocations();
@@ -32,6 +37,7 @@ export class EditServiceComponent implements OnInit{
 
   @ViewChild('editServiceForm') editServiceForm?: NgForm;
   
+  //loads service information into form
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.CarServicesService.fetchServiceById(this.id).subscribe(
@@ -55,7 +61,8 @@ export class EditServiceComponent implements OnInit{
       }
     );
   }
-
+  
+  //function that updates service information in the database
   updateService(oForm: NgForm){
     const formData = new FormData();
     for (const key of Object.keys(oForm.value)) {
@@ -97,7 +104,8 @@ export class EditServiceComponent implements OnInit{
       }
     );
   }  
-
+  
+  //populates locations for admin to select from to update service information
   populateLocations() {
     const locationsSub = this.locationServicesService.fetchAllLocations().subscribe(res => {
       if (res['status'] === 'success') {
@@ -110,6 +118,7 @@ export class EditServiceComponent implements OnInit{
     });
   }
   
+  //facilitates image uploads
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     console.log('Selected File:', this.selectedFile);

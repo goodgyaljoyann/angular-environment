@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./message-us.component.css']
 })
 export class MessageUsComponent implements OnInit, OnDestroy {
+
+  //Declare variables
   isError: boolean = false;
   messages: any[] = [];
   formData: any = {}; // Object to store form data
@@ -24,6 +26,7 @@ export class MessageUsComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) {}
 
+  //Initiates function
   ngOnInit(): void {
     this.populateMessage();
   }
@@ -33,7 +36,8 @@ export class MessageUsComponent implements OnInit, OnDestroy {
       this.messagesSub.unsubscribe();
     }
   }
-
+  
+  //Function that displays the users last message
   populateMessage(): void {
     const customer_id = this.authService.getCustomerId(); // Get customer_id
     this.messagesSub = this.messageService.fetchLastMessageByCustomerId(parseInt(customer_id, 10)).subscribe(
@@ -50,7 +54,8 @@ export class MessageUsComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  
+  //Function that stores message data
   saveMessage(newMessageForm: NgForm): void {
     const customer_id = this.authService.getCustomerId(); // Get customer_id
     const { message_content } = newMessageForm.value;

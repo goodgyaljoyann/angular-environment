@@ -12,7 +12,8 @@ export class DebitCardPaymentComponent {
     public dialogRef: MatDialogRef<DebitCardPaymentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-
+  
+  //function that checks if details were entered correctly and proceeds thereafter
   submitCreditCard(form: NgForm) {
     if (form.valid) {
       this.dialogRef.close({ success: true, formData: form.value });

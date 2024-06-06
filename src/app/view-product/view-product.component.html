@@ -1,4 +1,5 @@
 <app-header-main></app-header-main>
+<!--View page to view a product-->
 <div class="main-container" *ngIf="hasData">
   <div class="content">
     <div class="container">
@@ -17,7 +18,7 @@
       <button class="addtocart" (click)="addToCart(product); $event.stopPropagation();">Add to Cart</button>
     </div>
   </div>
-
+  <!--Product Recommendations-->
   <div class="sidebar">
     <h3>Recommended Products</h3>
     <div class="recommended-product" *ngFor="let recommended of recommendedProducts">

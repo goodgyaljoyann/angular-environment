@@ -11,16 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminsComponent } from './admins/admins.component';
-import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
-import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
-import { EditAppointmentComponent } from './edit-appointment/edit-appointment.component';
-import { CustomersComponent } from './customers/customers.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { LocationsComponent } from './locations/locations.component';
-import { CreateLocationComponent } from './create-location/create-location.component';
-import { EditLocationComponent } from './edit-location/edit-location.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProductsComponent } from './products/products.component';
 import { CreateProductComponent } from './create-product/create-product.component';
@@ -52,7 +45,6 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { RegisterAdminComponent } from './register-admin/register-admin.component';
 import { RemindersComponent } from './reminders/reminders.component';
 import { MessagesComponent } from './messages/messages.component';
-import { ReplysComponent } from './replys/replys.component';
 import { MessageUsComponent } from './message-us/message-us.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 import { AboutComponent } from './about/about.component';
@@ -60,6 +52,7 @@ import { SearchComponent } from './search/search.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 import { ViewAdminComponent } from './view-admin/view-admin.component';
+import { DeleteMessageDialogComponent } from './delete-message-dialog/delete-message-dialog.component';
 
 
 
@@ -72,16 +65,9 @@ import { ViewAdminComponent } from './view-admin/view-admin.component';
     LoginComponent,
     RegisterComponent,
     AdminsComponent,
-    CreateAdminComponent,
     EditAdminComponent,
     AppointmentsComponent,
-    CreateAppointmentComponent,
-    EditAppointmentComponent,
-    CustomersComponent,
     EditCustomerComponent,
-    LocationsComponent,
-    CreateLocationComponent,
-    EditLocationComponent,
     PaymentsComponent,
     ProductsComponent,
     CreateProductComponent,
@@ -107,7 +93,6 @@ import { ViewAdminComponent } from './view-admin/view-admin.component';
     RegisterAdminComponent,
     RemindersComponent,
     MessagesComponent,
-    ReplysComponent,
     MessageUsComponent,
     ReplyDialogComponent,
     AboutComponent,
@@ -115,6 +100,7 @@ import { ViewAdminComponent } from './view-admin/view-admin.component';
     ViewCustomerComponent,
     DeleteAccountDialogComponent,
     ViewAdminComponent,
+    DeleteMessageDialogComponent,
 
 
   ],

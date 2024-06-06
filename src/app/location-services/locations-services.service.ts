@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LocationServicesService {
+  //Initiates backend Api 
   private API_URL= environment.api_url+'/api/v1/locations';
  
   constructor(private  _http:HttpClient){ }
@@ -24,7 +25,7 @@ export class LocationServicesService {
                                   );
     }
 
-      // fetches a student
+      // fetches a location by Id
   fetchLocationById(id:number): Observable<any>{
     return this._http.get<any>(this.API_URL+ `/${id}`)
                                 .pipe(

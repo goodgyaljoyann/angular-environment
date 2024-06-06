@@ -1,11 +1,11 @@
-<!--Dialog box to confirm whether or not admin wants to remove product from system-->
+<!--Dialog box that confirms whether or not admin wants to remove a message from system-->
 <div style="display: flex; justify-content: center; align-items: center;">
     <div style=" border-radius: 10px; padding: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h5 style="margin: 0;">Remove Product</h5>
+        <h5 style="margin: 0;">Remove Message</h5>
       </div>
       <div style="margin-top: 20px;">
-        <p>Are you sure you want to delete <br> product<b> ID: {{ data.id }} ({{ data.product_name }} {{ data.price }})</b>?</p>
+        <p>Are you sure you want to permanently delete  <b>{{ data.first_name}} {{ data.last_name}} 's</b> message?</p>
       </div>
       <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
         <button type="button" class="btn btn-secondary" (click)="closeModal()" style="margin-right: 10px; background-color: #6c757d; border-color: #6c757d; border-radius: 10px;  padding: 5px;">Cancel</button>
@@ -14,4 +14,3 @@
     </div>
   </div>
   
-

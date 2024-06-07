@@ -160,8 +160,8 @@ logoutAdmin() {
   }
 
   // updates customer password
-  updatePassword(id:number, data:any): Observable<any>{
-    return this.http.patch<any>(this.apiUrl + `/update-password/${id}`, data)
+  updatePassword(id:number, formData:any): Observable<any>{
+    return this.http.patch<any>(this.apiUrl + `/update-password/${id}`, formData)
                                 .pipe(
                                   map((res)=>{
                                     return res;

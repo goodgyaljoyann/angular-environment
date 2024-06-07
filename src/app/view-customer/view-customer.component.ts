@@ -85,45 +85,11 @@ export class ViewCustomerComponent {
   }
   
   //Opens update password dialog box
-  openUpdatePasswordDialog(adminId: number): void {
-    const dialogRef = this.dialog.open(UpdatePasswordComponent, {
-      width: '300px',
-      data: { id: adminId }
-    });
+openUpdatePasswordDialog(customerId: number): void {
+  this.dialog.open(UpdatePasswordComponent, {
+    width: '300px',
+    data: { id: customerId }
+  });
+}
 
-    dialogRef.afterClosed().subscribe((result: NgForm) => {
-      if (result && result.valid) {
-        const formData = new FormData();
-        for (const key of Object.keys(result.value)) {
-          formData.append(key, result.value[key]);
-        }
-        //update the password of the user in database
-        this.authService.updatePassword(adminId, formData).subscribe(
-          (res) => {
-            if (res.status !== 'error') {
-              this.snackBar.open('Password updated successfully', 'Close', {
-                duration: 5000,
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
-            } else {
-              this.snackBar.open('Failed to update password. Please try again.', 'Close', {
-                duration: 3000,
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
-            }
-          },
-          (error) => {
-            console.error('Error updating password:', error);
-            this.snackBar.open('An error occurred. Please try again later.', 'Close', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top'
-            });
-          }
-        );
-      }
-    });
-  }
 }

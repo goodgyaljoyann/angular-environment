@@ -23,7 +23,7 @@
         <div class="button-group">
           <!--Customers can update password or delete account action buttons-->
           <button class="btn btn-delete" (click)="openDeleteConfirmationDialog(customer.customer_id, customer.first_name,customer.last_name)" >Delete Customer Account</button>
-          <button class="btn btn-update">Update Password</button>
+          <button class="btn btn-update" (click)="openUpdatePasswordDialog(customer.customer_id)">Update Password</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ProductsServicesService } from '../product-services/products-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -9,16 +9,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent implements OnInit{
+export class EditProductComponent implements OnInit, AfterViewInit{
 
   constructor(private ProductsServicesService: ProductsServicesService, 
     private route: ActivatedRoute, 
     private router: Router, 
     private snackBar: MatSnackBar) {}
 
+  //Initiate load of product data
+  ngAfterViewInit(): void {
+    this.loadData();
+  }
+
   //Initiates function
   ngOnInit(): void {
-    this.loadData();
+    
     
   }
   

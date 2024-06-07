@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild , AfterViewInit } from '@angular/core';
 import { CarServicesService } from '../car-services/car-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -10,17 +10,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './edit-service.component.html',
   styleUrls: ['./edit-service.component.css']
 })
-export class EditServiceComponent implements OnInit{
+export class EditServiceComponent implements OnInit, AfterViewInit{
 
   constructor(private CarServicesService: CarServicesService,
       private locationServicesService: LocationServicesService, 
       private route: ActivatedRoute, 
       private router: Router, 
       private snackBar: MatSnackBar) {}
-
+  
+      //Initiate load of service data
+  ngAfterViewInit(): void {
+        this.loadData();
+  }
       //Initiates function
   ngOnInit(): void {
-    this.loadData();
     this.populateLocations();
   }
   
@@ -37,30 +40,40 @@ export class EditServiceComponent implements OnInit{
 
   @ViewChild('editServiceForm') editServiceForm?: NgForm;
   
-  //loads service information into form
+  //loads service data into form
   loadData() {
     this.id = this.route.snapshot.params['id'];
     this.CarServicesService.fetchServiceById(this.id).subscribe(
       (res) => {
-        if (res['status'] !== 'error') {
-          const serviceData = res!['data']!['service'];
+        if (res && res['status'] !== 'error' && res['data'] && res['data']['service']) {
+          const serviceData = res['data']['service'];
           console.log(serviceData);
           this.hasData = true;
-          // Fill the form with the values from the response
-          // which is stored in the variable studData
-          this.editServiceForm?.setValue({
-            service_name: serviceData['service_name'],
-            description: serviceData['description'],
-            location_id: serviceData['location_id'],
-            price: serviceData['price'],
-            img: serviceData['img'],
-          })
+          // Check if form is initialized
+          if (this.editServiceForm) {
+            // Fill the form with the values from the response
+            this.editServiceForm.setValue({
+              service_name: serviceData['service_name'] || '',
+              description: serviceData['description'] || '',
+              location_id: serviceData['location_id'] || '',
+              price: serviceData['price'] || '',
+              img: serviceData['img'] || ''
+            });
+          } else {
+            console.error('Edit service form is not initialized');
+          }
         } else {
           this.hasData = false;
+          console.error('Error fetching service data:', res);
         }
+      },
+      (error) => {
+        console.error('Error fetching service:', error);
+        this.hasData = false;
       }
     );
   }
+  
   
   //function that updates service information in the database
   updateService(oForm: NgForm){

@@ -22,11 +22,11 @@
           <td>{{ appointment.payment_status }}</td>
           <td>
             <!--Buttons display based on whether or no the payment status is "paid" and updates accordingly-->
-            <ng-container *ngIf="appointment.appt_status !== 'refund'; else requestSent">
-              <button *ngIf="appointment.payment_status === 'paid'" (click)="updateStatus(appointment.appointment_id, 'refund')">
+            <ng-container *ngIf="appointment.appt_status !== 'refund'; else requestSent" >
+              <button *ngIf="appointment.payment_status === 'paid'" (click)="updateStatus(appointment.appointment_id, 'refund')" class="cancel-btn">
                 Cancel & Refund
               </button>
-              <button *ngIf="appointment.payment_status !== 'paid'" (click)="updateStatus(appointment.appointment_id, 'cancel')">
+              <button *ngIf="appointment.payment_status !== 'paid'" (click)="updateStatus(appointment.appointment_id, 'cancel')" class="cancel-btn">
                 Cancel
               </button>
             </ng-container>

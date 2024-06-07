@@ -14,9 +14,10 @@
           <div class="admin-info">
             <span id="email" class="email">{{ admin.email }}</span>
           </div>
+          <!--Open dialog boxes based on customer choice-->
           <div class="button-group">
             <button class="btn btn-delete" (click)="openDeleteConfirmationDialog(admin.admin_id, admin.f_name,admin.l_name)" >Delete admin Account</button>
-            <button class="btn btn-update">Update Password</button>
+            <button class="btn btn-update" (click)="openUpdatePasswordDialog(admin.admin_id)">Update Password</button>
           </div>
         </div>
       </div>

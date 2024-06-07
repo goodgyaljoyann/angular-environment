@@ -23,7 +23,7 @@ export class LoginComponent implements AfterViewInit {
           if (response && response.customer_id) {
             console.log('Login successful', response);
             const customerId = response.customer_id;
-            localStorage.setItem('customer_id', customerId);
+            localStorage.setItem('customer_id', customerId);//saves id to cookie
             this.router.navigate(['/']);
           } else if (response && response.error) {
             this.errorMessage = response.error;  // sends an error message

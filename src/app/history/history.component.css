@@ -63,3 +63,9 @@
     font-size: 18px;
   }
   
+  .cancel-btn{
+    border-radius: 20px;
+    padding: 5px;
+    background-color: #f7c375;
+    margin: 0 auto;
+  }

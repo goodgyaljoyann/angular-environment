@@ -53,6 +53,7 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 import { ViewAdminComponent } from './view-admin/view-admin.component';
 import { DeleteMessageDialogComponent } from './delete-message-dialog/delete-message-dialog.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 
@@ -101,6 +102,7 @@ import { DeleteMessageDialogComponent } from './delete-message-dialog/delete-mes
     DeleteAccountDialogComponent,
     ViewAdminComponent,
     DeleteMessageDialogComponent,
+    UpdatePasswordComponent,
 
 
   ],

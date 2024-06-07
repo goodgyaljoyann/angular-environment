@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 import { AuthService } from '../Auth/auth.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
   styleUrls: ['./login-admin.component.css']
 })
 export class LoginAdminComponent {
-  constructor(private authService: AuthService, private router:Router) {}
-  
-  //Function that accepts admin login information
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  // Function that accepts admin login information
   onLogin(form: any) {
     if (form.valid) {
       this.authService.loginAdmin(form.value).subscribe(
@@ -27,14 +28,15 @@ export class LoginAdminComponent {
               // Redirect to the admin dashboard
               this.router.navigate(['/dashboard']);
             } else {
-              console.error('Login failed: User is not an admin');
+              this.errorMessage = 'Login failed: User is not an admin';
             }
           } else {
-            console.error('Login failed: Response is missing admin_id');
+            this.errorMessage = 'Login failed: Response is missing admin_id';
           }
         },
         error => {
           console.error('Login failed', error);
+          this.errorMessage = 'Login failed: Invalid username or password';
         }
       );
     }

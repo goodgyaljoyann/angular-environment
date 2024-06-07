@@ -48,3 +48,8 @@
     background-color: #b71c1c; /* Darker shade of red on hover */
   }
   
+  .error-message {
+    margin-top: 10px;
+    color: #ff0000;
+    font-weight: bold;
+  }

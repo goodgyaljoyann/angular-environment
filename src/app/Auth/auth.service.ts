@@ -147,5 +147,27 @@ logoutAdmin() {
   isAuthenticated(): boolean {
     return this.token !== null;
   }
+
+   // updates admin password
+   updateAdminPassword(id:number, data:any): Observable<any>{
+    return this.http.patch<any>(this.apiUrl + `/update-password-admin/${id}`, data)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
+
+  // updates customer password
+  updatePassword(id:number, data:any): Observable<any>{
+    return this.http.patch<any>(this.apiUrl + `/update-password/${id}`, data)
+                                .pipe(
+                                  map((res)=>{
+                                    return res;
+                                  }
+                                  )
+                                );
+  }
 }
 

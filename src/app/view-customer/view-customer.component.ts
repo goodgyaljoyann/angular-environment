@@ -84,12 +84,12 @@ export class ViewCustomerComponent {
     });
   }
   
-  //Opens update password dialog box
-openUpdatePasswordDialog(customerId: number): void {
-  this.dialog.open(UpdatePasswordComponent, {
-    width: '300px',
-    data: { id: customerId }
-  });
-}
+   // Opens the update password dialog box
+   openUpdatePasswordDialog(customerId: number): void {
+    const dialogRef = this.dialog.open(UpdatePasswordComponent, {
+      width: '300px',
+      data: { id: customerId }
+    });
 
+}
 }

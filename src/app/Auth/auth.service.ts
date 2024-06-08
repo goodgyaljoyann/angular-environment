@@ -135,6 +135,12 @@ getAdminId(): Observable<string> {
   return of(this.cookieService.get('admin_id'));
 }
 
+//retrieves admin id from cookie, to curve observable string error
+getIdOfAdmin(): string {
+  // Retrieve customer_id from cookie or local storage
+  return this.cookieService.get('customer_id');
+  // can also use return localStorage.getItem('customer_id');
+}
 //logs admin out of the system
 logoutAdmin() {
   localStorage.removeItem('token');
@@ -149,8 +155,8 @@ logoutAdmin() {
   }
 
    // updates admin password
-   updateAdminPassword(id:number, data:any): Observable<any>{
-    return this.http.patch<any>(this.apiUrl + `/update-password-admin/${id}`, data)
+   updateAdminPassword(id:number, formData:any): Observable<any>{
+    return this.http.patch<any>(this.apiUrl + `/update-password-admin/${id}`, formData)
                                 .pipe(
                                   map((res)=>{
                                     return res;

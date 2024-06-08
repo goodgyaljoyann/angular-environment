@@ -5,23 +5,23 @@ import { AuthService } from '../Auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-update-password',
-  templateUrl: './update-password.component.html',
-  styleUrls: ['./update-password.component.css']
+  selector: 'app-update-admin-password',
+  templateUrl: './update-admin-password.component.html',
+  styleUrls: ['./update-admin-password.component.css']
 })
-export class UpdatePasswordComponent {
+export class UpdateAdminPasswordComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<UpdatePasswordComponent>,
+    private dialogRef: MatDialogRef<UpdateAdminPasswordComponent>,
     private authService: AuthService,
     private snackBar: MatSnackBar
   ) {}
 
   // Handles password update form submission
-  onUpdatePassword( form: NgForm): void {
+  onUpdateAdminPassword( form: NgForm): void {
     if (form.valid) {
-      const customerId = this.authService.getCustomerId()
-      this.authService.updatePassword(parseInt(customerId), form.value).subscribe(
+      const adminId = this.authService.getIdOfAdmin()
+      this.authService.updateAdminPassword(parseInt(adminId), form.value).subscribe(
         (res) => {
           if (res.status !== 'error') {
             this.showSnackbar('Password updated successfully', 5000);

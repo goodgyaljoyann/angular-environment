@@ -117,10 +117,7 @@ export class SearchComponent implements OnInit {
         const appointments = response.data || response.data?.appointments || [];
         if (Array.isArray(appointments)) {
           const appointmentResults = appointments.filter((appointment: Appointment) =>
-            appointment.appointment_id.toString().toLowerCase().includes(query.toLowerCase()) || 
-            appointment.date.toLowerCase().includes(query.toLowerCase()) || 
-            appointment.make.toLowerCase().includes(query.toLowerCase()) || 
-            appointment.model.toLowerCase().includes(query.toLowerCase())
+            appointment.appointment_id.toString().includes(query)
           );
           this.searchResults.push(...appointmentResults.map((appointment: Appointment) => ({
             type: 'appointment',

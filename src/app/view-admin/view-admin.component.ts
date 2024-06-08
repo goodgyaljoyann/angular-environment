@@ -3,7 +3,7 @@ import { AdminService } from '../admin-services/admin.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../Auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UpdatePasswordComponent } from '../update-password/update-password.component';
+import { UpdateAdminPasswordComponent } from '../update-admin-password/update-admin-password.component'; 
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
@@ -84,45 +84,13 @@ export class ViewAdminComponent {
     });
   }
   //Open the update password dialog box
-  openUpdatePasswordDialog(adminId: number): void {
-    const dialogRef = this.dialog.open(UpdatePasswordComponent, {
-      width: '300px',
-      data: { id: adminId }
-    });
+openUpdatePasswordDialog(adminId: number): void {
+  const dialogRef = this.dialog.open(UpdateAdminPasswordComponent, {
+    width: '300px',
+    data: { id: adminId }
+  });
 
-    dialogRef.afterClosed().subscribe((result: NgForm) => {
-      if (result && result.valid) {
-        const formData = new FormData();
-        for (const key of Object.keys(result.value)) {
-          formData.append(key, result.value[key]);
-        }
-        //Updates user password
-        this.authService.updateAdminPassword(adminId, formData).subscribe(
-          (res) => {
-            if (res.status !== 'error') {
-              this.snackBar.open('Password updated successfully', 'Close', {
-                duration: 5000,
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
-            } else {
-              this.snackBar.open('Failed to update password. Please try again.', 'Close', {
-                duration: 3000,
-                horizontalPosition: 'center',
-                verticalPosition: 'top'
-              });
-            }
-          },
-          (error) => {
-            console.error('Error updating password:', error);
-            this.snackBar.open('An error occurred. Please try again later.', 'Close', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top'
-            });
-          }
-        );
-      }
-    });
-  }
+}
+
+    
 }
